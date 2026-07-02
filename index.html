@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>X Cerebro // Command Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#07111F; --hull:#0C1A2E; --plate:#12233D; --plate2:#0F1D33;
+    --line:#1C3552; --cyan:#20D9FF; --cyan-dim:#0AA5C7; --cyan-glow:rgba(32,217,255,.35);
+    --ink:#E6F1FF; --mute:#8FA6C4; --mute2:#5F7796;
+    --amber:#F5A623; --red:#FF5D5D; --green:#3DE8A0; --violet:#B57BFF; --blue:#67B0FF;
+    --r:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:
+      radial-gradient(1200px 700px at 78% -8%, rgba(32,217,255,.10), transparent 60%),
+      radial-gradient(900px 600px at 0% 100%, rgba(181,123,255,.07), transparent 55%),
+      var(--void);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+    padding:22px clamp(12px,3vw,34px) 60px;
+  }
+  a{color:inherit}
+  /* ---------- command bar ---------- */
+  .bar{display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+    padding:16px 20px;border:1px solid var(--line);border-radius:var(--r);
+    background:linear-gradient(180deg,rgba(18,35,61,.75),rgba(12,26,46,.55));
+    backdrop-filter:blur(6px);position:relative;overflow:hidden}
+  .bar::before{content:"";position:absolute;inset:0;
+    background:linear-gradient(90deg,transparent,rgba(32,217,255,.06),transparent);pointer-events:none}
+  .brand{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .brand h1{font-family:'Orbitron';font-weight:900;font-size:clamp(18px,2.4vw,27px);
+    letter-spacing:.06em;margin:0;line-height:1;color:#fff}
+  .brand h1 span{color:var(--cyan);text-shadow:0 0 18px var(--cyan-glow)}
+  .brand p{margin:0;font-size:12px;color:var(--mute);letter-spacing:.14em;text-transform:uppercase}
+  .bar-right{margin-left:auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .live{display:flex;align-items:center;gap:8px;font:600 11px/1 'JetBrains Mono';
+    letter-spacing:.18em;color:var(--green);text-transform:uppercase}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--green);
+    box-shadow:0 0 0 0 rgba(61,232,160,.6);animation:pulse 2.2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(61,232,160,.55)}70%{box-shadow:0 0 0 9px rgba(61,232,160,0)}100%{box-shadow:0 0 0 0 rgba(61,232,160,0)}}
+  .stamp{font:500 11px/1.5 'JetBrains Mono';color:var(--mute);text-align:right}
+  .stamp b{color:var(--cyan);font-weight:700}
+  .btn{border:1px solid var(--line);background:rgba(32,217,255,.06);color:var(--cyan);
+    font:600 12px 'JetBrains Mono';letter-spacing:.06em;padding:9px 14px;border-radius:9px;
+    cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:7px}
+  .btn:hover{background:rgba(32,217,255,.14);border-color:var(--cyan-dim)}
+  .btn:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+
+  /* ---------- kpi strip ---------- */
+  .kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:16px}
+  .kpi{position:relative;border:1px solid var(--line);border-radius:var(--r);
+    background:linear-gradient(180deg,var(--plate),var(--plate2));padding:16px 15px 14px;overflow:hidden}
+  .kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--cyan);
+    box-shadow:0 0 14px var(--cyan-glow)}
+  .kpi .k-label{font:600 10px 'JetBrains Mono';letter-spacing:.16em;color:var(--cyan);text-transform:uppercase}
+  .kpi .k-num{font-family:'Orbitron';font-weight:700;font-size:34px;line-height:1;margin:9px 0 4px;color:#fff}
+  .kpi .k-sub{font-size:11px;color:var(--mute)}
+  .kpi.warn::before{background:var(--amber);box-shadow:0 0 14px rgba(245,166,35,.4)}
+  .kpi.warn .k-label{color:var(--amber)}
+  .kpi.crit::before{background:var(--red);box-shadow:0 0 14px rgba(255,93,93,.4)}
+  .kpi.crit .k-label{color:var(--red)}
+  /* corner brackets */
+  .brk::after,.brk::before{}
+  .corner{position:absolute;width:12px;height:12px;border:2px solid var(--cyan-dim);opacity:.5}
+  .c-tr{top:8px;right:8px;border-left:0;border-bottom:0}
+  .c-bl{bottom:8px;left:8px;border-right:0;border-top:0}
+
+  /* ---------- reactor bar ---------- */
+  .reactor{margin-top:14px;border:1px solid var(--line);border-radius:var(--r);
+    background:linear-gradient(180deg,var(--plate),var(--plate2));padding:16px 20px;
+    display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+  .reactor .r-label{font:600 11px 'JetBrains Mono';letter-spacing:.16em;color:var(--cyan);text-transform:uppercase;white-space:nowrap}
+  .track{flex:1;min-width:220px;height:16px;border-radius:20px;background:#0a1626;
+    border:1px solid var(--line);overflow:hidden;position:relative}
+  .track > i{display:block;height:100%;border-radius:20px;
+    background:linear-gradient(90deg,var(--cyan-dim),var(--cyan));
+    box-shadow:0 0 16px var(--cyan-glow);transition:width 1s cubic-bezier(.2,.7,.2,1)}
+  .reactor .r-pct{font-family:'Orbitron';font-weight:700;font-size:24px;color:#fff;min-width:74px;text-align:right}
+
+  /* ---------- layout ---------- */
+  .grid{display:grid;grid-template-columns:1.55fr 1fr;gap:16px;margin-top:16px}
+  .panel{border:1px solid var(--line);border-radius:var(--r);
+    background:linear-gradient(180deg,rgba(18,35,61,.55),rgba(12,26,46,.5));position:relative;overflow:hidden}
+  .panel > h2{font-family:'Orbitron';font-weight:700;font-size:13px;letter-spacing:.14em;
+    text-transform:uppercase;color:#fff;margin:0;padding:15px 18px 13px;
+    border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+  .panel > h2 .tick{color:var(--cyan)}
+  .panel > h2 .count{margin-left:auto;font:600 11px 'JetBrains Mono';color:var(--mute)}
+
+  /* filters */
+  .filters{display:flex;gap:8px;flex-wrap:wrap;padding:12px 18px 4px}
+  .search{flex:1;min-width:150px;background:#0a1626;border:1px solid var(--line);border-radius:9px;
+    color:var(--ink);font:500 13px 'Inter';padding:9px 12px}
+  .search::placeholder{color:var(--mute2)}
+  .search:focus{outline:none;border-color:var(--cyan-dim);box-shadow:0 0 0 3px rgba(32,217,255,.12)}
+  .chip{border:1px solid var(--line);background:transparent;color:var(--mute);
+    font:600 11px 'JetBrains Mono';letter-spacing:.04em;padding:8px 11px;border-radius:20px;cursor:pointer;transition:.15s}
+  .chip[aria-pressed="true"]{color:var(--void);background:var(--cyan);border-color:var(--cyan)}
+  .chip:hover{color:var(--ink)}
+  .chip[aria-pressed="true"]:hover{color:var(--void)}
+
+  /* build rows */
+  .rows{padding:8px 10px 14px}
+  .row{display:grid;grid-template-columns:1.4fr 108px 84px 128px 56px;gap:10px;align-items:center;
+    padding:11px 12px;border-radius:11px;cursor:pointer;transition:.13s;border:1px solid transparent}
+  .row:hover{background:rgba(32,217,255,.05);border-color:var(--line)}
+  .row:focus-visible{outline:2px solid var(--cyan);outline-offset:1px}
+  .row + .row{margin-top:2px}
+  .r-head{grid-template-columns:1.4fr 108px 84px 128px 56px;padding:6px 12px;cursor:default}
+  .r-head span{font:600 9.5px 'JetBrains Mono';letter-spacing:.12em;color:var(--mute2);text-transform:uppercase}
+  .r-head:hover{background:none;border-color:transparent}
+  .cl{min-width:0}
+  .cl .nm{font-weight:600;font-size:14px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .cl .pj{font-size:11.5px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+  .tag{display:inline-flex;align-items:center;justify-content:center;font:600 10.5px 'JetBrains Mono';
+    letter-spacing:.02em;padding:5px 8px;border-radius:7px;white-space:nowrap;width:100%}
+  .ov{display:flex;align-items:center;gap:8px}
+  .ov .mini{flex:1;height:7px;border-radius:6px;background:#0a1626;border:1px solid var(--line);overflow:hidden}
+  .ov .mini > i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan-dim),var(--cyan));box-shadow:0 0 8px var(--cyan-glow)}
+  .ov .pv{font:700 12px 'JetBrains Mono';color:var(--cyan);min-width:34px;text-align:right}
+  .days{font:700 13px 'JetBrains Mono';text-align:center}
+  .days small{display:block;font-weight:500;font-size:8.5px;color:var(--mute2);letter-spacing:.1em}
+
+  /* right rail cards */
+  .rail{display:flex;flex-direction:column;gap:16px}
+  .moves{padding:6px 10px 12px}
+  .move{display:grid;grid-template-columns:22px 1fr auto;gap:11px;align-items:center;
+    padding:10px 12px;border-radius:10px;cursor:pointer;transition:.13s}
+  .move:hover{background:rgba(32,217,255,.05)}
+  .move + .move{border-top:1px solid rgba(28,53,82,.5)}
+  .rank{font-family:'Orbitron';font-weight:700;font-size:13px;color:var(--cyan-dim);text-align:center}
+  .move .m-cl{font-weight:600;font-size:13px;color:#fff}
+  .move .m-ac{font-size:11px;color:var(--mute);margin-top:2px;line-height:1.35;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .m-days{font:700 12px 'JetBrains Mono';text-align:right;white-space:nowrap}
+
+  .comp{padding:12px 18px 16px;display:flex;flex-direction:column;gap:11px}
+  .cbar{display:grid;grid-template-columns:96px 1fr 40px;gap:11px;align-items:center}
+  .cbar .cn{font-size:12px;color:var(--mute)}
+  .cbar .ct{height:9px;border-radius:6px;background:#0a1626;border:1px solid var(--line);overflow:hidden}
+  .cbar .ct > i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan-dim),var(--cyan))}
+  .cbar .cp{font:700 12px 'JetBrains Mono';color:#fff;text-align:right}
+
+  .dist{padding:12px 18px 16px;display:flex;flex-direction:column;gap:9px}
+  .drow{display:grid;grid-template-columns:1fr 1fr 44px;gap:10px;align-items:center}
+  .drow .dn{font:600 11px 'JetBrains Mono';padding:4px 8px;border-radius:6px;text-align:center}
+  .drow .dt{height:9px;border-radius:6px;background:#0a1626;border:1px solid var(--line);overflow:hidden}
+  .drow .dt > i{display:block;height:100%}
+  .drow .dc{font:700 12px 'JetBrains Mono';color:var(--mute);text-align:right}
+
+  /* detail drawer */
+  .scrim{position:fixed;inset:0;background:rgba(3,8,16,.72);backdrop-filter:blur(3px);
+    opacity:0;pointer-events:none;transition:.2s;z-index:40}
+  .scrim.on{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;top:0;right:0;height:100%;width:min(460px,92vw);z-index:50;
+    background:linear-gradient(180deg,var(--hull),var(--void));border-left:1px solid var(--line);
+    transform:translateX(100%);transition:transform .28s cubic-bezier(.2,.7,.2,1);
+    overflow-y:auto;padding:26px 26px 40px}
+  .drawer.on{transform:translateX(0)}
+  .drawer .dh{display:flex;align-items:flex-start;gap:12px}
+  .drawer .did{font:600 11px 'JetBrains Mono';color:var(--cyan);letter-spacing:.1em}
+  .drawer h3{font-family:'Orbitron';font-weight:700;font-size:19px;margin:4px 0 0;color:#fff;line-height:1.2}
+  .drawer .dsub{color:var(--mute);font-size:13px;margin-top:3px}
+  .xbtn{margin-left:auto;background:none;border:1px solid var(--line);color:var(--mute);
+    width:34px;height:34px;border-radius:8px;cursor:pointer;font-size:16px;flex-shrink:0}
+  .xbtn:hover{color:var(--ink);border-color:var(--cyan-dim)}
+  .dtags{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+  .dblock{margin-top:18px}
+  .dblock .lbl{font:600 10px 'JetBrains Mono';letter-spacing:.14em;color:var(--cyan);text-transform:uppercase;margin-bottom:6px}
+  .dblock .val{font-size:13.5px;color:var(--ink);line-height:1.5}
+  .dblock .val.mut{color:var(--mute)}
+  .dcomps{margin-top:8px;display:flex;flex-direction:column;gap:8px}
+  .dcomp{display:grid;grid-template-columns:110px 1fr 38px;gap:10px;align-items:center}
+  .dcomp .n{font-size:11.5px;color:var(--mute)}
+  .dcomp .t{height:8px;border-radius:5px;background:#0a1626;border:1px solid var(--line);overflow:hidden}
+  .dcomp .t > i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan-dim),var(--cyan))}
+  .dcomp .p{font:700 11px 'JetBrains Mono';color:#fff;text-align:right}
+
+  .foot{margin-top:22px;text-align:center;font:500 11px 'JetBrains Mono';color:var(--mute2);letter-spacing:.04em}
+  .foot code{color:var(--cyan-dim);background:rgba(32,217,255,.06);padding:2px 6px;border-radius:5px}
+  .banner{margin-top:14px;border:1px solid rgba(245,166,35,.4);background:rgba(245,166,35,.08);
+    color:var(--amber);border-radius:11px;padding:11px 15px;font:500 12px 'JetBrains Mono';display:none}
+  .banner.on{display:block}
+
+  @media(max-width:1080px){.grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:620px){
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    .row,.r-head{grid-template-columns:1fr 84px 58px}
+    .row .st-pr,.r-head .h-pr{display:none}
+    .cl .pj{display:none}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+  <header class="bar">
+    <div class="brand">
+      <h1 id="ttl">X CEREBRO <span>//</span> COMMAND CENTER</h1>
+      <p id="sub">AI Agents + Jarvis Build-Outs</p>
+    </div>
+    <div class="bar-right">
+      <div class="live"><span class="dot"></span><span>Live</span></div>
+      <div class="stamp">SOURCE <b id="src">projects.json</b><br>SYNCED <b id="synced">—</b></div>
+      <button class="btn" id="refresh" title="Reload data">↻ Refresh</button>
+    </div>
+  </header>
+
+  <div class="banner" id="banner"></div>
+
+  <section class="kpis" id="kpis"></section>
+
+  <section class="reactor">
+    <span class="r-label">Portfolio Completion</span>
+    <div class="track"><i id="reactorFill" style="width:0%"></i></div>
+    <span class="r-pct" id="reactorPct">0%</span>
+  </section>
+
+  <main class="grid">
+    <section class="panel">
+      <h2><span class="tick">▮</span> Project Launch Board <span class="count" id="lbCount"></span></h2>
+      <div class="filters">
+        <input class="search" id="search" placeholder="Search client, project, owner…" aria-label="Search projects">
+        <button class="chip" data-f="all" aria-pressed="true">All</button>
+        <button class="chip" data-f="Build Mode" aria-pressed="false">Build</button>
+        <button class="chip" data-f="Planning" aria-pressed="false">Planning</button>
+        <button class="chip" data-f="Payment Follow-Up" aria-pressed="false">Payment</button>
+      </div>
+      <div class="rows">
+        <div class="row r-head">
+          <span>Client / Project</span><span>Status</span><span class="h-pr st-pr">Priority</span><span>Overall</span><span>Days</span>
+        </div>
+        <div id="board"></div>
+      </div>
+    </section>
+
+    <aside class="rail">
+      <section class="panel">
+        <h2><span class="tick">⚡</span> Next Moves <span class="count">auto-ranked</span></h2>
+        <div class="moves" id="moves"></div>
+      </section>
+      <section class="panel">
+        <h2><span class="tick">▤</span> Component Readiness</h2>
+        <div class="comp" id="comp"></div>
+      </section>
+      <section class="panel">
+        <h2><span class="tick">◷</span> Status Distribution</h2>
+        <div class="dist" id="dist"></div>
+      </section>
+    </aside>
+  </main>
+
+  <p class="foot">Edit <code>projects.json</code> in the repo → the site and every metric update on next load. Team-readable + AI-readable from the same file.</p>
+
+  <div class="scrim" id="scrim"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true"></aside>
+
+<script>
+/* ---------- fallback data (used only when opened locally without a server) ---------- */
+const FALLBACK = {"meta":{"title":"X CEREBRO","subtitle":"AI Agents + Jarvis Command Center","owner":"Alexia / Q","updated":"2026-07-02"},"weights":{"dashboard":10,"campaign":15,"automations":15,"aiAgent":20,"customWorkflow":15,"a2p":10,"jarvis":10,"jvPayment":5},"componentLabels":{"dashboard":"Dashboard","campaign":"Campaign","automations":"Automations","aiAgent":"AI Agent","customWorkflow":"Custom Workflow","a2p":"A2P Setup","jarvis":"Jarvis Build","jvPayment":"JV / Payment"},"statusOptions":["Planning","Build Mode","Testing","Payment Follow-Up","Blocked","Ready","Live"],"projects":[{"id":"XC-001","client":"Alex Rodas","project":"Coastalgic Realtor Campaign","workstream":"Realtor Campaign","buildType":"Campaign + AI Follow-Up","owner":"Alexia / Q","start":"2026-06-26","targetEnd":"2026-07-05","status":"Build Mode","priority":"High","components":{"dashboard":0.3,"campaign":0.6,"automations":0.35,"aiAgent":0.4,"customWorkflow":0.25,"a2p":0.1,"jarvis":0.5,"jvPayment":1},"jarvisRelated":"Yes","paymentFollowUp":"No","blocker":"Need final campaign angle, Realtor offer, and exact handoff rules.","nextAction":"Build campaign copy, agent prompt, pipeline statuses, and test follow-up flow.","notes":"Realtor campaign under Coastalgic; build inside Jarvis and prepare AI follow-up."},{"id":"XC-002","client":"Alex Calderon","project":"AI Agent and Custom Workflow","workstream":"AI Agent + Custom Workflow","buildType":"Custom AI Agent","owner":"Alexia / Q","start":"2026-06-26","targetEnd":"2026-07-10","status":"Build Mode","priority":"High","components":{"dashboard":0.2,"campaign":0.25,"automations":0.35,"aiAgent":0.45,"customWorkflow":0.4,"a2p":0.2,"jarvis":0.35,"jvPayment":1},"jarvisRelated":"Yes","paymentFollowUp":"No","blocker":"Need final workflow scope, knowledgebase, triggers, and what the agent can/cannot do.","nextAction":"Confirm use case, map workflow logic, build agent instructions, then QA sample conversations.","notes":"Custom AI agent plus client-specific workflow logic."},{"id":"XC-003","client":"Alejandro Carbajal","project":"AI Agents","workstream":"AI Agents","buildType":"AI Agent Project","owner":"Alexia / Q","start":"2026-06-26","targetEnd":"2026-07-08","status":"Planning","priority":"High","components":{"dashboard":0.15,"campaign":0.2,"automations":0.25,"aiAgent":0.4,"customWorkflow":0.2,"a2p":0.1,"jarvis":0.3,"jvPayment":1},"jarvisRelated":"Yes","paymentFollowUp":"No","blocker":"Need exact agent use case, channels, offer, FAQs, and escalation rules.","nextAction":"Collect intake answers and create first AI agent prompt + KB outline.","notes":"AI agent build; details still need to be scoped."},{"id":"XC-004","client":"Mark Fuller","project":"AI Agents","workstream":"AI Agents","buildType":"AI Agent Project","owner":"Alexia / Q","start":"2026-06-26","targetEnd":"2026-07-08","status":"Planning","priority":"High","components":{"dashboard":0.15,"campaign":0.2,"automations":0.25,"aiAgent":0.4,"customWorkflow":0.2,"a2p":0.1,"jarvis":0.3,"jvPayment":1},"jarvisRelated":"Yes","paymentFollowUp":"No","blocker":"Need agent objective, lead source, offer, and reply boundaries.","nextAction":"Gather client intake details and draft the initial agent structure.","notes":"AI agent build; currently scoped as agent project."},{"id":"XC-005","client":"Raj","project":"Leads and JV Partnership","workstream":"Leads + JV Partnership","buildType":"JV Partner + Lead System","owner":"Alexia / Q","start":"2026-06-26","targetEnd":"2026-07-12","status":"Planning","priority":"High","components":{"dashboard":0.25,"campaign":0.3,"automations":0.25,"aiAgent":0.2,"customWorkflow":0.3,"a2p":0.15,"jarvis":0.25,"jvPayment":0.6},"jarvisRelated":"Yes","paymentFollowUp":"Maybe","blocker":"Need JV terms, lead source, access, responsibilities, and campaign direction.","nextAction":"Define JV role, confirm lead flow, then build partner onboarding checklist.","notes":"Leads + JV partnership project; likely needs Jarvis pipeline and lead management setup."},{"id":"XC-006","client":"John - Bigheights LLC","project":"JV Partnership","workstream":"JV Partnership","buildType":"JV Partner Setup","owner":"Alexia / Q","start":"2026-06-26","targetEnd":"2026-07-03","status":"Payment Follow-Up","priority":"Urgent","components":{"dashboard":0.1,"campaign":0.1,"automations":0.1,"aiAgent":0.1,"customWorkflow":0.1,"a2p":0,"jarvis":0.15,"jvPayment":0.1},"jarvisRelated":"Yes","paymentFollowUp":"Yes","blocker":"Payment follow-up needed before build-out can move forward.","nextAction":"Follow up for payment, confirm scope, then move into onboarding and Jarvis setup.","notes":"Bigheights LLC JV partnership. Marked urgent because payment follow-up is required."},{"id":"XC-007","client":"Anthony Sosa","project":"AI Agents","workstream":"AI Agents","buildType":"AI Agent Project","owner":"Alexia / Q","start":"2026-06-26","targetEnd":"2026-07-08","status":"Planning","priority":"High","components":{"dashboard":0.2,"campaign":0.25,"automations":0.3,"aiAgent":0.45,"customWorkflow":0.25,"a2p":0.1,"jarvis":0.35,"jvPayment":1},"jarvisRelated":"Yes","paymentFollowUp":"No","blocker":"Need clear use case, agent goal, and business context for build-out.","nextAction":"Collect intake details, define agent outcome, and draft knowledgebase requirements.","notes":"AI agent project for Anthony; scope to be finalized."},{"id":"XC-008","client":"Jeff Richman","project":"Jarvis and Skool Build Campaign","workstream":"Jarvis + Skool Campaign","buildType":"Jarvis Build + Campaign","owner":"Alexia / Q","start":"2026-06-26","targetEnd":"2026-07-12","status":"Build Mode","priority":"High","components":{"dashboard":0.35,"campaign":0.5,"automations":0.4,"aiAgent":0.25,"customWorkflow":0.3,"a2p":0.15,"jarvis":0.55,"jvPayment":1},"jarvisRelated":"Yes","paymentFollowUp":"No","blocker":"Need Skool campaign structure, Jarvis funnel/campaign flow, and launch assets.","nextAction":"Map Skool campaign, build Jarvis campaign, create automations, and QA the full funnel.","notes":"Jarvis + Skool build campaign; needs campaign and automation build-out."}]};
+
+  const STATUS_CLR={"Planning":["#13294a","#8ec2ff"],"Build Mode":["#3a2408","#f5a623"],"Testing":["#2a1650","#c9a8ff"],"Payment Follow-Up":["#3d0f0f","#ff8080"],"Blocked":["#2a0808","#ff5d5d"],"Ready":["#0c3524","#3de8a0"],"Live":["#083b2c","#3de8a0"]};
+  const PRIO_CLR={"Urgent":["#3d0f0f","#ff8080"],"High":["#3a2408","#f5a623"],"Normal":["#13294a","#8ec2ff"]};
+  const HEALTH_CLR={"Overdue":"#ff5d5d","At Risk":"#f5a623","Payment Hold":"#b57bff","Blocked":"#ff5d5d","On Track":"#3de8a0"};
+  const DIST_CLR={"Planning":"#67B0FF","Build Mode":"#F5A623","Testing":"#B57BFF","Payment Follow-Up":"#FF5D5D","Blocked":"#FF5D5D","Ready":"#3DE8A0","Live":"#3DE8A0"};
+
+  let DB=null;
+  const $=s=>document.querySelector(s);
+  const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;};
+  const pct=v=>Math.round(v*100)+"%";
+  const esc=s=>String(s??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+
+  const overall=p=>{const w=DB.weights;let s=0,t=0;for(const k in w){s+=(p.components[k]||0)*w[k];t+=w[k];}return t?s/t:0;};
+  const daysLeft=p=>{const d=new Date(p.targetEnd);const n=new Date();d.setHours(0,0,0,0);n.setHours(0,0,0,0);return Math.round((d-n)/86400000);};
+  const readiness=p=>{if(p.status==="Payment Follow-Up")return"Payment Needed";const o=overall(p);if(o>=.85)return"Launch Ready";if(o>=.65)return"QA / Testing";if(o>=.35)return"Build Mode";return"Needs Scope";};
+  const health=p=>{if(p.status==="Blocked")return"Blocked";if(p.status==="Payment Follow-Up"||p.paymentFollowUp==="Yes")return"Payment Hold";const dl=daysLeft(p);if(dl<0)return"Overdue";if(dl<=5&&overall(p)<0.7)return"At Risk";return"On Track";};
+  const urgency=p=>daysLeft(p)-(p.priority==="Urgent"?1000:0)-(p.priority==="High"?100:0)-(p.status==="Payment Follow-Up"?500:0);
+  const tag=(txt,map)=>{const c=map[txt]||["#13294a","#8ec2ff"];return `<span class="tag" style="background:${c[0]};color:${c[1]}">${esc(txt)}</span>`;};
+  const dayCell=p=>{const d=daysLeft(p);const col=d<0?"var(--red)":d<=3?"var(--amber)":"var(--ink)";return `<div class="days" style="color:${col}">${d}<small>DAYS</small></div>`;};
+
+  let filterStatus="all", filterText="";
+
+  function render(){
+    const P=DB.projects;
+    $("#ttl").innerHTML = `${esc(DB.meta.title)} <span>//</span> COMMAND CENTER`;
+    $("#sub").textContent = DB.meta.subtitle;
+
+    // KPIs
+    const avg=P.reduce((a,p)=>a+overall(p),0)/(P.length||1);
+    const aiBuilds=P.filter(p=>/AI\s?(Agent|Follow)/i.test(p.buildType)).length;
+    const jarvis=P.filter(p=>p.jarvisRelated==="Yes").length;
+    const pay=P.filter(p=>p.status==="Payment Follow-Up").length;
+    const risk=P.filter(p=>["Overdue","At Risk","Blocked"].includes(health(p))).length;
+    const kpis=[
+      ["Total Builds",P.length,"Active client + JV",""],
+      ["Avg Progress",pct(avg),"Weighted completion",""],
+      ["AI Agent Builds",aiBuilds,"Agent workstreams",""],
+      ["Jarvis Related",jarvis,"CRM / automation",""],
+      ["Payment Holds",pay,"Collect / confirm",pay>0?"warn":""],
+      ["At Risk",risk,"Needs attention",risk>0?"crit":""],
+    ];
+    $("#kpis").innerHTML=kpis.map(k=>`<div class="kpi ${k[3]}"><span class="corner c-tr"></span><span class="corner c-bl"></span>
+      <div class="k-label">${k[0]}</div><div class="k-num">${k[1]}</div><div class="k-sub">${k[2]}</div></div>`).join("");
+
+    // reactor
+    $("#reactorPct").textContent=pct(avg);
+    requestAnimationFrame(()=>{$("#reactorFill").style.width=(avg*100).toFixed(1)+"%";});
+
+    // board (filtered)
+    const rows=P.filter(p=>{
+      const okS = filterStatus==="all" || p.status===filterStatus;
+      const t=filterText.toLowerCase();
+      const okT = !t || (p.client+p.project+p.owner+p.buildType).toLowerCase().includes(t);
+      return okS&&okT;
+    }).sort((a,b)=>urgency(a)-urgency(b));
+    $("#lbCount").textContent=`${rows.length} / ${P.length}`;
+    $("#board").innerHTML = rows.map(p=>{
+      const o=overall(p);
+      return `<div class="row" tabindex="0" data-id="${p.id}">
+        <div class="cl"><div class="nm">${esc(p.client)}</div><div class="pj">${esc(p.project)}</div></div>
+        ${tag(p.status,STATUS_CLR)}
+        <div class="st-pr">${tag(p.priority,PRIO_CLR)}</div>
+        <div class="ov"><div class="mini"><i style="width:${o*100}%"></i></div><span class="pv">${pct(o)}</span></div>
+        ${dayCell(p)}
+      </div>`;
+    }).join("") || `<div style="padding:26px;text-align:center;color:var(--mute);font-size:13px">No builds match this filter.</div>`;
+
+    // next moves
+    const moves=[...P].sort((a,b)=>urgency(a)-urgency(b)).slice(0,6);
+    $("#moves").innerHTML=moves.map((p,i)=>{
+      const d=daysLeft(p);const col=d<0?"var(--red)":d<=3?"var(--amber)":"var(--mute)";
+      return `<div class="move" data-id="${p.id}" tabindex="0">
+        <div class="rank">${String(i+1).padStart(2,"0")}</div>
+        <div><div class="m-cl">${esc(p.client)}</div><div class="m-ac">${esc(p.nextAction)}</div></div>
+        <div class="m-days" style="color:${col}">${d}d</div>
+      </div>`;
+    }).join("");
+
+    // component readiness
+    const W=DB.weights, L=DB.componentLabels;
+    $("#comp").innerHTML=Object.keys(W).map(k=>{
+      const avgc=P.reduce((a,p)=>a+(p.components[k]||0),0)/(P.length||1);
+      return `<div class="cbar"><span class="cn">${esc(L[k])}</span>
+        <div class="ct"><i style="width:${avgc*100}%"></i></div><span class="cp">${pct(avgc)}</span></div>`;
+    }).join("");
+
+    // status distribution
+    const total=P.length||1;
+    $("#dist").innerHTML=DB.statusOptions.map(st=>{
+      const c=P.filter(p=>p.status===st).length;
+      const col=DIST_CLR[st]||"#67B0FF";
+      return `<div class="drow">
+        <span class="dn" style="background:${hexA(col,.14)};color:${col}">${esc(st)}</span>
+        <div class="dt"><i style="width:${(c/total)*100}%;background:${col}"></i></div>
+        <span class="dc">${c}</span></div>`;
+    }).join("");
+
+    bindRows();
+  }
+
+  const hexA=(hex,a)=>{const h=hex.replace('#','');const n=parseInt(h,16);return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`;};
+
+  function bindRows(){
+    document.querySelectorAll("[data-id]").forEach(r=>{
+      r.onclick=()=>openDetail(r.dataset.id);
+      r.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openDetail(r.dataset.id);}};
+    });
+  }
+
+  function openDetail(id){
+    const p=DB.projects.find(x=>x.id===id);if(!p)return;
+    const o=overall(p),W=DB.weights,L=DB.componentLabels;
+    const comps=Object.keys(W).map(k=>`<div class="dcomp"><span class="n">${esc(L[k])}</span>
+      <div class="t"><i style="width:${(p.components[k]||0)*100}%"></i></div>
+      <span class="p">${pct(p.components[k]||0)}</span></div>`).join("");
+    $("#drawer").innerHTML=`
+      <div class="dh">
+        <div><div class="did">${esc(p.id)} · ${esc(p.owner)}</div>
+          <h3>${esc(p.client)}</h3><div class="dsub">${esc(p.project)}</div></div>
+        <button class="xbtn" id="xclose" aria-label="Close">✕</button>
+      </div>
+      <div class="dtags">
+        ${tag(p.status,STATUS_CLR)}${tag(p.priority,PRIO_CLR)}
+        <span class="tag" style="background:${hexA(HEALTH_CLR[health(p)],.15)};color:${HEALTH_CLR[health(p)]}">${health(p)}</span>
+        <span class="tag" style="background:rgba(32,217,255,.1);color:var(--cyan)">${readiness(p)}</span>
+      </div>
+      <div class="dblock"><div class="lbl">Overall</div>
+        <div class="ov"><div class="mini" style="height:9px"><i style="width:${o*100}%"></i></div><span class="pv" style="font-size:14px">${pct(o)}</span></div></div>
+      <div class="dblock"><div class="lbl">Timeline</div>
+        <div class="val mut">${esc(p.start)} → ${esc(p.targetEnd)} · <b style="color:${daysLeft(p)<0?'var(--red)':daysLeft(p)<=3?'var(--amber)':'var(--cyan)'}">${daysLeft(p)} days left</b></div></div>
+      <div class="dblock"><div class="lbl">Current Blocker</div><div class="val">${esc(p.blocker)}</div></div>
+      <div class="dblock"><div class="lbl">Next Action</div><div class="val">${esc(p.nextAction)}</div></div>
+      <div class="dblock"><div class="lbl">Component Readiness</div><div class="dcomps">${comps}</div></div>
+      <div class="dblock"><div class="lbl">Notes</div><div class="val mut">${esc(p.notes)}</div></div>
+      <div class="dblock"><div class="lbl">Flags</div><div class="val mut">Jarvis: ${esc(p.jarvisRelated)} · Payment follow-up: ${esc(p.paymentFollowUp)} · Build: ${esc(p.buildType)}</div></div>`;
+    $("#drawer").classList.add("on");$("#drawer").setAttribute("aria-hidden","false");
+    $("#scrim").classList.add("on");
+    $("#xclose").onclick=closeDetail;
+  }
+  function closeDetail(){$("#drawer").classList.remove("on");$("#drawer").setAttribute("aria-hidden","true");$("#scrim").classList.remove("on");}
+  $("#scrim").onclick=closeDetail;
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDetail();});
+
+  // filters
+  document.querySelectorAll(".chip").forEach(c=>{
+    c.onclick=()=>{document.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed","false"));
+      c.setAttribute("aria-pressed","true");filterStatus=c.dataset.f;render();};
+  });
+  $("#search").oninput=e=>{filterText=e.target.value;render();};
+  $("#refresh").onclick=()=>load(true);
+
+  function stamp(){const d=new Date();$("#synced").textContent=d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'});}
+
+  async function load(manual){
+    try{
+      const res=await fetch("projects.json?t="+Date.now(),{cache:"no-store"});
+      if(!res.ok) throw new Error(res.status);
+      DB=await res.json();
+      $("#src").textContent="projects.json";
+      $("#banner").classList.remove("on");
+    }catch(err){
+      DB=FALLBACK;
+      $("#src").textContent="embedded (local)";
+      $("#banner").classList.add("on");
+      $("#banner").textContent="⚠ Live projects.json not reachable — showing the built-in copy. Deploy to GitHub Pages (or run a local server) to load the live file.";
+    }
+    render();stamp();
+  }
+
+  load();
+  setInterval(load,60000); // auto-refresh every 60s for wall displays
+</script>
+</body>
+</html>
