@@ -103,10 +103,10 @@
       "components": {
         "dashboard": 0.15,
         "campaign": 0.2,
-        "automations": 0.25,
-        "aiAgent": 0.4,
+        "automations": 0.5,
+        "aiAgent": 0.5,
         "customWorkflow": 0.2,
-        "a2p": 0.1,
+        "a2p": 1,
         "jarvis": 0.3,
         "jvPayment": 1
       },
