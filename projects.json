@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-07-02"
+    "updated": "2026-07-03"
   },
   "weights": {
     "dashboard": 10,
@@ -25,7 +25,15 @@
     "jarvis": "Jarvis Build",
     "jvPayment": "JV / Payment"
   },
-  "statusOptions": ["Planning", "Build Mode", "Testing", "Payment Follow-Up", "Blocked", "Ready", "Live"],
+  "statusOptions": [
+    "Planning",
+    "Build Mode",
+    "Testing",
+    "Payment Follow-Up",
+    "Blocked",
+    "Ready",
+    "Live"
+  ],
   "projects": [
     {
       "id": "XC-001",
@@ -38,7 +46,16 @@
       "targetEnd": "2026-07-05",
       "status": "Build Mode",
       "priority": "High",
-      "components": { "dashboard": 0.30, "campaign": 0.60, "automations": 0.35, "aiAgent": 0.40, "customWorkflow": 0.25, "a2p": 0.10, "jarvis": 0.50, "jvPayment": 1.00 },
+      "components": {
+        "dashboard": 0.3,
+        "campaign": 0.6,
+        "automations": 0.35,
+        "aiAgent": 0.4,
+        "customWorkflow": 0.25,
+        "a2p": 0.1,
+        "jarvis": 0.5,
+        "jvPayment": 1
+      },
       "jarvisRelated": "Yes",
       "paymentFollowUp": "No",
       "blocker": "Need final campaign angle, Realtor offer, and exact handoff rules.",
@@ -56,7 +73,16 @@
       "targetEnd": "2026-07-10",
       "status": "Build Mode",
       "priority": "High",
-      "components": { "dashboard": 0.20, "campaign": 0.25, "automations": 0.35, "aiAgent": 0.45, "customWorkflow": 0.40, "a2p": 0.20, "jarvis": 0.35, "jvPayment": 1.00 },
+      "components": {
+        "dashboard": 0.2,
+        "campaign": 0.25,
+        "automations": 0.35,
+        "aiAgent": 0.45,
+        "customWorkflow": 0.4,
+        "a2p": 0.2,
+        "jarvis": 0.35,
+        "jvPayment": 1
+      },
       "jarvisRelated": "Yes",
       "paymentFollowUp": "No",
       "blocker": "Need final workflow scope, knowledgebase, triggers, and what the agent can/cannot do.",
@@ -74,7 +100,16 @@
       "targetEnd": "2026-07-08",
       "status": "Planning",
       "priority": "High",
-      "components": { "dashboard": 0.15, "campaign": 0.20, "automations": 0.25, "aiAgent": 0.40, "customWorkflow": 0.20, "a2p": 0.10, "jarvis": 0.30, "jvPayment": 1.00 },
+      "components": {
+        "dashboard": 0.15,
+        "campaign": 0.2,
+        "automations": 0.25,
+        "aiAgent": 0.4,
+        "customWorkflow": 0.2,
+        "a2p": 0.1,
+        "jarvis": 0.3,
+        "jvPayment": 1
+      },
       "jarvisRelated": "Yes",
       "paymentFollowUp": "No",
       "blocker": "Need exact agent use case, channels, offer, FAQs, and escalation rules.",
@@ -92,7 +127,16 @@
       "targetEnd": "2026-07-08",
       "status": "Planning",
       "priority": "High",
-      "components": { "dashboard": 0.15, "campaign": 0.20, "automations": 0.25, "aiAgent": 0.40, "customWorkflow": 0.20, "a2p": 0.10, "jarvis": 0.30, "jvPayment": 1.00 },
+      "components": {
+        "dashboard": 0.15,
+        "campaign": 0.2,
+        "automations": 0.25,
+        "aiAgent": 0.4,
+        "customWorkflow": 0.2,
+        "a2p": 0.1,
+        "jarvis": 0.3,
+        "jvPayment": 1
+      },
       "jarvisRelated": "Yes",
       "paymentFollowUp": "No",
       "blocker": "Need agent objective, lead source, offer, and reply boundaries.",
@@ -110,7 +154,16 @@
       "targetEnd": "2026-07-12",
       "status": "Planning",
       "priority": "High",
-      "components": { "dashboard": 0.25, "campaign": 0.30, "automations": 0.25, "aiAgent": 0.20, "customWorkflow": 0.30, "a2p": 0.15, "jarvis": 0.25, "jvPayment": 0.60 },
+      "components": {
+        "dashboard": 0.25,
+        "campaign": 0.3,
+        "automations": 0.25,
+        "aiAgent": 0.2,
+        "customWorkflow": 0.3,
+        "a2p": 0.15,
+        "jarvis": 0.25,
+        "jvPayment": 0.6
+      },
       "jarvisRelated": "Yes",
       "paymentFollowUp": "Maybe",
       "blocker": "Need JV terms, lead source, access, responsibilities, and campaign direction.",
@@ -128,7 +181,16 @@
       "targetEnd": "2026-07-03",
       "status": "Payment Follow-Up",
       "priority": "Urgent",
-      "components": { "dashboard": 0.10, "campaign": 0.10, "automations": 0.10, "aiAgent": 0.10, "customWorkflow": 0.10, "a2p": 0.00, "jarvis": 0.15, "jvPayment": 0.10 },
+      "components": {
+        "dashboard": 0.1,
+        "campaign": 0.1,
+        "automations": 0.1,
+        "aiAgent": 0.1,
+        "customWorkflow": 0.1,
+        "a2p": 0,
+        "jarvis": 0.15,
+        "jvPayment": 0.1
+      },
       "jarvisRelated": "Yes",
       "paymentFollowUp": "Yes",
       "blocker": "Payment follow-up needed before build-out can move forward.",
@@ -146,7 +208,16 @@
       "targetEnd": "2026-07-08",
       "status": "Planning",
       "priority": "High",
-      "components": { "dashboard": 0.20, "campaign": 0.25, "automations": 0.30, "aiAgent": 0.45, "customWorkflow": 0.25, "a2p": 0.10, "jarvis": 0.35, "jvPayment": 1.00 },
+      "components": {
+        "dashboard": 0.2,
+        "campaign": 0.25,
+        "automations": 0.3,
+        "aiAgent": 0.45,
+        "customWorkflow": 0.25,
+        "a2p": 0.1,
+        "jarvis": 0.35,
+        "jvPayment": 1
+      },
       "jarvisRelated": "Yes",
       "paymentFollowUp": "No",
       "blocker": "Need clear use case, agent goal, and business context for build-out.",
@@ -164,7 +235,16 @@
       "targetEnd": "2026-07-12",
       "status": "Build Mode",
       "priority": "High",
-      "components": { "dashboard": 0.35, "campaign": 0.50, "automations": 0.40, "aiAgent": 0.25, "customWorkflow": 0.30, "a2p": 0.15, "jarvis": 0.55, "jvPayment": 1.00 },
+      "components": {
+        "dashboard": 0.35,
+        "campaign": 0.5,
+        "automations": 0.4,
+        "aiAgent": 0.25,
+        "customWorkflow": 0.3,
+        "a2p": 0.15,
+        "jarvis": 0.55,
+        "jvPayment": 1
+      },
       "jarvisRelated": "Yes",
       "paymentFollowUp": "No",
       "blocker": "Need Skool campaign structure, Jarvis funnel/campaign flow, and launch assets.",
