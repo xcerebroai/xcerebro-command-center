@@ -193,6 +193,55 @@
     color:var(--amber);border-radius:11px;padding:11px 15px;font:500 12px 'JetBrains Mono';display:none}
   .banner.on{display:block}
 
+  /* ---------- editor mode ---------- */
+  .btn.edit[aria-pressed="true"]{background:var(--green);color:var(--void);border-color:var(--green)}
+  .editbar{display:none;margin-top:14px;align-items:center;gap:14px;flex-wrap:wrap;
+    border:1px solid rgba(61,232,160,.35);background:rgba(61,232,160,.07);border-radius:11px;padding:10px 15px}
+  .editbar.on{display:flex}
+  .editbar .etxt{font:500 12px 'JetBrains Mono';color:var(--green);letter-spacing:.02em}
+  .editbar .esep{color:var(--mute2)}
+  .editbar .elink{font:600 11px 'JetBrains Mono';color:var(--cyan);cursor:pointer;text-decoration:underline;background:none;border:0}
+  .editbar .keyok{color:var(--green)} .editbar .keyno{color:var(--amber)}
+  /* form controls (reused in drawer for edit + add) */
+  .efield{margin-top:14px}
+  .efield > label{display:block;font:600 10px 'JetBrains Mono';letter-spacing:.14em;
+    color:var(--cyan);text-transform:uppercase;margin-bottom:6px}
+  .ein,.esel,.eta{width:100%;background:#0a1626;border:1px solid var(--line);border-radius:9px;
+    color:var(--ink);font:500 13px 'Inter';padding:9px 11px}
+  .eta{min-height:60px;resize:vertical}
+  .ein:focus,.esel:focus,.eta:focus{outline:none;border-color:var(--cyan-dim);box-shadow:0 0 0 3px rgba(32,217,255,.12)}
+  .erow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .eslider{display:grid;grid-template-columns:110px 1fr 40px;gap:10px;align-items:center;margin-top:9px}
+  .eslider .sn{font-size:11.5px;color:var(--mute)}
+  .eslider input[type=range]{width:100%;accent-color:var(--cyan)}
+  .eslider .sv{font:700 11px 'JetBrains Mono';color:#fff;text-align:right}
+  .esave{margin-top:22px;display:flex;gap:10px}
+  .esave .primary{flex:1;justify-content:center;background:var(--green);color:var(--void);
+    border-color:var(--green);font-weight:700;padding:12px}
+  .esave .primary:hover{background:#2fd992}
+  .esave .primary:disabled{opacity:.55;cursor:default}
+  .ghost{background:none;border:1px solid var(--line);color:var(--mute);border-radius:9px;
+    padding:12px 16px;cursor:pointer;font:600 12px 'JetBrains Mono'}
+  .ghost:hover{color:var(--ink);border-color:var(--cyan-dim)}
+  /* token modal + toast */
+  .modal{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;
+    background:rgba(3,8,16,.75);backdrop-filter:blur(3px);padding:18px}
+  .modal.on{display:flex}
+  .mcard{width:min(520px,96vw);max-height:90vh;overflow-y:auto;background:linear-gradient(180deg,var(--hull),var(--void));
+    border:1px solid var(--line);border-radius:16px;padding:26px}
+  .mcard h3{font-family:'Orbitron';font-weight:700;font-size:18px;margin:0 0 6px;color:#fff}
+  .mcard p{font-size:13px;color:var(--mute);line-height:1.55;margin:0 0 12px}
+  .mcard ol{font-size:12.5px;color:var(--mute);line-height:1.7;padding-left:20px;margin:0 0 14px}
+  .mcard a{color:var(--cyan)}
+  .mcard code{color:var(--cyan-dim);background:rgba(32,217,255,.08);padding:1px 5px;border-radius:4px;font-size:11.5px}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);z-index:80;
+    background:var(--plate);border:1px solid var(--cyan-dim);color:var(--ink);border-radius:10px;
+    padding:12px 18px;font:600 12.5px 'JetBrains Mono';opacity:0;pointer-events:none;transition:.25s;
+    box-shadow:0 8px 30px rgba(0,0,0,.5);max-width:90vw}
+  .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+  .toast.err{border-color:var(--red);color:var(--red)}
+  .toast.ok{border-color:var(--green);color:var(--green)}
+
   @media(max-width:1080px){.grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(3,1fr)}}
   @media(max-width:620px){
     .kpis{grid-template-columns:repeat(2,1fr)}
@@ -213,11 +262,20 @@
       <div class="live"><span class="dot"></span><span>Live</span></div>
       <div class="stamp">SOURCE <b id="src">projects.json</b><br>SYNCED <b id="synced">—</b></div>
       <button class="btn" id="refresh" title="Reload data">↻ Refresh</button>
-      <a class="btn edit" href="https://github.com/xcerebroai/xcerebro-command-center/edit/main/projects.json" target="_blank" rel="noopener" title="Edit projects.json on GitHub — add clients, update status, then Commit changes">✎ Edit Data</a>
+      <button class="btn edit" id="editToggle" aria-pressed="false" title="Turn in-page editing on/off">✎ Editor</button>
+      <button class="btn" id="addClient" title="Add a new client / project" style="display:none">➕ Add Client</button>
     </div>
   </header>
 
   <div class="banner" id="banner"></div>
+
+  <div class="editbar" id="editbar">
+    <span class="etxt">✎ Editor on — click any client to move its status, priority or progress.</span>
+    <span class="esep">·</span>
+    <span class="etxt">Access key: <b id="keyState" class="keyno">not set</b></span>
+    <button class="elink" id="keyBtn">set / change key</button>
+    <button class="elink" id="rawLink">raw file on GitHub ↗</button>
+  </div>
 
   <section class="kpis" id="kpis"></section>
 
@@ -266,6 +324,28 @@
   <div class="scrim" id="scrim"></div>
   <aside class="drawer" id="drawer" aria-hidden="true"></aside>
 
+  <div class="modal" id="keyModal">
+    <div class="mcard">
+      <h3>One-click Save — access key</h3>
+      <p>To save changes straight to GitHub, paste a personal access key below. It's stored <b>only in this browser</b> (never on the website) and lets the buttons write to your repo.</p>
+      <ol>
+        <li>Open <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener">github.com/settings/tokens</a> → <b>Generate new token</b>.</li>
+        <li><b>Repository access</b> → Only select repositories → <code>xcerebro-command-center</code>.</li>
+        <li><b>Permissions</b> → Repository → <b>Contents</b> → <b>Read and write</b>.</li>
+        <li>Generate, copy the <code>github_pat_…</code> value, paste it here.</li>
+      </ol>
+      <div class="efield" style="margin-top:0"><label>Access key</label>
+        <input class="ein" id="keyInput" type="password" placeholder="github_pat_…" autocomplete="off"></div>
+      <div class="esave">
+        <button class="btn primary" id="keySave">Save key</button>
+        <button class="ghost" id="keyClear">Remove key</button>
+        <button class="ghost" id="keyCancel">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
 <script>
 /* ---------- fallback data (used only when opened locally without a server) ---------- */
 const FALLBACK = {"meta":{"title":"X CEREBRO","subtitle":"AI Agents + Jarvis Command Center","owner":"Alexia / Q","updated":"2026-07-02"},"weights":{"dashboard":10,"campaign":15,"automations":15,"aiAgent":20,"customWorkflow":15,"a2p":10,"jarvis":10,"jvPayment":5},"componentLabels":{"dashboard":"Dashboard","campaign":"Campaign","automations":"Automations","aiAgent":"AI Agent","customWorkflow":"Custom Workflow","a2p":"A2P Setup","jarvis":"Jarvis Build","jvPayment":"JV / Payment"},"statusOptions":["Planning","Build Mode","Testing","Payment Follow-Up","Blocked","Ready","Live"],"projects":[{"id":"XC-001","client":"Alex Rodas","project":"Coastalgic Realtor Campaign","workstream":"Realtor Campaign","buildType":"Campaign + AI Follow-Up","owner":"Alexia / Q","start":"2026-06-26","targetEnd":"2026-07-05","status":"Build Mode","priority":"High","components":{"dashboard":0.3,"campaign":0.6,"automations":0.35,"aiAgent":0.4,"customWorkflow":0.25,"a2p":0.1,"jarvis":0.5,"jvPayment":1},"jarvisRelated":"Yes","paymentFollowUp":"No","blocker":"Need final campaign angle, Realtor offer, and exact handoff rules.","nextAction":"Build campaign copy, agent prompt, pipeline statuses, and test follow-up flow.","notes":"Realtor campaign under Coastalgic; build inside Jarvis and prepare AI follow-up."},{"id":"XC-002","client":"Alex Calderon","project":"AI Agent and Custom Workflow","workstream":"AI Agent + Custom Workflow","buildType":"Custom AI Agent","owner":"Alexia / Q","start":"2026-06-26","targetEnd":"2026-07-10","status":"Build Mode","priority":"High","components":{"dashboard":0.2,"campaign":0.25,"automations":0.35,"aiAgent":0.45,"customWorkflow":0.4,"a2p":0.2,"jarvis":0.35,"jvPayment":1},"jarvisRelated":"Yes","paymentFollowUp":"No","blocker":"Need final workflow scope, knowledgebase, triggers, and what the agent can/cannot do.","nextAction":"Confirm use case, map workflow logic, build agent instructions, then QA sample conversations.","notes":"Custom AI agent plus client-specific workflow logic."},{"id":"XC-003","client":"Alejandro Carbajal","project":"AI Agents","workstream":"AI Agents","buildType":"AI Agent Project","owner":"Alexia / Q","start":"2026-06-26","targetEnd":"2026-07-08","status":"Planning","priority":"High","components":{"dashboard":0.15,"campaign":0.2,"automations":0.25,"aiAgent":0.4,"customWorkflow":0.2,"a2p":0.1,"jarvis":0.3,"jvPayment":1},"jarvisRelated":"Yes","paymentFollowUp":"No","blocker":"Need exact agent use case, channels, offer, FAQs, and escalation rules.","nextAction":"Collect intake answers and create first AI agent prompt + KB outline.","notes":"AI agent build; details still need to be scoped."},{"id":"XC-004","client":"Mark Fuller","project":"AI Agents","workstream":"AI Agents","buildType":"AI Agent Project","owner":"Alexia / Q","start":"2026-06-26","targetEnd":"2026-07-08","status":"Planning","priority":"High","components":{"dashboard":0.15,"campaign":0.2,"automations":0.25,"aiAgent":0.4,"customWorkflow":0.2,"a2p":0.1,"jarvis":0.3,"jvPayment":1},"jarvisRelated":"Yes","paymentFollowUp":"No","blocker":"Need agent objective, lead source, offer, and reply boundaries.","nextAction":"Gather client intake details and draft the initial agent structure.","notes":"AI agent build; currently scoped as agent project."},{"id":"XC-005","client":"Raj","project":"Leads and JV Partnership","workstream":"Leads + JV Partnership","buildType":"JV Partner + Lead System","owner":"Alexia / Q","start":"2026-06-26","targetEnd":"2026-07-12","status":"Planning","priority":"High","components":{"dashboard":0.25,"campaign":0.3,"automations":0.25,"aiAgent":0.2,"customWorkflow":0.3,"a2p":0.15,"jarvis":0.25,"jvPayment":0.6},"jarvisRelated":"Yes","paymentFollowUp":"Maybe","blocker":"Need JV terms, lead source, access, responsibilities, and campaign direction.","nextAction":"Define JV role, confirm lead flow, then build partner onboarding checklist.","notes":"Leads + JV partnership project; likely needs Jarvis pipeline and lead management setup."},{"id":"XC-006","client":"John - Bigheights LLC","project":"JV Partnership","workstream":"JV Partnership","buildType":"JV Partner Setup","owner":"Alexia / Q","start":"2026-06-26","targetEnd":"2026-07-03","status":"Payment Follow-Up","priority":"Urgent","components":{"dashboard":0.1,"campaign":0.1,"automations":0.1,"aiAgent":0.1,"customWorkflow":0.1,"a2p":0,"jarvis":0.15,"jvPayment":0.1},"jarvisRelated":"Yes","paymentFollowUp":"Yes","blocker":"Payment follow-up needed before build-out can move forward.","nextAction":"Follow up for payment, confirm scope, then move into onboarding and Jarvis setup.","notes":"Bigheights LLC JV partnership. Marked urgent because payment follow-up is required."},{"id":"XC-007","client":"Anthony Sosa","project":"AI Agents","workstream":"AI Agents","buildType":"AI Agent Project","owner":"Alexia / Q","start":"2026-06-26","targetEnd":"2026-07-08","status":"Planning","priority":"High","components":{"dashboard":0.2,"campaign":0.25,"automations":0.3,"aiAgent":0.45,"customWorkflow":0.25,"a2p":0.1,"jarvis":0.35,"jvPayment":1},"jarvisRelated":"Yes","paymentFollowUp":"No","blocker":"Need clear use case, agent goal, and business context for build-out.","nextAction":"Collect intake details, define agent outcome, and draft knowledgebase requirements.","notes":"AI agent project for Anthony; scope to be finalized."},{"id":"XC-008","client":"Jeff Richman","project":"Jarvis and Skool Build Campaign","workstream":"Jarvis + Skool Campaign","buildType":"Jarvis Build + Campaign","owner":"Alexia / Q","start":"2026-06-26","targetEnd":"2026-07-12","status":"Build Mode","priority":"High","components":{"dashboard":0.35,"campaign":0.5,"automations":0.4,"aiAgent":0.25,"customWorkflow":0.3,"a2p":0.15,"jarvis":0.55,"jvPayment":1},"jarvisRelated":"Yes","paymentFollowUp":"No","blocker":"Need Skool campaign structure, Jarvis funnel/campaign flow, and launch assets.","nextAction":"Map Skool campaign, build Jarvis campaign, create automations, and QA the full funnel.","notes":"Jarvis + Skool build campaign; needs campaign and automation build-out."}]};
@@ -289,7 +369,7 @@ const FALLBACK = {"meta":{"title":"X CEREBRO","subtitle":"AI Agents + Jarvis Com
   const tag=(txt,map)=>{const c=map[txt]||["#13294a","#8ec2ff"];return `<span class="tag" style="background:${c[0]};color:${c[1]}">${esc(txt)}</span>`;};
   const dayCell=p=>{const d=daysLeft(p);const col=d<0?"var(--red)":d<=3?"var(--amber)":"var(--ink)";return `<div class="days" style="color:${col}">${d}<small>DAYS</small></div>`;};
 
-  let filterStatus="all", filterText="";
+  let filterStatus="all", filterText="", editorMode=false, holdUntil=0;
 
   function render(){
     const P=DB.projects;
@@ -380,6 +460,7 @@ const FALLBACK = {"meta":{"title":"X CEREBRO","subtitle":"AI Agents + Jarvis Com
 
   function openDetail(id){
     const p=DB.projects.find(x=>x.id===id);if(!p)return;
+    if(editorMode){openEditor(p);return;}
     const o=overall(p),W=DB.weights,L=DB.componentLabels;
     const comps=Object.keys(W).map(k=>`<div class="dcomp"><span class="n">${esc(L[k])}</span>
       <div class="t"><i style="width:${(p.components[k]||0)*100}%"></i></div>
@@ -423,6 +504,7 @@ const FALLBACK = {"meta":{"title":"X CEREBRO","subtitle":"AI Agents + Jarvis Com
   function stamp(){const d=new Date();$("#synced").textContent=d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'});}
 
   async function load(manual){
+    if(!manual && DB && Date.now()<holdUntil){stamp();return;} // just saved — don't let auto-refresh flash old data
     try{
       const res=await fetch("projects.json?t="+Date.now(),{cache:"no-store"});
       if(!res.ok) throw new Error(res.status);
@@ -440,6 +522,138 @@ const FALLBACK = {"meta":{"title":"X CEREBRO","subtitle":"AI Agents + Jarvis Com
 
   load();
   setInterval(load,60000); // auto-refresh every 60s for wall displays
+
+  /* ============ EDITOR (one-click save to GitHub) ============ */
+  const GH={
+    repo:"xcerebroai/xcerebro-command-center", file:"projects.json", branch:"main", tk:"xc_gh_token",
+    token(){return (localStorage.getItem(this.tk)||"").trim();},
+    save(t){localStorage.setItem(this.tk,t.trim());},
+    clear(){localStorage.removeItem(this.tk);},
+    async fetchLatest(){
+      const r=await fetch(`https://api.github.com/repos/${this.repo}/contents/${this.file}?ref=${this.branch}&t=`+Date.now(),
+        {headers:{Authorization:"Bearer "+this.token(),Accept:"application/vnd.github+json"},cache:"no-store"});
+      if(r.status===401||r.status===403) throw new Error("AUTH "+r.status);
+      if(!r.ok) throw new Error("read "+r.status);
+      const j=await r.json();
+      const txt=decodeURIComponent(escape(atob((j.content||"").replace(/\n/g,""))));
+      return {sha:j.sha, data:JSON.parse(txt)};
+    },
+    async commit(data,message,sha){
+      const b64=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
+      const r=await fetch(`https://api.github.com/repos/${this.repo}/contents/${this.file}`,
+        {method:"PUT",headers:{Authorization:"Bearer "+this.token(),Accept:"application/vnd.github+json","Content-Type":"application/json"},
+         body:JSON.stringify({message,content:b64,sha,branch:this.branch})});
+      if(r.status===401||r.status===403) throw new Error("AUTH "+r.status);
+      if(!r.ok){let m="";try{m=(await r.json()).message||""}catch(_){}throw new Error(r.status+" "+m);}
+      return r.json();
+    }
+  };
+
+  let toastT=null;
+  function toast(msg,type){const t=$("#toast");t.textContent=msg;t.className="toast on"+(type?" "+type:"");
+    clearTimeout(toastT);toastT=setTimeout(()=>{t.className="toast";},type==="err"?5200:3500);}
+
+  function refreshKeyState(){const has=!!GH.token(),s=$("#keyState");if(s){s.textContent=has?"set ✓":"not set";s.className=has?"keyok":"keyno";}}
+  function openKeyModal(){$("#keyInput").value=GH.token();$("#keyModal").classList.add("on");setTimeout(()=>$("#keyInput").focus(),50);}
+  function closeKeyModal(){$("#keyModal").classList.remove("on");}
+
+  function setEditor(on){editorMode=on;
+    $("#editToggle").setAttribute("aria-pressed",on?"true":"false");
+    $("#editbar").classList.toggle("on",on);
+    $("#addClient").style.display=on?"inline-flex":"none";
+    refreshKeyState(); if(!on) closeDetail();}
+
+  function showDrawer(html){const d=$("#drawer");d.innerHTML=html;d.classList.add("on");d.setAttribute("aria-hidden","false");$("#scrim").classList.add("on");d.scrollTop=0;}
+
+  function slidersHTML(comps){const W=DB.weights,L=DB.componentLabels;
+    return Object.keys(W).map(k=>{const v=Math.round((comps[k]||0)*100);
+      return `<div class="eslider"><span class="sn">${esc(L[k])}</span>
+        <input type="range" min="0" max="100" value="${v}" id="ec_${k}" oninput="document.getElementById('sv_${k}').textContent=this.value+'%'">
+        <span class="sv" id="sv_${k}">${v}%</span></div>`;}).join("");}
+
+  function editorForm(p,mode){
+    const sel=(id,opts,cur)=>`<select class="esel" id="${id}">`+opts.map(o=>`<option ${o===cur?"selected":""}>${esc(o)}</option>`).join("")+`</select>`;
+    return `<div class="dh"><div><div class="did">${mode==="add"?"NEW BUILD":esc(p.id)+" · editing"}</div>
+        <h3>${mode==="add"?"Add Client / Project":esc(p.client)}</h3></div>
+        <button class="xbtn" id="xclose" aria-label="Close">✕</button></div>
+      <div class="efield"><label>Client</label><input class="ein" id="ef_client" value="${esc(p.client||"")}" placeholder="Client name"></div>
+      <div class="efield"><label>Project</label><input class="ein" id="ef_project" value="${esc(p.project||"")}" placeholder="What you're building"></div>
+      <div class="erow">
+        <div class="efield"><label>Status — move</label>${sel("ef_status",DB.statusOptions,p.status||"Planning")}</div>
+        <div class="efield"><label>Priority</label>${sel("ef_priority",["Urgent","High","Normal"],p.priority||"High")}</div></div>
+      <div class="erow">
+        <div class="efield"><label>Build Type / System</label><input class="ein" id="ef_buildType" list="btlist" value="${esc(p.buildType||"")}">
+          <datalist id="btlist"><option>AI Agent Project</option><option>Custom AI Agent</option><option>Campaign + AI Follow-Up</option><option>Jarvis Build + Campaign</option><option>JV Partner Setup</option><option>JV Partner + Lead System</option></datalist></div>
+        <div class="efield"><label>Workstream</label><input class="ein" id="ef_workstream" value="${esc(p.workstream||"")}"></div></div>
+      <div class="erow">
+        <div class="efield"><label>Owner</label><input class="ein" id="ef_owner" value="${esc(p.owner||(DB.meta&&DB.meta.owner)||"")}"></div>
+        <div class="efield"><label>Target End</label><input class="ein" id="ef_targetEnd" type="date" value="${esc(p.targetEnd||"")}"></div></div>
+      <div class="erow">
+        <div class="efield"><label>Jarvis Related</label>${sel("ef_jarvis",["Yes","No"],p.jarvisRelated||"Yes")}</div>
+        <div class="efield"><label>Payment Follow-Up</label>${sel("ef_payment",["No","Yes","Maybe"],p.paymentFollowUp||"No")}</div></div>
+      <div class="efield"><label>Progress by component</label>${slidersHTML(p.components||{})}</div>
+      <div class="efield"><label>Current Blocker</label><textarea class="eta" id="ef_blocker">${esc(p.blocker||"")}</textarea></div>
+      <div class="efield"><label>Next Action</label><textarea class="eta" id="ef_nextAction">${esc(p.nextAction||"")}</textarea></div>
+      <div class="efield"><label>Notes</label><textarea class="eta" id="ef_notes">${esc(p.notes||"")}</textarea></div>
+      <div class="esave">
+        <button class="btn primary" id="ef_save">${mode==="add"?"Add & Save to GitHub":"Save to GitHub"}</button>
+        <button class="ghost" id="ef_cancel">Cancel</button></div>`;
+  }
+
+  function readForm(){const g=id=>document.getElementById(id),comps={};
+    Object.keys(DB.weights).forEach(k=>{comps[k]=(+g("ec_"+k).value)/100;});
+    return {client:g("ef_client").value.trim(),project:g("ef_project").value.trim(),status:g("ef_status").value,
+      priority:g("ef_priority").value,buildType:g("ef_buildType").value.trim(),workstream:g("ef_workstream").value.trim(),
+      owner:g("ef_owner").value.trim(),targetEnd:g("ef_targetEnd").value,jarvisRelated:g("ef_jarvis").value,
+      paymentFollowUp:g("ef_payment").value,blocker:g("ef_blocker").value.trim(),nextAction:g("ef_nextAction").value.trim(),
+      notes:g("ef_notes").value.trim(),components:comps};}
+
+  function bindForm(mode,p){const g=id=>document.getElementById(id);
+    g("xclose").onclick=closeDetail; g("ef_cancel").onclick=closeDetail;
+    g("ef_save").onclick=()=>{const v=readForm();
+      if(!v.client){toast("Client name is required","err");return;}
+      if(mode==="add"){
+        commitChange(data=>{let max=0;data.projects.forEach(x=>{const m=/(\d+)/.exec(x.id||"");if(m)max=Math.max(max,+m[1]);});
+          data.projects.push(Object.assign({id:"XC-"+String(max+1).padStart(3,"0"),start:p.start},v));},
+          "Add client "+v.client,g("ef_save"));
+      }else{
+        commitChange(data=>{const t=data.projects.find(x=>x.id===p.id);
+          if(!t)throw new Error("that client is gone — reload");Object.assign(t,v);},
+          "Update "+p.id+" "+v.client,g("ef_save"));
+      }};}
+
+  function openEditor(p){showDrawer(editorForm(p,"edit"));bindForm("edit",p);}
+  function openAddClient(){const today=new Date().toISOString().slice(0,10);
+    const blank={client:"",project:"",status:"Planning",priority:"High",buildType:"AI Agent Project",workstream:"",
+      owner:(DB.meta&&DB.meta.owner)||"",start:today,targetEnd:"",jarvisRelated:"Yes",paymentFollowUp:"No",
+      blocker:"",nextAction:"",notes:"",components:Object.fromEntries(Object.keys(DB.weights).map(k=>[k,0.1]))};
+    showDrawer(editorForm(blank,"add"));bindForm("add",blank);}
+
+  async function commitChange(mutator,message,btn){
+    if(!GH.token()){toast("Set your access key first","err");openKeyModal();return;}
+    const label=btn?btn.textContent:"";if(btn){btn.disabled=true;btn.textContent="Saving…";}
+    try{
+      const {sha,data}=await GH.fetchLatest();
+      mutator(data);
+      if(data.meta) data.meta.updated=new Date().toISOString().slice(0,10);
+      await GH.commit(data,message,sha);
+      holdUntil=Date.now()+90000; DB=data; render(); closeDetail();
+      toast("Saved ✓ — live for the team in ~1 min","ok");
+    }catch(e){
+      if(String(e.message).indexOf("AUTH")>=0){toast("Access key invalid or missing write access","err");openKeyModal();}
+      else toast("Save failed: "+e.message,"err");
+    }finally{if(btn){btn.disabled=false;btn.textContent=label;}}
+  }
+
+  $("#editToggle").onclick=()=>setEditor(!editorMode);
+  $("#addClient").onclick=()=>{if(!editorMode)setEditor(true);openAddClient();};
+  $("#keyBtn").onclick=openKeyModal;
+  $("#rawLink").onclick=()=>window.open("https://github.com/"+GH.repo+"/edit/"+GH.branch+"/"+GH.file,"_blank");
+  $("#keySave").onclick=()=>{const v=$("#keyInput").value.trim();if(!v){toast("Paste a key first","err");return;}GH.save(v);refreshKeyState();closeKeyModal();toast("Key saved ✓","ok");};
+  $("#keyClear").onclick=()=>{GH.clear();refreshKeyState();$("#keyInput").value="";toast("Key removed");};
+  $("#keyCancel").onclick=closeKeyModal;
+  $("#keyModal").onclick=e=>{if(e.target.id==="keyModal")closeKeyModal();};
+  refreshKeyState();
 </script>
 </body>
 </html>
