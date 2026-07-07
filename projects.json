@@ -125,7 +125,7 @@
       "owner": "Alexia / Q",
       "start": "2026-06-26",
       "targetEnd": "2026-07-08",
-      "status": "Planning",
+      "status": "Testing",
       "priority": "High",
       "components": {
         "dashboard": 0.15,
