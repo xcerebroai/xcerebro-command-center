@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>X Cerebro // Command Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#07111F; --hull:#0C1A2E; --plate:#12233D; --plate2:#0F1D33;
+    --line:#1C3552; --cyan:#20D9FF; --cyan-dim:#0AA5C7; --cyan-glow:rgba(32,217,255,.35);
+    --ink:#E6F1FF; --mute:#8FA6C4; --mute2:#5F7796;
+    --amber:#F5A623; --red:#FF5D5D; --green:#3DE8A0; --violet:#B57BFF; --blue:#67B0FF;
+    --r:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:
+      radial-gradient(1200px 700px at 78% -8%, rgba(32,217,255,.10), transparent 60%),
+      radial-gradient(900px 600px at 0% 100%, rgba(181,123,255,.07), transparent 55%),
+      var(--void);
+    color:var(--ink);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+    min-height:100vh;padding:22px clamp(12px,3vw,34px) 60px;
+  }
+  a{color:inherit}
+  /* command bar */
+  .bar{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:16px 20px;border:1px solid var(--line);
+    border-radius:var(--r);background:linear-gradient(180deg,rgba(18,35,61,.75),rgba(12,26,46,.55));backdrop-filter:blur(6px);position:relative;overflow:hidden}
+  .brand h1{font-family:'Orbitron';font-weight:900;font-size:clamp(18px,2.4vw,27px);letter-spacing:.06em;margin:0;line-height:1;color:#fff}
+  .brand h1 span{color:var(--cyan);text-shadow:0 0 18px var(--cyan-glow)}
+  .brand p{margin:2px 0 0;font-size:12px;color:var(--mute);letter-spacing:.14em;text-transform:uppercase}
+  .bar-right{margin-left:auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .live{display:flex;align-items:center;gap:8px;font:600 11px/1 'JetBrains Mono';letter-spacing:.18em;color:var(--green);text-transform:uppercase}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(61,232,160,.6);animation:pulse 2.2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(61,232,160,.55)}70%{box-shadow:0 0 0 9px rgba(61,232,160,0)}100%{box-shadow:0 0 0 0 rgba(61,232,160,0)}}
+  .stamp{font:500 11px/1.5 'JetBrains Mono';color:var(--mute);text-align:right}
+  .stamp b{color:var(--cyan);font-weight:700}
+  .btn{border:1px solid var(--line);background:rgba(32,217,255,.06);color:var(--cyan);font:600 12px 'JetBrains Mono';
+    letter-spacing:.06em;padding:9px 14px;border-radius:9px;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:7px;text-decoration:none}
+  .btn:hover{background:rgba(32,217,255,.14);border-color:var(--cyan-dim)}
+  .btn.edit[aria-pressed="true"]{background:var(--green);color:var(--void);border-color:var(--green)}
+  .btn.pri{background:var(--cyan);color:var(--void);border-color:var(--cyan)}
+  .btn.pri:hover{background:#4fe3ff}
+
+  .editbar{display:none;margin-top:14px;align-items:center;gap:14px;flex-wrap:wrap;border:1px solid rgba(61,232,160,.35);
+    background:rgba(61,232,160,.07);border-radius:11px;padding:10px 15px}
+  .editbar.on{display:flex}
+  .editbar .etxt{font:500 12px 'JetBrains Mono';color:var(--green)}
+  .editbar .esep{color:var(--mute2)}
+  .editbar .elink{font:600 11px 'JetBrains Mono';color:var(--cyan);cursor:pointer;text-decoration:underline;background:none;border:0}
+  .keyok{color:var(--green)} .keyno{color:var(--amber)}
+
+  /* kpis */
+  .kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:16px}
+  .kpi{position:relative;border:1px solid var(--line);border-radius:var(--r);background:linear-gradient(180deg,var(--plate),var(--plate2));padding:16px 15px 14px;overflow:hidden}
+  .kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--cyan);box-shadow:0 0 14px var(--cyan-glow)}
+  .kpi .k-label{font:600 10px 'JetBrains Mono';letter-spacing:.16em;color:var(--cyan);text-transform:uppercase}
+  .kpi .k-num{font-family:'Orbitron';font-weight:700;font-size:30px;line-height:1;margin:9px 0 4px;color:#fff}
+  .kpi .k-sub{font-size:11px;color:var(--mute)}
+  .kpi.warn::before{background:var(--amber)} .kpi.warn .k-label{color:var(--amber)}
+  .kpi.crit::before{background:var(--red)} .kpi.crit .k-label{color:var(--red)}
+
+  .reactor{margin-top:14px;border:1px solid var(--line);border-radius:var(--r);background:linear-gradient(180deg,var(--plate),var(--plate2));
+    padding:16px 20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+  .reactor .r-label{font:600 11px 'JetBrains Mono';letter-spacing:.16em;color:var(--cyan);text-transform:uppercase;white-space:nowrap}
+  .track{flex:1;min-width:220px;height:16px;border-radius:20px;background:#0a1626;border:1px solid var(--line);overflow:hidden;position:relative}
+  .track > i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,var(--cyan-dim),var(--cyan));box-shadow:0 0 16px var(--cyan-glow);transition:width 1s cubic-bezier(.2,.7,.2,1)}
+  .reactor .r-pct{font-family:'Orbitron';font-weight:700;font-size:24px;color:#fff;min-width:74px;text-align:right}
+
+  .grid{display:grid;grid-template-columns:1.55fr 1fr;gap:16px;margin-top:16px}
+  .panel{border:1px solid var(--line);border-radius:var(--r);background:linear-gradient(180deg,rgba(18,35,61,.55),rgba(12,26,46,.5));position:relative;overflow:hidden}
+  .panel > h2{font-family:'Orbitron';font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin:0;
+    padding:15px 18px 13px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+  .panel > h2 .tick{color:var(--cyan)}
+  .panel > h2 .count{margin-left:auto;font:600 11px 'JetBrains Mono';color:var(--mute)}
+  .filters{display:flex;gap:8px;flex-wrap:wrap;padding:12px 18px 4px}
+  .search{flex:1;min-width:150px;background:#0a1626;border:1px solid var(--line);border-radius:9px;color:var(--ink);font:500 13px 'Inter';padding:9px 12px}
+  .search::placeholder{color:var(--mute2)}
+  .search:focus{outline:none;border-color:var(--cyan-dim);box-shadow:0 0 0 3px rgba(32,217,255,.12)}
+
+  /* client cards */
+  .clients{padding:10px 12px 16px;display:flex;flex-direction:column;gap:10px}
+  .client{border:1px solid var(--line);border-radius:12px;background:rgba(10,22,38,.5);overflow:hidden}
+  .chead{display:grid;grid-template-columns:20px 1fr 120px 80px;gap:12px;align-items:center;padding:13px 15px;cursor:pointer;transition:.13s}
+  .chead:hover{background:rgba(32,217,255,.05)}
+  .chev{color:var(--mute2);font-size:13px;transition:transform .18s}
+  .client.open .chev{transform:rotate(90deg)}
+  .cname{min-width:0}
+  .cname .nm{font-weight:700;font-size:15px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .cname .co{font-size:11.5px;color:var(--mute);margin-top:1px}
+  .cbarwrap{display:flex;align-items:center;gap:8px}
+  .cbarwrap .mini{flex:1;height:8px;border-radius:6px;background:#0a1626;border:1px solid var(--line);overflow:hidden}
+  .cbarwrap .mini > i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan-dim),var(--cyan));box-shadow:0 0 8px var(--cyan-glow)}
+  .cbarwrap .pv{font:700 12px 'JetBrains Mono';color:var(--cyan);min-width:36px;text-align:right}
+  .cprojcount{font:600 11px 'JetBrains Mono';color:var(--mute);text-align:right}
+  .projwrap{display:none;padding:0 12px 12px;flex-direction:column;gap:8px}
+  .client.open .projwrap{display:flex}
+  .proj{border:1px solid var(--line);border-radius:10px;background:rgba(18,35,61,.4);padding:11px 13px;cursor:pointer;transition:.13s}
+  .proj:hover{border-color:var(--cyan-dim);background:rgba(32,217,255,.05)}
+  .prow{display:grid;grid-template-columns:1fr 118px 150px 46px;gap:10px;align-items:center}
+  .pj-nm{font-weight:600;font-size:13.5px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pj-bt{font-size:11px;color:var(--mute);margin-top:1px}
+  .tag{display:inline-flex;align-items:center;justify-content:center;font:600 10.5px 'JetBrains Mono';padding:5px 8px;border-radius:7px;white-space:nowrap;width:100%}
+  .ov{display:flex;align-items:center;gap:8px}
+  .ov .mini{flex:1;height:7px;border-radius:6px;background:#0a1626;border:1px solid var(--line);overflow:hidden}
+  .ov .mini > i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan-dim),var(--cyan))}
+  .ov .pv{font:700 12px 'JetBrains Mono';color:var(--cyan);min-width:34px;text-align:right}
+  .days{font:700 13px 'JetBrains Mono';text-align:center}
+  .days small{display:block;font-weight:500;font-size:8px;color:var(--mute2);letter-spacing:.1em}
+  .chk-mini{margin-top:9px;display:flex;flex-wrap:wrap;gap:5px}
+  .chk-mini .ci{font:600 9.5px 'JetBrains Mono';padding:3px 7px;border-radius:20px;border:1px solid var(--line);color:var(--mute2);background:#0a1626}
+  .chk-mini .ci.done{color:var(--green);border-color:rgba(61,232,160,.4);background:rgba(61,232,160,.08)}
+  .addproj{border:1px dashed var(--line);border-radius:10px;padding:9px;text-align:center;color:var(--cyan);
+    font:600 11px 'JetBrains Mono';cursor:pointer;background:none}
+  .addproj:hover{border-color:var(--cyan-dim);background:rgba(32,217,255,.05)}
+
+  .rail{display:flex;flex-direction:column;gap:16px}
+  .moves{padding:6px 10px 12px}
+  .move{display:grid;grid-template-columns:22px 1fr auto;gap:11px;align-items:center;padding:10px 12px;border-radius:10px;cursor:pointer;transition:.13s}
+  .move:hover{background:rgba(32,217,255,.05)}
+  .move + .move{border-top:1px solid rgba(28,53,82,.5)}
+  .rank{font-family:'Orbitron';font-weight:700;font-size:13px;color:var(--cyan-dim);text-align:center}
+  .move .m-cl{font-weight:600;font-size:13px;color:#fff}
+  .move .m-ac{font-size:11px;color:var(--mute);margin-top:2px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .m-days{font:700 12px 'JetBrains Mono';text-align:right;white-space:nowrap}
+  .dist{padding:12px 18px 16px;display:flex;flex-direction:column;gap:9px}
+  .drow{display:grid;grid-template-columns:1fr 1fr 44px;gap:10px;align-items:center}
+  .drow .dn{font:600 11px 'JetBrains Mono';padding:4px 8px;border-radius:6px;text-align:center}
+  .drow .dt{height:9px;border-radius:6px;background:#0a1626;border:1px solid var(--line);overflow:hidden}
+  .drow .dt > i{display:block;height:100%}
+  .drow .dc{font:700 12px 'JetBrains Mono';color:var(--mute);text-align:right}
+  /* AI panel */
+  .aip{padding:14px 18px 18px;font-size:13px;color:var(--mute);line-height:1.55}
+  .aip b{color:var(--ink)}
+  .aip .url{margin-top:10px;display:flex;gap:8px;align-items:stretch}
+  .aip .url input{flex:1;min-width:0;background:#0a1626;border:1px solid var(--line);border-radius:8px;color:var(--cyan);font:500 11px 'JetBrains Mono';padding:9px 10px}
+  .aip .copy{white-space:nowrap}
+
+  /* drawer */
+  .scrim{position:fixed;inset:0;background:rgba(3,8,16,.72);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:.2s;z-index:40}
+  .scrim.on{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;top:0;right:0;height:100%;width:min(480px,94vw);z-index:50;background:linear-gradient(180deg,var(--hull),var(--void));
+    border-left:1px solid var(--line);transform:translateX(100%);transition:transform .28s cubic-bezier(.2,.7,.2,1);overflow-y:auto;padding:26px 26px 40px}
+  .drawer.on{transform:translateX(0)}
+  .dh{display:flex;align-items:flex-start;gap:12px}
+  .did{font:600 11px 'JetBrains Mono';color:var(--cyan);letter-spacing:.1em}
+  .drawer h3{font-family:'Orbitron';font-weight:700;font-size:18px;margin:4px 0 0;color:#fff;line-height:1.2}
+  .xbtn{margin-left:auto;background:none;border:1px solid var(--line);color:var(--mute);width:34px;height:34px;border-radius:8px;cursor:pointer;font-size:16px;flex-shrink:0}
+  .xbtn:hover{color:var(--ink);border-color:var(--cyan-dim)}
+  .efield{margin-top:14px}
+  .efield > label{display:block;font:600 10px 'JetBrains Mono';letter-spacing:.14em;color:var(--cyan);text-transform:uppercase;margin-bottom:6px}
+  .ein,.esel,.eta{width:100%;background:#0a1626;border:1px solid var(--line);border-radius:9px;color:var(--ink);font:500 13px 'Inter';padding:9px 11px}
+  .eta{min-height:56px;resize:vertical}
+  .ein:focus,.esel:focus,.eta:focus{outline:none;border-color:var(--cyan-dim);box-shadow:0 0 0 3px rgba(32,217,255,.12)}
+  .erow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  /* checklist editor */
+  .checks{margin-top:8px;display:flex;flex-direction:column;gap:7px}
+  .citem{display:flex;align-items:center;gap:10px;background:#0a1626;border:1px solid var(--line);border-radius:9px;padding:9px 11px}
+  .citem input[type=checkbox]{width:18px;height:18px;accent-color:var(--green);flex-shrink:0;cursor:pointer}
+  .citem .cl-txt{flex:1;font-size:13px;color:var(--ink)}
+  .citem.done .cl-txt{color:var(--green);text-decoration:line-through;text-decoration-color:rgba(61,232,160,.5)}
+  .citem .rm{background:none;border:0;color:var(--mute2);cursor:pointer;font-size:15px;padding:0 2px}
+  .citem .rm:hover{color:var(--red)}
+  .addchk{display:flex;gap:8px;margin-top:9px}
+  .addchk input{flex:1;background:#0a1626;border:1px solid var(--line);border-radius:9px;color:var(--ink);font:500 13px 'Inter';padding:9px 11px}
+  .chkpct{margin-top:10px;display:flex;align-items:center;gap:10px}
+  .chkpct .bar{flex:1;height:9px;border-radius:6px;background:#0a1626;border:1px solid var(--line);overflow:hidden}
+  .chkpct .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan-dim),var(--cyan))}
+  .chkpct .n{font:700 13px 'JetBrains Mono';color:#fff}
+  .esave{margin-top:22px;display:flex;gap:10px}
+  .esave .primary{flex:1;justify-content:center;background:var(--green);color:var(--void);border-color:var(--green);font-weight:700;padding:12px}
+  .esave .primary:hover{background:#2fd992}
+  .esave .primary:disabled{opacity:.55;cursor:default}
+  .ghost{background:none;border:1px solid var(--line);color:var(--mute);border-radius:9px;padding:12px 16px;cursor:pointer;font:600 12px 'JetBrains Mono'}
+  .ghost:hover{color:var(--ink);border-color:var(--cyan-dim)}
+  .ghost.del{color:var(--red);border-color:rgba(255,93,93,.3)}
+  .modal{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;background:rgba(3,8,16,.75);backdrop-filter:blur(3px);padding:18px}
+  .modal.on{display:flex}
+  .mcard{width:min(520px,96vw);max-height:90vh;overflow-y:auto;background:linear-gradient(180deg,var(--hull),var(--void));border:1px solid var(--line);border-radius:16px;padding:26px}
+  .mcard h3{font-family:'Orbitron';font-weight:700;font-size:18px;margin:0 0 6px;color:#fff}
+  .mcard p{font-size:13px;color:var(--mute);line-height:1.55;margin:0 0 12px}
+  .mcard ol{font-size:12.5px;color:var(--mute);line-height:1.7;padding-left:20px;margin:0 0 14px}
+  .mcard a{color:var(--cyan)} .mcard code{color:var(--cyan-dim);background:rgba(32,217,255,.08);padding:1px 5px;border-radius:4px;font-size:11.5px}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);z-index:80;background:var(--plate);border:1px solid var(--cyan-dim);
+    color:var(--ink);border-radius:10px;padding:12px 18px;font:600 12.5px 'JetBrains Mono';opacity:0;pointer-events:none;transition:.25s;box-shadow:0 8px 30px rgba(0,0,0,.5);max-width:90vw}
+  .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+  .toast.err{border-color:var(--red);color:var(--red)} .toast.ok{border-color:var(--green);color:var(--green)}
+  .foot{margin-top:22px;text-align:center;font:500 11px 'JetBrains Mono';color:var(--mute2)}
+  .banner{margin-top:14px;border:1px solid rgba(245,166,35,.4);background:rgba(245,166,35,.08);color:var(--amber);border-radius:11px;padding:11px 15px;font:500 12px 'JetBrains Mono';display:none}
+  .banner.on{display:block}
+  @media(max-width:1080px){.grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:620px){.kpis{grid-template-columns:repeat(2,1fr)}.prow{grid-template-columns:1fr 90px 46px}.prow .pr-st{display:none}.chead{grid-template-columns:18px 1fr 70px}.chead .cprojcount{display:none}}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+  <header class="bar">
+    <div class="brand">
+      <h1 id="ttl">X CEREBRO <span>//</span> COMMAND CENTER</h1>
+      <p id="sub">AI Agents + Jarvis Build-Outs</p>
+    </div>
+    <div class="bar-right">
+      <div class="live"><span class="dot"></span><span>Live</span></div>
+      <div class="stamp">SOURCE <b id="src">projects.json</b><br>SYNCED <b id="synced">—</b></div>
+      <button class="btn" id="refresh" title="Reload data">↻ Refresh</button>
+      <button class="btn edit" id="editToggle" aria-pressed="false" title="Turn in-page editing on/off">✎ Editor</button>
+      <button class="btn pri" id="addClient" title="Add a new client" style="display:none">➕ Add Client</button>
+    </div>
+  </header>
+
+  <div class="banner" id="banner"></div>
+  <div class="editbar" id="editbar">
+    <span class="etxt">✎ Editor on — click a project to edit its checklist, or use ➕ Add Client.</span>
+    <span class="esep">·</span>
+    <span class="etxt">Access key: <b id="keyState" class="keyno">not set</b></span>
+    <button class="elink" id="keyBtn">set / change key</button>
+  </div>
+
+  <section class="kpis" id="kpis"></section>
+
+  <section class="reactor">
+    <span class="r-label">Portfolio Completion</span>
+    <div class="track"><i id="reactorFill" style="width:0%"></i></div>
+    <span class="r-pct" id="reactorPct">0%</span>
+  </section>
+
+  <main class="grid">
+    <section class="panel">
+      <h2><span class="tick">▮</span> Clients &amp; Projects <span class="count" id="lbCount"></span></h2>
+      <div class="filters">
+        <input class="search" id="search" placeholder="Search client, project, owner…" aria-label="Search">
+      </div>
+      <div class="clients" id="board"></div>
+    </section>
+
+    <aside class="rail">
+      <section class="panel">
+        <h2><span class="tick">⚡</span> Next Moves <span class="count">auto-ranked</span></h2>
+        <div class="moves" id="moves"></div>
+      </section>
+      <section class="panel">
+        <h2><span class="tick">◷</span> Status Distribution</h2>
+        <div class="dist" id="dist"></div>
+      </section>
+      <section class="panel">
+        <h2><span class="tick">🤖</span> Connect your AI Agent</h2>
+        <div class="aip" id="aip"></div>
+      </section>
+    </aside>
+  </main>
+
+  <p class="foot">Checklist-driven · every % is calculated from ticked tasks · team-readable + AI-readable from the same file.</p>
+
+  <div class="scrim" id="scrim"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true"></aside>
+
+  <div class="modal" id="keyModal">
+    <div class="mcard">
+      <h3>One-click Save — access key</h3>
+      <p>To save changes straight to GitHub, paste a personal access key below. It's stored <b>only in this browser</b>, never on the website.</p>
+      <ol>
+        <li>Open <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener">github.com/settings/tokens</a> → <b>Generate new token</b> (Fine-grained).</li>
+        <li><b>Repository access</b> → Only select repositories → <code>xcerebro-command-center</code>.</li>
+        <li><b>Permissions</b> → Repository → <b>Contents</b> → <b>Read and write</b>.</li>
+        <li>Generate, copy the <code>github_pat_…</code>, paste it here.</li>
+      </ol>
+      <div class="efield" style="margin-top:0"><label>Access key</label>
+        <input class="ein" id="keyInput" type="password" placeholder="github_pat_…" autocomplete="off"></div>
+      <div class="esave">
+        <button class="btn primary" id="keySave">Save key</button>
+        <button class="ghost" id="keyClear">Remove key</button>
+        <button class="ghost" id="keyCancel">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+<script>
+const DEFAULT_TASKS=["Dashboard set up","Campaign built","Automations wired","AI Agent configured","Custom workflow mapped","A2P registration","Jarvis build","JV / Payment confirmed"];
+const FALLBACK={"meta":{"title":"X CEREBRO","subtitle":"AI Agents + Jarvis Command Center","owner":"Alexia / Q","updated":"2026-07-07"},"statusOptions":["Planning","Build Mode","Testing","Payment Follow-Up","Blocked","Ready","Live"],"priorityOptions":["Urgent","High","Normal"],"clients":[]};
+
+const STATUS_CLR={"Planning":["#13294a","#8ec2ff"],"Build Mode":["#3a2408","#f5a623"],"Testing":["#2a1650","#c9a8ff"],"Payment Follow-Up":["#3d0f0f","#ff8080"],"Blocked":["#2a0808","#ff5d5d"],"Ready":["#0c3524","#3de8a0"],"Live":["#083b2c","#3de8a0"]};
+const PRIO_CLR={"Urgent":["#3d0f0f","#ff8080"],"High":["#3a2408","#f5a623"],"Normal":["#13294a","#8ec2ff"]};
+const DIST_CLR={"Planning":"#67B0FF","Build Mode":"#F5A623","Testing":"#B57BFF","Payment Follow-Up":"#FF5D5D","Blocked":"#FF5D5D","Ready":"#3DE8A0","Live":"#3DE8A0"};
+
+let DB=null, editorMode=false, holdUntil=0, filterText="", openClients={};
+const $=s=>document.querySelector(s);
+const pct=v=>Math.round(v*100)+"%";
+const esc=s=>String(s??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+const REPO="xcerebroai/xcerebro-command-center", BRANCH="main";
+const FILEPATH=location.pathname.includes("/v2/")?"v2/projects.json":"projects.json";
+const RAWURL="https://raw.githubusercontent.com/"+REPO+"/"+BRANCH+"/"+FILEPATH;
+
+const clients=()=>DB.clients||[];
+const projPct=p=>{const t=p.tasks||[];return t.length?t.filter(x=>x.done).length/t.length:0;};
+const clientTasks=c=>{let d=0,t=0;(c.projects||[]).forEach(p=>{(p.tasks||[]).forEach(x=>{t++;if(x.done)d++;});});return{d,t};};
+const clientPct=c=>{const {d,t}=clientTasks(c);return t?d/t:0;};
+const allProjects=()=>{const a=[];clients().forEach(c=>(c.projects||[]).forEach(p=>a.push({c,p})));return a;};
+const daysLeft=p=>{if(!p.targetEnd)return 99;const d=new Date(p.targetEnd),n=new Date();d.setHours(0,0,0,0);n.setHours(0,0,0,0);return Math.round((d-n)/86400000);};
+const health=p=>{if(p.status==="Blocked")return"Blocked";if(p.status==="Payment Follow-Up")return"Payment Hold";const dl=daysLeft(p);if(dl<0)return"Overdue";if(dl<=5&&projPct(p)<0.7)return"At Risk";return"On Track";};
+const urgency=p=>daysLeft(p)-(p.priority==="Urgent"?1000:0)-(p.priority==="High"?100:0)-(p.status==="Payment Follow-Up"?500:0);
+const tag=(txt,map)=>{const c=map[txt]||["#13294a","#8ec2ff"];return `<span class="tag" style="background:${c[0]};color:${c[1]}">${esc(txt)}</span>`;};
+const dayCell=p=>{const d=daysLeft(p);const col=d<0?"var(--red)":d<=3?"var(--amber)":"var(--ink)";return `<div class="days" style="color:${col}">${d}<small>DAYS</small></div>`;};
+const hexA=(hex,a)=>{const h=hex.replace('#','');const n=parseInt(h,16);return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`;};
+
+function render(){
+  $("#ttl").innerHTML=`${esc(DB.meta.title)} <span>//</span> COMMAND CENTER`;
+  $("#sub").textContent=DB.meta.subtitle;
+  const CLS=clients(), PRJ=allProjects();
+  const avg=PRJ.length?PRJ.reduce((a,x)=>a+projPct(x.p),0)/PRJ.length:0;
+  let doneT=0,totT=0;PRJ.forEach(x=>{(x.p.tasks||[]).forEach(t=>{totT++;if(t.done)doneT++;});});
+  const risk=PRJ.filter(x=>["Overdue","At Risk","Blocked"].includes(health(x.p))).length;
+  const pay=PRJ.filter(x=>x.p.status==="Payment Follow-Up").length;
+  const kpis=[
+    ["Clients",CLS.length,"On the board",""],
+    ["Projects",PRJ.length,"Active builds",""],
+    ["Avg Complete",pct(avg),"Across projects",""],
+    ["Tasks Done",doneT+"/"+totT,"Checklist items",""],
+    ["Payment Holds",pay,"Collect / confirm",pay>0?"warn":""],
+    ["At Risk",risk,"Needs attention",risk>0?"crit":""]
+  ];
+  $("#kpis").innerHTML=kpis.map(k=>`<div class="kpi ${k[3]}"><div class="k-label">${k[0]}</div><div class="k-num">${k[1]}</div><div class="k-sub">${k[2]}</div></div>`).join("");
+  $("#reactorPct").textContent=pct(avg);
+  requestAnimationFrame(()=>{$("#reactorFill").style.width=(avg*100).toFixed(1)+"%";});
+
+  const t=filterText.toLowerCase();
+  const shown=CLS.filter(c=>{if(!t)return true;const hay=(c.name+" "+(c.company||"")+" "+(c.projects||[]).map(p=>p.name+" "+p.buildType+" "+p.owner).join(" ")).toLowerCase();return hay.includes(t);});
+  $("#lbCount").textContent=`${shown.length} / ${CLS.length}`;
+  $("#board").innerHTML=shown.map(c=>{
+    const cp=clientPct(c), open=openClients[c.id];
+    const projs=(c.projects||[]).map(p=>{
+      const o=projPct(p);
+      const mini=(p.tasks||[]).map(x=>`<span class="ci ${x.done?'done':''}">${x.done?'✓':'○'} ${esc(x.label)}</span>`).join("");
+      return `<div class="proj" data-cid="${c.id}" data-pid="${p.id}">
+        <div class="prow">
+          <div style="min-width:0"><div class="pj-nm">${esc(p.name)}</div><div class="pj-bt">${esc(p.buildType||"")}</div></div>
+          <div class="pr-st">${tag(p.status,STATUS_CLR)}</div>
+          <div class="ov"><div class="mini"><i style="width:${o*100}%"></i></div><span class="pv">${pct(o)}</span></div>
+          ${dayCell(p)}
+        </div>
+        <div class="chk-mini">${mini}</div>
+      </div>`;
+    }).join("");
+    const addBtn=editorMode?`<button class="addproj" data-addproj="${c.id}">➕ Add project for ${esc(c.name)}</button>`:"";
+    return `<div class="client ${open?'open':''}" data-client="${c.id}">
+      <div class="chead" data-toggle="${c.id}">
+        <span class="chev">▶</span>
+        <div class="cname"><div class="nm">${esc(c.name)}</div>${c.company?`<div class="co">${esc(c.company)}</div>`:""}</div>
+        <div class="cbarwrap"><div class="mini"><i style="width:${cp*100}%"></i></div><span class="pv">${pct(cp)}</span></div>
+        <div class="cprojcount">${(c.projects||[]).length} proj</div>
+      </div>
+      <div class="projwrap">${projs}${addBtn}</div>
+    </div>`;
+  }).join("")||`<div style="padding:26px;text-align:center;color:var(--mute)">No clients match.</div>`;
+
+  const moves=PRJ.slice().sort((a,b)=>urgency(a.p)-urgency(b.p)).slice(0,6);
+  $("#moves").innerHTML=moves.map((x,i)=>{const d=daysLeft(x.p);const col=d<0?"var(--red)":d<=3?"var(--amber)":"var(--mute)";
+    return `<div class="move" data-cid="${x.c.id}" data-pid="${x.p.id}">
+      <div class="rank">${String(i+1).padStart(2,"0")}</div>
+      <div><div class="m-cl">${esc(x.c.name)}</div><div class="m-ac">${esc(x.p.nextAction||"")}</div></div>
+      <div class="m-days" style="color:${col}">${d}d</div></div>`;}).join("")||`<div style="padding:18px;color:var(--mute)">Nothing yet.</div>`;
+
+  const total=PRJ.length||1;
+  $("#dist").innerHTML=DB.statusOptions.map(st=>{const c=PRJ.filter(x=>x.p.status===st).length;const col=DIST_CLR[st]||"#67B0FF";
+    return `<div class="drow"><span class="dn" style="background:${hexA(col,.14)};color:${col}">${esc(st)}</span>
+      <div class="dt"><i style="width:${(c/total)*100}%;background:${col}"></i></div><span class="dc">${c}</span></div>`;}).join("");
+
+  $("#aip").innerHTML=`Your AI agent reads the live board from one <b>read-only link</b> — no login needed. Point any agent (GHL/Jarvis, a GPT, Claude) at it to answer "where is each client?" in real time.
+    <div class="url"><input id="rawurl" readonly value="${RAWURL}"><button class="btn copy" id="copyRaw">Copy</button></div>
+    <div style="margin-top:10px"><button class="btn" id="copyPrompt">Copy ready-made agent instructions</button></div>`;
+  $("#copyRaw").onclick=()=>{navigator.clipboard.writeText(RAWURL);toast("Link copied ✓","ok");};
+  $("#copyPrompt").onclick=()=>{navigator.clipboard.writeText(AGENT_PROMPT());toast("Agent instructions copied ✓","ok");};
+
+  bindBoard();
+}
+
+function AGENT_PROMPT(){return `You are the status assistant for the X Cerebro command center.
+The single source of truth is this JSON file: ${RAWURL}
+Whenever asked about a client or project, FETCH that URL fresh and answer from it.
+Data shape: clients[] -> each has name, company, projects[]. Each project has name, buildType, status, priority, start, targetEnd, tasks[] (each {label, done}), blocker, nextAction, notes.
+A project's % complete = done tasks / total tasks. A client's % = done tasks / total tasks across all their projects.
+When asked "where are we with <client>", summarize each project's %, status, what's done, what's left (unchecked tasks), the blocker, and the next action.`;}
+
+function bindBoard(){
+  document.querySelectorAll("[data-toggle]").forEach(h=>h.onclick=()=>{const id=h.dataset.toggle;openClients[id]=!openClients[id];render();});
+  document.querySelectorAll(".proj[data-pid]").forEach(el=>el.onclick=()=>openProject(el.dataset.cid,el.dataset.pid));
+  document.querySelectorAll("[data-addproj]").forEach(b=>b.onclick=e=>{e.stopPropagation();openAddProject(b.dataset.addproj);});
+  document.querySelectorAll(".move[data-pid]").forEach(el=>el.onclick=()=>openProject(el.dataset.cid,el.dataset.pid));
+}
+
+/* ---------- drawer / editor ---------- */
+function showDrawer(html){const d=$("#drawer");d.innerHTML=html;d.classList.add("on");d.setAttribute("aria-hidden","false");$("#scrim").classList.add("on");d.scrollTop=0;}
+function closeDrawer(){$("#drawer").classList.remove("on");$("#drawer").setAttribute("aria-hidden","true");$("#scrim").classList.remove("on");}
+$("#scrim").onclick=closeDrawer;
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeDrawer();closeKeyModal();}});
+
+let draftTasks=[];
+function checklistHTML(){
+  const done=draftTasks.filter(t=>t.done).length, tot=draftTasks.length, p=tot?done/tot:0;
+  return `<div class="chkpct"><div class="bar"><i style="width:${p*100}%"></i></div><span class="n">${Math.round(p*100)}%</span></div>
+    <div class="checks">${draftTasks.map((t,i)=>`<div class="citem ${t.done?'done':''}">
+      <input type="checkbox" ${t.done?'checked':''} data-ti="${i}"><span class="cl-txt">${esc(t.label)}</span>
+      <button class="rm" data-rm="${i}" title="Remove">✕</button></div>`).join("")}</div>
+    <div class="addchk"><input id="newtask" placeholder="Add a task / deliverable…"><button class="btn" id="addtaskBtn">Add</button></div>`;
+}
+function bindChecklist(){
+  document.querySelectorAll('#chkbox input[type=checkbox]').forEach(cb=>cb.onchange=()=>{draftTasks[+cb.dataset.ti].done=cb.checked;refreshChecklist();});
+  document.querySelectorAll('#chkbox [data-rm]').forEach(b=>b.onclick=()=>{draftTasks.splice(+b.dataset.rm,1);refreshChecklist();});
+  const nt=document.getElementById("newtask");
+  const add=()=>{const v=nt.value.trim();if(!v)return;draftTasks.push({label:v,done:false});refreshChecklist();};
+  document.getElementById("addtaskBtn").onclick=add;
+  nt.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();add();}};
+}
+function refreshChecklist(){document.getElementById("chkbox").innerHTML=checklistHTML();bindChecklist();const f=document.getElementById("newtask");if(f)f.focus();}
+
+function projectForm(p,mode,titleId,titleName){
+  const sel=(id,opts,cur)=>`<select class="esel" id="${id}">`+opts.map(o=>`<option ${o===cur?"selected":""}>${esc(o)}</option>`).join("")+`</select>`;
+  return `<div class="dh"><div><div class="did">${esc(titleId)}</div><h3>${esc(titleName)}</h3></div>
+      <button class="xbtn" id="xclose">✕</button></div>
+    <div class="efield"><label>Project name</label><input class="ein" id="f_name" value="${esc(p.name||"")}" placeholder="What you're building"></div>
+    <div class="efield"><label>Build type / system</label><input class="ein" id="f_buildType" list="btl" value="${esc(p.buildType||"")}">
+      <datalist id="btl"><option>AI Agent Project</option><option>Custom AI Agent</option><option>Campaign + AI Follow-Up</option><option>Jarvis Build + Campaign</option><option>JV Partner Setup</option><option>JV Partner + Lead System</option></datalist></div>
+    <div class="erow"><div class="efield"><label>Status</label>${sel("f_status",DB.statusOptions,p.status||"Planning")}</div>
+      <div class="efield"><label>Priority</label>${sel("f_priority",DB.priorityOptions||["Urgent","High","Normal"],p.priority||"High")}</div></div>
+    <div class="erow"><div class="efield"><label>Owner</label><input class="ein" id="f_owner" value="${esc(p.owner||DB.meta.owner||"")}"></div>
+      <div class="efield"><label>Target end</label><input class="ein" id="f_targetEnd" type="date" value="${esc(p.targetEnd||"")}"></div></div>
+    <div class="efield"><label>Checklist — what's been done</label><div id="chkbox">${checklistHTML()}</div></div>
+    <div class="efield"><label>Current blocker</label><textarea class="eta" id="f_blocker">${esc(p.blocker||"")}</textarea></div>
+    <div class="efield"><label>Next action</label><textarea class="eta" id="f_nextAction">${esc(p.nextAction||"")}</textarea></div>
+    <div class="efield"><label>Notes</label><textarea class="eta" id="f_notes">${esc(p.notes||"")}</textarea></div>
+    <div class="esave"><button class="btn primary" id="f_save">${mode==="edit"?"Save to GitHub":"Add & Save"}</button>
+      <button class="ghost" id="f_cancel">Cancel</button>${mode==="edit"?`<button class="ghost del" id="f_del">Delete</button>`:""}</div>`;
+}
+function readProject(base){const g=id=>document.getElementById(id);
+  return Object.assign({},base,{name:g("f_name").value.trim(),buildType:g("f_buildType").value.trim(),status:g("f_status").value,
+    priority:g("f_priority").value,owner:g("f_owner").value.trim(),targetEnd:g("f_targetEnd").value,
+    tasks:draftTasks.map(t=>({label:t.label,done:!!t.done})),blocker:g("f_blocker").value.trim(),
+    nextAction:g("f_nextAction").value.trim(),notes:g("f_notes").value.trim()});
+}
+
+function openProject(cid,pid){
+  const c=clients().find(x=>x.id===cid);if(!c)return;const p=(c.projects||[]).find(x=>x.id===pid);if(!p)return;
+  if(!editorMode){return openView(c,p);}
+  draftTasks=(p.tasks||[]).map(t=>({label:t.label,done:!!t.done}));
+  showDrawer(projectForm(p,"edit",p.id+" · "+c.name,p.name));
+  bindChecklist();
+  document.getElementById("xclose").onclick=closeDrawer;
+  document.getElementById("f_cancel").onclick=closeDrawer;
+  document.getElementById("f_del").onclick=()=>{if(!confirm("Delete this project?"))return;
+    commitChange(data=>{const cc=data.clients.find(x=>x.id===cid);cc.projects=cc.projects.filter(x=>x.id!==pid);},"Delete project "+p.name,document.getElementById("f_del"));};
+  document.getElementById("f_save").onclick=()=>{const v=readProject(p);if(!v.name){toast("Project name required","err");return;}
+    commitChange(data=>{const cc=data.clients.find(x=>x.id===cid);const t=cc.projects.find(x=>x.id===pid);Object.assign(t,v);},"Update "+p.id+" "+v.name,document.getElementById("f_save"));};
+}
+function openView(c,p){
+  const o=projPct(p);
+  const checks=(p.tasks||[]).map(t=>`<div class="citem ${t.done?'done':''}"><input type="checkbox" ${t.done?'checked':''} disabled><span class="cl-txt">${esc(t.label)}</span></div>`).join("");
+  showDrawer(`<div class="dh"><div><div class="did">${esc(p.id)} · ${esc(c.name)}</div><h3>${esc(p.name)}</h3></div><button class="xbtn" id="xclose">✕</button></div>
+    <div class="efield"><label>Status</label><div>${tag(p.status,STATUS_CLR)} ${tag(p.priority,PRIO_CLR)}</div></div>
+    <div class="efield"><label>Completion</label><div class="chkpct"><div class="bar"><i style="width:${o*100}%"></i></div><span class="n">${pct(o)}</span></div></div>
+    <div class="efield"><label>Timeline</label><div style="color:var(--mute);font-size:13px">${esc(p.start||"?")} → ${esc(p.targetEnd||"?")} · <b style="color:${daysLeft(p)<0?'var(--red)':'var(--cyan)'}">${daysLeft(p)} days left</b></div></div>
+    <div class="efield"><label>Checklist</label><div class="checks">${checks}</div></div>
+    <div class="efield"><label>Blocker</label><div style="color:var(--ink);font-size:13.5px">${esc(p.blocker||"—")}</div></div>
+    <div class="efield"><label>Next action</label><div style="color:var(--ink);font-size:13.5px">${esc(p.nextAction||"—")}</div></div>
+    <div class="efield"><label>Notes</label><div style="color:var(--mute);font-size:13px">${esc(p.notes||"—")}</div></div>
+    <div class="esave"><button class="ghost" id="xclose2" style="flex:1">Close</button></div>`);
+  document.getElementById("xclose").onclick=closeDrawer;document.getElementById("xclose2").onclick=closeDrawer;
+}
+function openAddProject(cid){
+  const c=clients().find(x=>x.id===cid);if(!c)return;
+  draftTasks=DEFAULT_TASKS.map(l=>({label:l,done:false}));
+  const blank={name:"",buildType:"AI Agent Project",status:"Planning",priority:"High",owner:DB.meta.owner||"",targetEnd:"",blocker:"",nextAction:"",notes:""};
+  showDrawer(projectForm(blank,"add","NEW PROJECT · "+c.name,"Add project"));
+  bindChecklist();
+  document.getElementById("xclose").onclick=closeDrawer;document.getElementById("f_cancel").onclick=closeDrawer;
+  document.getElementById("f_save").onclick=()=>{const v=readProject(blank);if(!v.name){toast("Project name required","err");return;}
+    commitChange(data=>{const cc=data.clients.find(x=>x.id===cid);let mx=0;data.clients.forEach(k=>(k.projects||[]).forEach(pp=>{const m=/(\d+)/.exec(pp.id||"");if(m)mx=Math.max(mx,+m[1]);}));
+      v.id="P-"+String(mx+1).padStart(3,"0");v.start=todayStr();(cc.projects=cc.projects||[]).push(v);},"Add project "+v.name+" for "+c.name,document.getElementById("f_save"));};
+}
+function openAddClient(){
+  draftTasks=DEFAULT_TASKS.map(l=>({label:l,done:false}));
+  const blank={name:"",buildType:"AI Agent Project",status:"Planning",priority:"High",owner:DB.meta.owner||"",targetEnd:"",blocker:"",nextAction:"",notes:""};
+  showDrawer(`<div class="dh"><div><div class="did">NEW CLIENT</div><h3>Add client</h3></div><button class="xbtn" id="xclose">✕</button></div>
+    <div class="erow"><div class="efield"><label>Client name</label><input class="ein" id="c_name" placeholder="e.g. Jane Smith"></div>
+      <div class="efield"><label>Company (optional)</label><input class="ein" id="c_company" placeholder="e.g. Acme LLC"></div></div>
+    <div class="efield"><label>First project name</label><input class="ein" id="f_name" placeholder="What you're building"></div>
+    <div class="efield"><label>Build type / system</label><input class="ein" id="f_buildType" list="btl2" value="AI Agent Project">
+      <datalist id="btl2"><option>AI Agent Project</option><option>Custom AI Agent</option><option>Campaign + AI Follow-Up</option><option>Jarvis Build + Campaign</option><option>JV Partner Setup</option></datalist></div>
+    <div class="erow"><div class="efield"><label>Status</label><select class="esel" id="f_status">${DB.statusOptions.map(o=>`<option ${o==="Planning"?"selected":""}>${o}</option>`).join("")}</select></div>
+      <div class="efield"><label>Priority</label><select class="esel" id="f_priority">${(DB.priorityOptions||["Urgent","High","Normal"]).map(o=>`<option ${o==="High"?"selected":""}>${o}</option>`).join("")}</select></div></div>
+    <div class="erow"><div class="efield"><label>Owner</label><input class="ein" id="f_owner" value="${esc(DB.meta.owner||"")}"></div>
+      <div class="efield"><label>Target end</label><input class="ein" id="f_targetEnd" type="date"></div></div>
+    <div class="efield"><label>Checklist — what's been done</label><div id="chkbox">${checklistHTML()}</div></div>
+    <div class="efield"><label>Current blocker</label><textarea class="eta" id="f_blocker"></textarea></div>
+    <div class="efield"><label>Next action</label><textarea class="eta" id="f_nextAction"></textarea></div>
+    <div class="efield"><label>Notes</label><textarea class="eta" id="f_notes"></textarea></div>
+    <div class="esave"><button class="btn primary" id="c_save">Add client & Save</button><button class="ghost" id="f_cancel">Cancel</button></div>`);
+  bindChecklist();
+  document.getElementById("xclose").onclick=closeDrawer;document.getElementById("f_cancel").onclick=closeDrawer;
+  document.getElementById("c_save").onclick=()=>{
+    const name=document.getElementById("c_name").value.trim();if(!name){toast("Client name required","err");return;}
+    const v=readProject(blank);if(!v.name){toast("Project name required","err");return;}
+    commitChange(data=>{
+      let cx=0;(data.clients||[]).forEach(k=>{const m=/(\d+)/.exec(k.id||"");if(m)cx=Math.max(cx,+m[1]);});
+      let px=0;(data.clients||[]).forEach(k=>(k.projects||[]).forEach(pp=>{const m=/(\d+)/.exec(pp.id||"");if(m)px=Math.max(px,+m[1]);}));
+      v.id="P-"+String(px+1).padStart(3,"0");v.start=todayStr();
+      const cid="C-"+String(cx+1).padStart(3,"0");
+      (data.clients=data.clients||[]).push({id:cid,name:name,company:document.getElementById("c_company").value.trim(),projects:[v]});
+      openClients[cid]=true;
+    },"Add client "+name,document.getElementById("c_save"));
+  };
+}
+function todayStr(){return new Date().toISOString().slice(0,10);}
+
+/* ---------- GitHub one-click save ---------- */
+const GH={tk:"xc_gh_token",token(){return(localStorage.getItem(this.tk)||"").trim();},save(t){localStorage.setItem(this.tk,t.trim());},clear(){localStorage.removeItem(this.tk);},
+  async fetchLatest(){const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${FILEPATH}?ref=${BRANCH}&t=`+Date.now(),
+      {headers:{Authorization:"Bearer "+this.token(),Accept:"application/vnd.github+json"},cache:"no-store"});
+    if(r.status===401||r.status===403)throw new Error("AUTH "+r.status);if(!r.ok)throw new Error("read "+r.status);
+    const j=await r.json();return{sha:j.sha,data:JSON.parse(decodeURIComponent(escape(atob((j.content||"").replace(/\n/g,"")))))};},
+  async commit(data,message,sha){const b64=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
+    const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${FILEPATH}`,{method:"PUT",
+      headers:{Authorization:"Bearer "+this.token(),Accept:"application/vnd.github+json","Content-Type":"application/json"},
+      body:JSON.stringify({message,content:b64,sha,branch:BRANCH})});
+    if(r.status===401||r.status===403)throw new Error("AUTH "+r.status);
+    if(!r.ok){let m="";try{m=(await r.json()).message||""}catch(_){}
+      throw new Error(r.status+" "+m);}return r.json();}};
+
+let toastT=null;
+function toast(msg,type){const t=$("#toast");t.textContent=msg;t.className="toast on"+(type?" "+type:"");clearTimeout(toastT);toastT=setTimeout(()=>{t.className="toast";},type==="err"?5200:3200);}
+function refreshKeyState(){const has=!!GH.token(),s=$("#keyState");if(s){s.textContent=has?"set ✓":"not set";s.className=has?"keyok":"keyno";}}
+function openKeyModal(){$("#keyInput").value=GH.token();$("#keyModal").classList.add("on");setTimeout(()=>$("#keyInput").focus(),40);}
+function closeKeyModal(){$("#keyModal").classList.remove("on");}
+
+async function commitChange(mutator,message,btn){
+  if(!GH.token()){toast("Set your access key first","err");openKeyModal();return;}
+  const label=btn?btn.textContent:"";if(btn){btn.disabled=true;btn.textContent="Saving…";}
+  try{
+    const {sha,data}=await GH.fetchLatest();
+    if(!data.clients)data.clients=[];
+    mutator(data);
+    data.meta=data.meta||{};data.meta.updated=todayStr();
+    await GH.commit(data,message,sha);
+    holdUntil=Date.now()+90000;DB=data;render();closeDrawer();
+    toast("Saved ✓ — live in ~1 min","ok");
+  }catch(e){
+    if(String(e.message).indexOf("AUTH")>=0){toast("Access key invalid or missing write access","err");openKeyModal();}
+    else toast("Save failed: "+e.message,"err");
+  }finally{if(btn){btn.disabled=false;btn.textContent=label;}}
+}
+
+function setEditor(on){editorMode=on;$("#editToggle").setAttribute("aria-pressed",on?"true":"false");
+  $("#editbar").classList.toggle("on",on);$("#addClient").style.display=on?"inline-flex":"none";refreshKeyState();if(!on)closeDrawer();render();}
+$("#editToggle").onclick=()=>setEditor(!editorMode);
+$("#addClient").onclick=()=>{if(!editorMode)setEditor(true);openAddClient();};
+$("#keyBtn").onclick=openKeyModal;
+$("#keySave").onclick=()=>{const v=$("#keyInput").value.trim();if(!v){toast("Paste a key first","err");return;}GH.save(v);refreshKeyState();closeKeyModal();toast("Key saved ✓","ok");};
+$("#keyClear").onclick=()=>{GH.clear();refreshKeyState();$("#keyInput").value="";toast("Key removed");};
+$("#keyCancel").onclick=closeKeyModal;
+$("#keyModal").onclick=e=>{if(e.target.id==="keyModal")closeKeyModal();};
+$("#search").oninput=e=>{filterText=e.target.value;render();};
+$("#refresh").onclick=()=>load(true);
+
+function stamp(){$("#synced").textContent=new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'});}
+async function load(manual){
+  if(!manual && DB && Date.now()<holdUntil){stamp();return;}
+  try{
+    const res=await fetch("projects.json?t="+Date.now(),{cache:"no-store"});
+    if(!res.ok)throw new Error(res.status);
+    DB=await res.json();$("#src").textContent="projects.json";$("#banner").classList.remove("on");
+  }catch(err){
+    DB=FALLBACK;$("#src").textContent="embedded (local)";$("#banner").classList.add("on");
+    $("#banner").textContent="⚠ Live projects.json not reachable — showing built-in copy.";
+  }
+  if(!DB.statusOptions)DB.statusOptions=["Planning","Build Mode","Testing","Payment Follow-Up","Blocked","Ready","Live"];
+  if(Object.keys(openClients).length===0)clients().forEach((c,i)=>{if(i<2)openClients[c.id]=true;});
+  refreshKeyState();render();stamp();
+}
+load();
+setInterval(load,60000);
+</script>
+</body>
+</html>
