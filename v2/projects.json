@@ -5,8 +5,20 @@
     "owner": "Alexia / Q",
     "updated": "2026-07-07"
   },
-  "statusOptions": ["Planning", "Build Mode", "Testing", "Payment Follow-Up", "Blocked", "Ready", "Live"],
-  "priorityOptions": ["Urgent", "High", "Normal"],
+  "statusOptions": [
+    "Planning",
+    "Build Mode",
+    "Testing",
+    "Payment Follow-Up",
+    "Blocked",
+    "Ready",
+    "Live"
+  ],
+  "priorityOptions": [
+    "Urgent",
+    "High",
+    "Normal"
+  ],
   "clients": [
     {
       "id": "C-001",
@@ -23,14 +35,38 @@
           "start": "2026-06-26",
           "targetEnd": "2026-07-05",
           "tasks": [
-            { "label": "Dashboard set up", "done": false },
-            { "label": "Campaign built", "done": true },
-            { "label": "Automations wired", "done": false },
-            { "label": "AI Agent configured", "done": true },
-            { "label": "Custom workflow mapped", "done": false },
-            { "label": "A2P registration", "done": false },
-            { "label": "Jarvis build", "done": true },
-            { "label": "JV / Payment confirmed", "done": true }
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": true
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": true
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": true
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": true
+            }
           ],
           "blocker": "Need final campaign angle, Realtor offer, and exact handoff rules.",
           "nextAction": "Build campaign copy, agent prompt, pipeline statuses, and test follow-up flow.",
@@ -53,14 +89,38 @@
           "start": "2026-06-26",
           "targetEnd": "2026-07-10",
           "tasks": [
-            { "label": "Dashboard set up", "done": false },
-            { "label": "Campaign built", "done": false },
-            { "label": "Automations wired", "done": false },
-            { "label": "AI Agent configured", "done": true },
-            { "label": "Custom workflow mapped", "done": true },
-            { "label": "A2P registration", "done": false },
-            { "label": "Jarvis build", "done": false },
-            { "label": "JV / Payment confirmed", "done": true }
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": true
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": true
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": true
+            }
           ],
           "blocker": "Need final workflow scope, knowledgebase, triggers, and what the agent can/cannot do.",
           "nextAction": "Confirm use case, map workflow logic, build agent instructions, then QA sample conversations.",
@@ -83,14 +143,38 @@
           "start": "2026-06-26",
           "targetEnd": "2026-07-08",
           "tasks": [
-            { "label": "Dashboard set up", "done": false },
-            { "label": "Campaign built", "done": false },
-            { "label": "Automations wired", "done": false },
-            { "label": "AI Agent configured", "done": true },
-            { "label": "Custom workflow mapped", "done": false },
-            { "label": "A2P registration", "done": false },
-            { "label": "Jarvis build", "done": false },
-            { "label": "JV / Payment confirmed", "done": true }
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": true
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": true
+            }
           ],
           "blocker": "Need exact agent use case, channels, offer, FAQs, and escalation rules.",
           "nextAction": "Collect intake answers and create first AI agent prompt + KB outline.",
@@ -113,14 +197,38 @@
           "start": "2026-06-26",
           "targetEnd": "2026-07-08",
           "tasks": [
-            { "label": "Dashboard set up", "done": false },
-            { "label": "Campaign built", "done": false },
-            { "label": "Automations wired", "done": false },
-            { "label": "AI Agent configured", "done": true },
-            { "label": "Custom workflow mapped", "done": false },
-            { "label": "A2P registration", "done": false },
-            { "label": "Jarvis build", "done": false },
-            { "label": "JV / Payment confirmed", "done": true }
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": true
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": true
+            }
           ],
           "blocker": "Need agent objective, lead source, offer, and reply boundaries.",
           "nextAction": "Gather client intake details and draft the initial agent structure.",
@@ -143,18 +251,43 @@
           "start": "2026-06-26",
           "targetEnd": "2026-07-12",
           "tasks": [
-            { "label": "Dashboard set up", "done": false },
-            { "label": "Campaign built", "done": false },
-            { "label": "Automations wired", "done": false },
-            { "label": "AI Agent configured", "done": false },
-            { "label": "Custom workflow mapped", "done": false },
-            { "label": "A2P registration", "done": false },
-            { "label": "Jarvis build", "done": false },
-            { "label": "JV / Payment confirmed", "done": true }
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": true
+            }
           ],
-          "blocker": "Need JV terms, lead source, access, responsibilities, and campaign direction.",
-          "nextAction": "Define JV role, confirm lead flow, then build partner onboarding checklist.",
-          "notes": "Leads + JV partnership project; likely needs Jarvis pipeline and lead management setup."
+          "blocker": "Payment method issue on Jarvis account, needs to add credits.",
+          "nextAction": "Follow up with Raj to add credits to his Jarvis account; confirm once added.",
+          "notes": "Leads + JV partnership project; likely needs Jarvis pipeline and lead management setup.",
+          "creditsAdded": false
         }
       ]
     },
@@ -173,14 +306,38 @@
           "start": "2026-06-26",
           "targetEnd": "2026-07-03",
           "tasks": [
-            { "label": "Dashboard set up", "done": false },
-            { "label": "Campaign built", "done": false },
-            { "label": "Automations wired", "done": false },
-            { "label": "AI Agent configured", "done": false },
-            { "label": "Custom workflow mapped", "done": false },
-            { "label": "A2P registration", "done": false },
-            { "label": "Jarvis build", "done": false },
-            { "label": "JV / Payment confirmed", "done": false }
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
           ],
           "blocker": "Payment follow-up needed before build-out can move forward.",
           "nextAction": "Follow up for payment, confirm scope, then move into onboarding and Jarvis setup.",
@@ -203,14 +360,38 @@
           "start": "2026-06-26",
           "targetEnd": "2026-07-08",
           "tasks": [
-            { "label": "Dashboard set up", "done": false },
-            { "label": "Campaign built", "done": false },
-            { "label": "Automations wired", "done": false },
-            { "label": "AI Agent configured", "done": true },
-            { "label": "Custom workflow mapped", "done": false },
-            { "label": "A2P registration", "done": false },
-            { "label": "Jarvis build", "done": false },
-            { "label": "JV / Payment confirmed", "done": true }
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": true
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": true
+            }
           ],
           "blocker": "Need clear use case, agent goal, and business context for build-out.",
           "nextAction": "Collect intake details, define agent outcome, and draft knowledgebase requirements.",
@@ -233,14 +414,38 @@
           "start": "2026-06-26",
           "targetEnd": "2026-07-12",
           "tasks": [
-            { "label": "Dashboard set up", "done": false },
-            { "label": "Campaign built", "done": true },
-            { "label": "Automations wired", "done": false },
-            { "label": "AI Agent configured", "done": false },
-            { "label": "Custom workflow mapped", "done": false },
-            { "label": "A2P registration", "done": false },
-            { "label": "Jarvis build", "done": true },
-            { "label": "JV / Payment confirmed", "done": true }
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": true
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": true
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": true
+            }
           ],
           "blocker": "Need Skool campaign structure, Jarvis funnel/campaign flow, and launch assets.",
           "nextAction": "Map Skool campaign, build Jarvis campaign, create automations, and QA the full funnel.",
