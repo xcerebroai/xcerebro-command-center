@@ -57,7 +57,7 @@
             },
             {
               "label": "A2P registration",
-              "done": false
+              "done": true
             },
             {
               "label": "Jarvis build",
@@ -450,6 +450,222 @@
           "blocker": "Need Skool campaign structure, Jarvis funnel/campaign flow, and launch assets.",
           "nextAction": "Map Skool campaign, build Jarvis campaign, create automations, and QA the full funnel.",
           "notes": "Jarvis + Skool build campaign; needs campaign and automation build-out."
+        }
+      ]
+    },
+    {
+      "id": "C-009",
+      "name": "John Campbell",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-009",
+          "name": "AI Agents Installation",
+          "buildType": "AI Agent Installation",
+          "status": "Blocked",
+          "priority": "Normal",
+          "owner": "Alexia / Q",
+          "start": "2026-07-07",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": true
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "blocker": "Waiting on A2P registration to clear before connecting the agent to Jarvis.",
+          "nextAction": "Connect AI agent to Jarvis once A2P registration is approved.",
+          "notes": "AI agent already connected in Telegram."
+        }
+      ]
+    },
+    {
+      "id": "C-010",
+      "name": "Tony Gutierrez",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-010",
+          "name": "AI Agents Installation",
+          "buildType": "AI Agent Installation",
+          "status": "Planning",
+          "priority": "Normal",
+          "owner": "Alexia / Q",
+          "start": "2026-07-07",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "blocker": "Details pending.",
+          "nextAction": "Gather requirements and kick off build.",
+          "notes": "Placeholder entry, details to be filled in."
+        }
+      ]
+    },
+    {
+      "id": "C-011",
+      "name": "Sam Vega",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-011",
+          "name": "AI Agents Installation",
+          "buildType": "AI Agent Installation",
+          "status": "Planning",
+          "priority": "Normal",
+          "owner": "Alexia / Q",
+          "start": "2026-07-07",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "blocker": "Details pending.",
+          "nextAction": "Gather requirements and kick off build.",
+          "notes": "Placeholder entry, details to be filled in."
+        }
+      ]
+    },
+    {
+      "id": "C-012",
+      "name": "Jon Curtis",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-012",
+          "name": "AI Agents and JV Partnership Surplus Funds",
+          "buildType": "AI Agent Installation + JV Partnership",
+          "status": "Planning",
+          "priority": "Normal",
+          "owner": "Alexia / Q",
+          "start": "2026-07-07",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "blocker": "Details pending.",
+          "nextAction": "Gather requirements and kick off build.",
+          "notes": "Placeholder entry, details to be filled in."
         }
       ]
     }
