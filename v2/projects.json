@@ -344,7 +344,7 @@
           "id": "P-006",
           "name": "JV Partnership",
           "buildType": "JV Partner Setup",
-          "status": "Payment Follow-Up",
+          "status": "Planning",
           "priority": "Urgent",
           "owner": "Alexia / Q",
           "start": "2026-06-26",
@@ -389,8 +389,8 @@
           "payment": {
             "total": 0,
             "paid": 0,
-            "dueDate": "",
             "status": "Unpaid",
+            "dueDate": "",
             "lastFollowUp": "",
             "notes": ""
           }
