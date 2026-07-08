@@ -558,11 +558,11 @@ document.getElementById("paysearch").oninput=()=>renderPayments();
 /* ---------- follow-ups (Dyan) ---------- */
 const FU_STATUS=["Pending","Done"];
 const FU_CHAN=["Call","Text","Email","DM","Other"];
-const CALL_STATUS=["Booked","Showed","No-show → rebook","Rebooked","Cancelled"];
+const CALL_STATUS=["Booked","Showed","No-show → rebook","Rebooked","Cancelled","Closed/Won"];
 const CALL_TYPES=["Coaching","1 on 1","Discovery Call","Other"];
 const CTYPECLR={"Coaching":["#2a1650","#c9a8ff"],"1 on 1":["#13294a","#8ec2ff"],"Discovery Call":["#0c3524","#3de8a0"],"Other":["#1c2a3d","#8FA6C4"]};
 const FUCLR={"Pending":["#3a2408","#f5a623"],"Done":["#0c3524","#3de8a0"],"Overdue":["#2a0808","#ff5d5d"]};
-const CALLCLR={"Booked":["#13294a","#8ec2ff"],"Showed":["#0c3524","#3de8a0"],"No-show → rebook":["#3d0f0f","#ff8080"],"Rebooked":["#2a1650","#c9a8ff"],"Cancelled":["#1c2a3d","#8FA6C4"]};
+const CALLCLR={"Booked":["#13294a","#8ec2ff"],"Showed":["#0c3524","#3de8a0"],"No-show → rebook":["#3d0f0f","#ff8080"],"Rebooked":["#2a1650","#c9a8ff"],"Cancelled":["#1c2a3d","#8FA6C4"],"Closed/Won":["#083b2c","#3de8a0"]};
 const followups=()=>DB.followups||(DB.followups=[]);
 const calls=()=>DB.calls||(DB.calls=[]);
 const nextId=(arr,pfx)=>{let m=0;arr.forEach(x=>{const g=/(\d+)/.exec(x.id||"");if(g)m=Math.max(m,+g[1]);});return pfx+String(m+1).padStart(3,"0");};
@@ -649,13 +649,53 @@ function openCall(id){
     <div class="erow"><div class="efield"><label>Status</label>${selHTML("k_status",CALL_STATUS,c.status||"Booked")}</div>
       <div class="efield"><label>Reminder date</label><input class="ein" id="k_reminder" type="date" value="${esc(c.reminder||"")}"></div></div>
     <div class="efield"><label>Notes</label><textarea class="eta" id="k_notes">${esc(c.notes||"")}</textarea></div>
+    ${id?`<div class="efield" id="k_convert_wrap" style="display:${c.status==="Closed/Won"?"block":"none"}"><label>Deal closed</label>
+      <button class="btn pri" id="k_convert" style="width:100%;justify-content:center;padding:12px">🎉 Convert to Client &amp; Project</button>
+      <div style="margin-top:6px;font:500 11px 'JetBrains Mono';color:var(--mute)">Creates a client + Planning project and removes this call from Booked Calls.</div></div>`:""}
     <div class="esave"><button class="btn primary" id="k_save">${id?"Save":"Add & Save"}</button><button class="ghost" id="k_cancel">Cancel</button>${id?'<button class="ghost del" id="k_del">Delete</button>':''}</div>`);
   const g=x=>document.getElementById(x);
   g("xclose").onclick=closeDrawer;g("k_cancel").onclick=closeDrawer;
   if(id)g("k_del").onclick=()=>{if(!confirm("Delete this call?"))return;commitChange(data=>{data.calls=(data.calls||[]).filter(x=>x.id!==id);},"Delete call "+id,g("k_del"));};
+  if(id){const w=g("k_convert_wrap");g("k_status").onchange=()=>{if(w)w.style.display=g("k_status").value==="Closed/Won"?"block":"none";};
+    g("k_convert").onclick=()=>convertCallToClient(id);}
   g("k_save").onclick=()=>{const v={who:g("k_who").value.trim(),type:g("k_type").value,when:g("k_when").value,purpose:g("k_purpose").value.trim(),status:g("k_status").value,reminder:g("k_reminder").value,notes:g("k_notes").value.trim()};
     if(!v.who){toast("Who is required","err");return;}
     commitChange(data=>{data.calls=data.calls||[];if(id){const t=data.calls.find(x=>x.id===id);Object.assign(t,v);}else{v.id=nextId(data.calls,"K-");data.calls.push(v);}},(id?"Update ":"Add ")+"call "+v.who,g("k_save"));};
+}
+function convertCallToClient(id){
+  const g=x=>document.getElementById(x);
+  // carry over any unsaved edits from the open drawer, falling back to the stored call
+  const src=calls().find(x=>x.id===id)||{};
+  const who=(g("k_who")?g("k_who").value.trim():"")||src.who||"";
+  const purpose=(g("k_purpose")?g("k_purpose").value.trim():"")||src.purpose||"";
+  const notes=(g("k_notes")?g("k_notes").value.trim():src.notes||"");
+  if(!who){toast("Who is required to convert","err");return;}
+  if(!confirm(`Convert "${who}" into a client + project?\n\nThis creates a new client and a Planning project, then removes the call from Booked Calls.`))return;
+  const projName=purpose||(who+" — New Project");
+  commitChange(data=>{
+    data.clients=data.clients||[];
+    let cx=0;data.clients.forEach(k=>{const m=/(\d+)/.exec(k.id||"");if(m)cx=Math.max(cx,+m[1]);});
+    let px=0;data.clients.forEach(k=>(k.projects||[]).forEach(pp=>{const m=/(\d+)/.exec(pp.id||"");if(m)px=Math.max(px,+m[1]);}));
+    const cid="C-"+String(cx+1).padStart(3,"0");
+    const project={
+      id:"P-"+String(px+1).padStart(3,"0"),
+      name:projName,
+      buildType:purpose||"AI Agent Project",
+      status:"Planning",
+      priority:"High",
+      owner:"Alexia / Q",
+      start:todayStr(),
+      targetEnd:"",
+      tasks:DEFAULT_TASKS.map(l=>({label:l,done:false})),
+      blocker:"",
+      nextAction:"",
+      notes:notes,
+      payment:{total:0,paid:0,dueDate:"",status:"Unpaid",lastFollowUp:"",notes:""}
+    };
+    data.clients.push({id:cid,name:who,company:"",projects:[project]});
+    data.calls=(data.calls||[]).filter(x=>x.id!==id);
+    openClients[cid]=true;
+  },"Convert booked call to client: "+who,g("k_convert"),"Converted ✓ — "+who+" is now a client on the Command Center");
 }
 document.getElementById("addFu").onclick=()=>{if(!editorMode)setEditor(true);openFollowup(null);};
 document.getElementById("addCall").onclick=()=>{if(!editorMode)setEditor(true);openCall(null);};
@@ -808,7 +848,7 @@ function refreshKeyState(){const has=!!GH.token(),s=$("#keyState");if(s){s.textC
 function openKeyModal(){$("#keyInput").value=GH.token();$("#keyModal").classList.add("on");setTimeout(()=>$("#keyInput").focus(),40);}
 function closeKeyModal(){$("#keyModal").classList.remove("on");}
 
-async function commitChange(mutator,message,btn){
+async function commitChange(mutator,message,btn,okMsg){
   if(!GH.token()){toast("Set your access key first","err");openKeyModal();return;}
   const label=btn?btn.textContent:"";if(btn){btn.disabled=true;btn.textContent="Saving…";}
   try{
@@ -818,7 +858,7 @@ async function commitChange(mutator,message,btn){
     data.meta=data.meta||{};data.meta.updated=todayStr();
     await GH.commit(data,message,sha);
     holdUntil=Date.now()+90000;DB=data;render();closeDrawer();
-    toast("Saved ✓ — live in ~1 min","ok");
+    toast(okMsg||"Saved ✓ — live in ~1 min","ok");
   }catch(e){
     if(String(e.message).indexOf("AUTH")>=0){toast("Access key invalid or missing write access","err");openKeyModal();}
     else toast("Save failed: "+e.message,"err");
