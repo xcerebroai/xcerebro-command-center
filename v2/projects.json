@@ -469,6 +469,10 @@
           "targetEnd": "",
           "tasks": [
             {
+              "label": "Website built",
+              "done": false
+            },
+            {
               "label": "Dashboard set up",
               "done": false
             },
@@ -501,8 +505,8 @@
               "done": false
             }
           ],
-          "blocker": "Waiting on A2P registration to clear before connecting the agent to Jarvis.",
-          "nextAction": "Connect AI agent to Jarvis once A2P registration is approved.",
+          "blocker": "Needs a website built before A2P registration can be submitted.",
+          "nextAction": "Build website, then register A2P. Connect agent to Jarvis once A2P clears.",
           "notes": "AI agent already connected in Telegram."
         }
       ]
