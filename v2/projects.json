@@ -228,10 +228,14 @@
             {
               "label": "JV / Payment confirmed",
               "done": true
+            },
+            {
+              "label": "Create text campaign",
+              "done": false
             }
           ],
           "blocker": "Need agent objective, lead source, offer, and reply boundaries.",
-          "nextAction": "Gather client intake details and draft the initial agent structure.",
+          "nextAction": "Gather client intake details, draft agent structure, and create the text campaign.",
           "notes": "AI agent build; currently scoped as agent project."
         }
       ]
@@ -670,6 +674,60 @@
           "blocker": "Details pending.",
           "nextAction": "Gather requirements and kick off build.",
           "notes": "Placeholder entry, details to be filled in."
+        }
+      ]
+    },
+    {
+      "id": "C-013",
+      "name": "Angel Rabago",
+      "company": "MaxTax Refunds Corp",
+      "projects": [
+        {
+          "id": "P-013",
+          "name": "DBA Campaign",
+          "buildType": "Campaign Build",
+          "status": "Planning",
+          "priority": "Normal",
+          "owner": "Alexia / Q",
+          "start": "2026-07-08",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "blocker": "Details pending.",
+          "nextAction": "Gather DBA campaign requirements and kick off build.",
+          "notes": "New client entry."
         }
       ]
     }
