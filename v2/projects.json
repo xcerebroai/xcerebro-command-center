@@ -640,7 +640,7 @@
           "notes": "Placeholder entry, details to be filled in.",
           "payment": {
             "total": 2000,
-            "paid": 0,
+            "paid": 2000,
             "status": "Paid",
             "dueDate": "",
             "lastFollowUp": "2026-07-08",
