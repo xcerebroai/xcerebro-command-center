@@ -70,7 +70,15 @@
           ],
           "blocker": "Need final campaign angle, Realtor offer, and exact handoff rules.",
           "nextAction": "Build campaign copy, agent prompt, pipeline statuses, and test follow-up flow.",
-          "notes": "Realtor campaign under Coastalgic; build inside Jarvis and prepare AI follow-up."
+          "notes": "Realtor campaign under Coastalgic; build inside Jarvis and prepare AI follow-up.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "dueDate": "",
+            "status": "Paid",
+            "lastFollowUp": "",
+            "notes": ""
+          }
         }
       ]
     },
@@ -124,7 +132,15 @@
           ],
           "blocker": "Need final workflow scope, knowledgebase, triggers, and what the agent can/cannot do.",
           "nextAction": "Confirm use case, map workflow logic, build agent instructions, then QA sample conversations.",
-          "notes": "Custom AI agent plus client-specific workflow logic."
+          "notes": "Custom AI agent plus client-specific workflow logic.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "dueDate": "",
+            "status": "Paid",
+            "lastFollowUp": "",
+            "notes": ""
+          }
         }
       ]
     },
@@ -178,7 +194,15 @@
           ],
           "blocker": "Need exact agent use case, channels, offer, FAQs, and escalation rules.",
           "nextAction": "Collect intake answers and create first AI agent prompt + KB outline.",
-          "notes": "AI agent build; details still need to be scoped."
+          "notes": "AI agent build; details still need to be scoped.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "dueDate": "",
+            "status": "Paid",
+            "lastFollowUp": "",
+            "notes": ""
+          }
         }
       ]
     },
@@ -236,7 +260,15 @@
           ],
           "blocker": "Need agent objective, lead source, offer, and reply boundaries.",
           "nextAction": "Gather client intake details, draft agent structure, and create the text campaign.",
-          "notes": "AI agent build; currently scoped as agent project."
+          "notes": "AI agent build; currently scoped as agent project.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "dueDate": "",
+            "status": "Paid",
+            "lastFollowUp": "",
+            "notes": ""
+          }
         }
       ]
     },
@@ -291,7 +323,15 @@
           "blocker": "Payment method issue on Jarvis account, needs to add credits.",
           "nextAction": "Follow up with Raj to add credits to his Jarvis account; confirm once added.",
           "notes": "Leads + JV partnership project; likely needs Jarvis pipeline and lead management setup.",
-          "creditsAdded": false
+          "creditsAdded": false,
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "dueDate": "",
+            "status": "Paid",
+            "lastFollowUp": "",
+            "notes": ""
+          }
         }
       ]
     },
@@ -345,7 +385,15 @@
           ],
           "blocker": "Payment follow-up needed before build-out can move forward.",
           "nextAction": "Follow up for payment, confirm scope, then move into onboarding and Jarvis setup.",
-          "notes": "Bigheights LLC JV partnership. Marked urgent because payment follow-up is required."
+          "notes": "Bigheights LLC JV partnership. Marked urgent because payment follow-up is required.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "dueDate": "",
+            "status": "Unpaid",
+            "lastFollowUp": "",
+            "notes": ""
+          }
         }
       ]
     },
@@ -399,7 +447,15 @@
           ],
           "blocker": "Need clear use case, agent goal, and business context for build-out.",
           "nextAction": "Collect intake details, define agent outcome, and draft knowledgebase requirements.",
-          "notes": "AI agent project for Anthony; scope to be finalized."
+          "notes": "AI agent project for Anthony; scope to be finalized.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "dueDate": "",
+            "status": "Paid",
+            "lastFollowUp": "",
+            "notes": ""
+          }
         }
       ]
     },
@@ -453,7 +509,15 @@
           ],
           "blocker": "Need Skool campaign structure, Jarvis funnel/campaign flow, and launch assets.",
           "nextAction": "Map Skool campaign, build Jarvis campaign, create automations, and QA the full funnel.",
-          "notes": "Jarvis + Skool build campaign; needs campaign and automation build-out."
+          "notes": "Jarvis + Skool build campaign; needs campaign and automation build-out.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "dueDate": "",
+            "status": "Paid",
+            "lastFollowUp": "",
+            "notes": ""
+          }
         }
       ]
     },
@@ -511,7 +575,15 @@
           ],
           "blocker": "Needs a website built before A2P registration can be submitted.",
           "nextAction": "Build website, then register A2P. Connect agent to Jarvis once A2P clears.",
-          "notes": "AI agent already connected in Telegram."
+          "notes": "AI agent already connected in Telegram.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "dueDate": "",
+            "status": "Unpaid",
+            "lastFollowUp": "",
+            "notes": ""
+          }
         }
       ]
     },
@@ -565,7 +637,15 @@
           ],
           "blocker": "Details pending.",
           "nextAction": "Gather requirements and kick off build.",
-          "notes": "Placeholder entry, details to be filled in."
+          "notes": "Placeholder entry, details to be filled in.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "dueDate": "",
+            "status": "Unpaid",
+            "lastFollowUp": "",
+            "notes": ""
+          }
         }
       ]
     },
@@ -619,7 +699,15 @@
           ],
           "blocker": "Details pending.",
           "nextAction": "Gather requirements and kick off build.",
-          "notes": "Placeholder entry, details to be filled in."
+          "notes": "Placeholder entry, details to be filled in.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "dueDate": "",
+            "status": "Unpaid",
+            "lastFollowUp": "",
+            "notes": ""
+          }
         }
       ]
     },
@@ -673,7 +761,15 @@
           ],
           "blocker": "Details pending.",
           "nextAction": "Gather requirements and kick off build.",
-          "notes": "Placeholder entry, details to be filled in."
+          "notes": "Placeholder entry, details to be filled in.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "dueDate": "",
+            "status": "Paid",
+            "lastFollowUp": "",
+            "notes": ""
+          }
         }
       ]
     },
@@ -727,9 +823,23 @@
           ],
           "blocker": "Details pending.",
           "nextAction": "Gather DBA campaign requirements and kick off build.",
-          "notes": "New client entry."
+          "notes": "New client entry.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "dueDate": "",
+            "status": "Unpaid",
+            "lastFollowUp": "",
+            "notes": ""
+          }
         }
       ]
     }
-  ]
+  ],
+  "paymentStatusOptions": [
+    "Paid",
+    "Partial",
+    "Unpaid"
+  ],
+  "currency": "USD"
 }

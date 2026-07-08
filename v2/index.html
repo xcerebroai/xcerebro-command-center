@@ -188,6 +188,41 @@
     color:var(--ink);border-radius:10px;padding:12px 18px;font:600 12.5px 'JetBrains Mono';opacity:0;pointer-events:none;transition:.25s;box-shadow:0 8px 30px rgba(0,0,0,.5);max-width:90vw}
   .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
   .toast.err{border-color:var(--red);color:var(--red)} .toast.ok{border-color:var(--green);color:var(--green)}
+  /* tabs */
+  .tabs{display:flex;gap:8px;margin-top:16px;border-bottom:1px solid var(--line);padding-bottom:0}
+  .tab{border:1px solid var(--line);border-bottom:none;background:rgba(10,22,38,.5);color:var(--mute);
+    font:700 12px 'JetBrains Mono';letter-spacing:.04em;padding:11px 18px;border-radius:10px 10px 0 0;cursor:pointer;
+    display:inline-flex;align-items:center;gap:8px;transition:.15s;position:relative;top:1px}
+  .tab:hover{color:var(--ink)}
+  .tab.on{color:#fff;background:linear-gradient(180deg,var(--plate),var(--plate2));border-color:var(--cyan-dim);
+    box-shadow:0 -2px 12px rgba(32,217,255,.12)}
+  .tab.on::after{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--cyan);border-radius:2px}
+  .tabbadge{font:700 10px 'JetBrains Mono';background:var(--red);color:#fff;border-radius:20px;padding:1px 7px;min-width:18px;text-align:center}
+  #view-command,#view-payments{margin-top:16px}
+  /* payments */
+  .paytable{padding:8px 10px 16px}
+  .payrow{display:grid;grid-template-columns:1.5fr 92px 92px 100px 96px 116px 44px;gap:10px;align-items:center;
+    padding:12px;border-radius:11px;border:1px solid transparent;transition:.13s;cursor:pointer}
+  .payrow:hover{background:rgba(32,217,255,.05);border-color:var(--line)}
+  .payrow + .payrow{margin-top:2px}
+  .payhead{padding:6px 12px;cursor:default}
+  .payhead span{font:600 9.5px 'JetBrains Mono';letter-spacing:.1em;color:var(--mute2);text-transform:uppercase}
+  .payhead:hover{background:none}
+  .pc{min-width:0}
+  .pc .nm{font-weight:600;font-size:13.5px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pc .sub{font-size:11px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .money{font:700 13px 'JetBrains Mono';text-align:right}
+  .money.bal{color:var(--amber)} .money.bal.zero{color:var(--mute2)}
+  .money.paid{color:var(--green)} .money.tot{color:var(--ink)}
+  .due{font:600 11px 'JetBrains Mono';text-align:center}
+  .flwup{font:600 10.5px 'JetBrains Mono';color:var(--mute);text-align:center;white-space:nowrap}
+  .logbtn{background:none;border:1px solid var(--line);color:var(--cyan);border-radius:7px;padding:6px;cursor:pointer;font-size:12px}
+  .logbtn:hover{border-color:var(--cyan-dim);background:rgba(32,217,255,.08)}
+  .paysec{margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}
+  .paysec .lbl{font:700 11px 'JetBrains Mono';letter-spacing:.1em;color:var(--green);text-transform:uppercase;margin-bottom:2px}
+  .balshow{margin-top:12px;display:flex;align-items:center;gap:10px;background:#0a1626;border:1px solid var(--line);border-radius:9px;padding:11px 13px}
+  .balshow .k{font:600 10px 'JetBrains Mono';letter-spacing:.12em;color:var(--mute);text-transform:uppercase}
+  .balshow .v{margin-left:auto;font:700 16px 'JetBrains Mono';color:var(--amber)}
   .foot{margin-top:22px;text-align:center;font:500 11px 'JetBrains Mono';color:var(--mute2)}
   .banner{margin-top:14px;border:1px solid rgba(245,166,35,.4);background:rgba(245,166,35,.08);color:var(--amber);border-radius:11px;padding:11px 15px;font:500 12px 'JetBrains Mono';display:none}
   .banner.on{display:block}
@@ -219,6 +254,12 @@
     <button class="elink" id="keyBtn">set / change key</button>
   </div>
 
+  <nav class="tabs" id="tabs">
+    <button class="tab on" data-tab="command">◉ Command Center</button>
+    <button class="tab" data-tab="payments">💲 Payments <span class="tabbadge" id="payBadge" style="display:none"></span></button>
+  </nav>
+
+  <div id="view-command">
   <section class="kpis" id="kpis"></section>
 
   <section class="reactor">
@@ -251,6 +292,22 @@
       </section>
     </aside>
   </main>
+  </div><!-- /view-command -->
+
+  <div id="view-payments" style="display:none">
+    <section class="kpis" id="paykpis"></section>
+    <section class="panel" style="margin-top:16px">
+      <h2><span class="tick">💲</span> Outstanding Balances <span class="count" id="payCount"></span></h2>
+      <div class="filters"><input class="search" id="paysearch" placeholder="Search client…" aria-label="Search payments"></div>
+      <div class="paytable">
+        <div class="payrow payhead">
+          <span>Client / Project</span><span style="text-align:right">Total</span><span style="text-align:right">Paid</span>
+          <span style="text-align:right">Balance</span><span style="text-align:center">Due</span><span style="text-align:center">Last follow-up</span><span></span>
+        </div>
+        <div id="paytable"></div>
+      </div>
+    </section>
+  </div><!-- /view-payments -->
 
   <p class="foot">Checklist-driven · every % is calculated from ticked tasks · team-readable + AI-readable from the same file.</p>
 
@@ -375,7 +432,8 @@ function render(){
   $("#copyRaw").onclick=()=>{navigator.clipboard.writeText(RAWURL);toast("Link copied ✓","ok");};
   $("#copyPrompt").onclick=()=>{navigator.clipboard.writeText(AGENT_PROMPT());toast("Agent instructions copied ✓","ok");};
 
-  bindBoard();
+  bindBoard();updatePayBadge();
+  if(document.getElementById("paytable"))renderPayments();
 }
 
 function AGENT_PROMPT(){return `You are the status assistant for the X Cerebro command center.
@@ -391,6 +449,77 @@ function bindBoard(){
   document.querySelectorAll("[data-addproj]").forEach(b=>b.onclick=e=>{e.stopPropagation();openAddProject(b.dataset.addproj);});
   document.querySelectorAll(".move[data-pid]").forEach(el=>el.onclick=()=>openProject(el.dataset.cid,el.dataset.pid));
 }
+
+/* ---------- payments ---------- */
+const CUR=()=>DB.currency||"USD";
+const money=n=>{n=+n||0;return (n<0?"-$":"$")+Math.abs(n).toLocaleString(undefined,{maximumFractionDigits:2});};
+const pay=p=>p.payment||{total:0,paid:0,status:"Unpaid",dueDate:"",lastFollowUp:"",notes:""};
+const bal=p=>Math.max(0,(+pay(p).total||0)-(+pay(p).paid||0));
+const payStatus=p=>{const q=pay(p),b=bal(p);if((q.status==="Paid")&&b<=0)return"Paid";
+  if(b>0&&q.dueDate){const d=new Date(q.dueDate),n=new Date();d.setHours(0,0,0,0);n.setHours(0,0,0,0);if(d<n)return"Overdue";}
+  return q.status||"Unpaid";};
+const PAYCLR={"Paid":["#0c3524","#3de8a0"],"Partial":["#3a2408","#f5a623"],"Unpaid":["#3d0f0f","#ff8080"],"Overdue":["#2a0808","#ff5d5d"]};
+const payAccounts=()=>allProjects().filter(x=>pay(x.p).status!=="Paid"||bal(x.p)>0);
+
+function renderPayments(){
+  const accts=payAccounts();
+  const t=(document.getElementById("paysearch").value||"").toLowerCase();
+  const rows=accts.filter(x=>!t||(x.c.name+" "+(x.c.company||"")+" "+x.p.name).toLowerCase().includes(t))
+    .sort((a,b)=>(payStatus(b.p)==="Overdue")-(payStatus(a.p)==="Overdue") || bal(b.p)-bal(a.p));
+  const outstanding=accts.reduce((s,x)=>s+bal(x.p),0);
+  const collected=allProjects().reduce((s,x)=>s+(+pay(x.p).paid||0),0);
+  const overdue=accts.filter(x=>payStatus(x.p)==="Overdue").length;
+  const kp=[["Outstanding",money(outstanding),"Still owed",outstanding>0?"warn":""],
+    ["Collected",money(collected),"Paid to date",""],
+    ["Open Accounts",accts.length,"With a balance / unpaid",accts.length>0?"warn":""],
+    ["Overdue",overdue,"Past due date",overdue>0?"crit":""]];
+  const pk=document.getElementById("paykpis");
+  pk.style.gridTemplateColumns="repeat(4,1fr)";
+  pk.innerHTML=kp.map(k=>`<div class="kpi ${k[3]}"><div class="k-label">${k[0]}</div><div class="k-num">${k[1]}</div><div class="k-sub">${k[2]}</div></div>`).join("");
+  document.getElementById("payCount").textContent=accts.length+" open";
+  document.getElementById("paytable").innerHTML=rows.map(x=>{
+    const q=pay(x.p),b=bal(x.p),st=payStatus(x.p),c=PAYCLR[st]||PAYCLR.Unpaid;
+    const due=q.dueDate?`<span style="color:${st==='Overdue'?'var(--red)':'var(--mute)'}">${esc(q.dueDate)}</span>`:'<span style="color:var(--mute2)">—</span>';
+    const flw=q.lastFollowUp?esc(q.lastFollowUp):'<span style="color:var(--mute2)">never</span>';
+    const log=editorMode?`<button class="logbtn" data-log="${x.c.id}|${x.p.id}" title="Log a follow-up today">✎</button>`:'';
+    return `<div class="payrow" data-cid="${x.c.id}" data-pid="${x.p.id}">
+      <div class="pc"><div class="nm">${esc(x.c.name)}${x.c.company?' · '+esc(x.c.company):''}</div><div class="sub">${esc(x.p.name)}</div></div>
+      <div class="money tot">${(+q.total)?money(q.total):'—'}</div>
+      <div class="money paid">${(+q.paid)?money(q.paid):'—'}</div>
+      <div class="money bal ${b<=0?'zero':''}">${money(b)}</div>
+      <div class="due">${due}<div style="margin-top:3px"><span class="tag" style="background:${c[0]};color:${c[1]};width:auto;padding:2px 7px">${st}</span></div></div>
+      <div class="flwup">${flw}</div>
+      <div style="text-align:center">${log}</div></div>`;
+  }).join("")||`<div style="padding:26px;text-align:center;color:var(--mute)">No open balances — everyone's paid. 🎉</div>`;
+  document.querySelectorAll('#paytable .payrow[data-pid]').forEach(el=>el.onclick=e=>{if(e.target.closest('[data-log]'))return;openProject(el.dataset.cid,el.dataset.pid);});
+  document.querySelectorAll('#paytable [data-log]').forEach(b=>b.onclick=e=>{e.stopPropagation();const parts=b.dataset.log.split("|");
+    commitChange(data=>{const cc=data.clients.find(k=>k.id===parts[0]);const pp=cc.projects.find(k=>k.id===parts[1]);pp.payment=pp.payment||{};pp.payment.lastFollowUp=todayStr();},"Log follow-up "+parts[0],b);});
+}
+function updatePayBadge(){const n=payAccounts().length,badge=document.getElementById("payBadge");if(!badge)return;
+  if(n){badge.style.display="";badge.textContent=n;}else badge.style.display="none";}
+function paybalUpd(){const t=+((document.getElementById('pay_total')||{}).value)||0,pd=+((document.getElementById('pay_paid')||{}).value)||0;
+  const el=document.getElementById('pay_bal');if(el)el.textContent=money(Math.max(0,t-pd));}
+function paymentSection(q){return `<div class="paysec"><div class="lbl">💲 Payment</div>
+    <div class="erow"><div class="efield"><label>Total (${esc(CUR())})</label><input class="ein" id="pay_total" type="number" min="0" step="0.01" value="${q.total?esc(q.total):""}" oninput="paybalUpd()" placeholder="0"></div>
+      <div class="efield"><label>Paid (${esc(CUR())})</label><input class="ein" id="pay_paid" type="number" min="0" step="0.01" value="${q.paid?esc(q.paid):""}" oninput="paybalUpd()" placeholder="0"></div></div>
+    <div class="erow"><div class="efield"><label>Payment status</label><select class="esel" id="pay_status">${(DB.paymentStatusOptions||["Paid","Partial","Unpaid"]).map(o=>`<option ${o===(q.status||"Unpaid")?"selected":""}>${o}</option>`).join("")}</select></div>
+      <div class="efield"><label>Due date</label><input class="ein" id="pay_due" type="date" value="${esc(q.dueDate||"")}"></div></div>
+    <div class="efield"><label>Last follow-up</label><input class="ein" id="pay_follow" type="date" value="${esc(q.lastFollowUp||"")}"></div>
+    <div class="efield"><label>Payment notes</label><textarea class="eta" id="pay_notes">${esc(q.notes||"")}</textarea></div>
+    <div class="balshow"><span class="k">Balance owed</span><span class="v" id="pay_bal">${money(Math.max(0,(+(q.total||0))-(+(q.paid||0))))}</span></div></div>`;}
+function readPayment(base){const g=id=>document.getElementById(id);
+  if(!g('pay_total'))return base&&base.payment?base.payment:{total:0,paid:0,status:"Unpaid",dueDate:"",lastFollowUp:"",notes:""};
+  return {total:+g('pay_total').value||0,paid:+g('pay_paid').value||0,status:g('pay_status').value,
+    dueDate:g('pay_due').value,lastFollowUp:g('pay_follow').value,notes:g('pay_notes').value.trim()};}
+
+let activeTab="command";
+function switchTab(t){activeTab=t;
+  document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("on",b.dataset.tab===t));
+  document.getElementById("view-command").style.display=t==="command"?"":"none";
+  document.getElementById("view-payments").style.display=t==="payments"?"":"none";
+  if(t==="payments")renderPayments();}
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));
+document.getElementById("paysearch").oninput=()=>renderPayments();
 
 /* ---------- drawer / editor ---------- */
 function showDrawer(html){const d=$("#drawer");d.innerHTML=html;d.classList.add("on");d.setAttribute("aria-hidden","false");$("#scrim").classList.add("on");d.scrollTop=0;}
@@ -419,6 +548,7 @@ function refreshChecklist(){document.getElementById("chkbox").innerHTML=checklis
 
 function projectForm(p,mode,titleId,titleName){
   const sel=(id,opts,cur)=>`<select class="esel" id="${id}">`+opts.map(o=>`<option ${o===cur?"selected":""}>${esc(o)}</option>`).join("")+`</select>`;
+  const q=p.payment||{};
   return `<div class="dh"><div><div class="did">${esc(titleId)}</div><h3>${esc(titleName)}</h3></div>
       <button class="xbtn" id="xclose">✕</button></div>
     <div class="efield"><label>Project name</label><input class="ein" id="f_name" value="${esc(p.name||"")}" placeholder="What you're building"></div>
@@ -429,6 +559,7 @@ function projectForm(p,mode,titleId,titleName){
     <div class="erow"><div class="efield"><label>Owner</label><input class="ein" id="f_owner" value="${esc(p.owner||DB.meta.owner||"")}"></div>
       <div class="efield"><label>Target end</label><input class="ein" id="f_targetEnd" type="date" value="${esc(p.targetEnd||"")}"></div></div>
     <div class="efield"><label>Checklist — what's been done</label><div id="chkbox">${checklistHTML()}</div></div>
+    ${paymentSection(q)}
     <div class="efield"><label>Current blocker</label><textarea class="eta" id="f_blocker">${esc(p.blocker||"")}</textarea></div>
     <div class="efield"><label>Next action</label><textarea class="eta" id="f_nextAction">${esc(p.nextAction||"")}</textarea></div>
     <div class="efield"><label>Notes</label><textarea class="eta" id="f_notes">${esc(p.notes||"")}</textarea></div>
@@ -438,7 +569,7 @@ function projectForm(p,mode,titleId,titleName){
 function readProject(base){const g=id=>document.getElementById(id);
   return Object.assign({},base,{name:g("f_name").value.trim(),buildType:g("f_buildType").value.trim(),status:g("f_status").value,
     priority:g("f_priority").value,owner:g("f_owner").value.trim(),targetEnd:g("f_targetEnd").value,
-    tasks:draftTasks.map(t=>({label:t.label,done:!!t.done})),blocker:g("f_blocker").value.trim(),
+    tasks:draftTasks.map(t=>({label:t.label,done:!!t.done})),payment:readPayment(base),blocker:g("f_blocker").value.trim(),
     nextAction:g("f_nextAction").value.trim(),notes:g("f_notes").value.trim()});
 }
 
@@ -494,6 +625,7 @@ function openAddClient(){
     <div class="erow"><div class="efield"><label>Owner</label><input class="ein" id="f_owner" value="${esc(DB.meta.owner||"")}"></div>
       <div class="efield"><label>Target end</label><input class="ein" id="f_targetEnd" type="date"></div></div>
     <div class="efield"><label>Checklist — what's been done</label><div id="chkbox">${checklistHTML()}</div></div>
+    ${paymentSection({})}
     <div class="efield"><label>Current blocker</label><textarea class="eta" id="f_blocker"></textarea></div>
     <div class="efield"><label>Next action</label><textarea class="eta" id="f_nextAction"></textarea></div>
     <div class="efield"><label>Notes</label><textarea class="eta" id="f_notes"></textarea></div>
