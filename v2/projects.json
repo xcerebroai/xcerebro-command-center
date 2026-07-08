@@ -577,10 +577,10 @@
           "nextAction": "Build website, then register A2P. Connect agent to Jarvis once A2P clears.",
           "notes": "AI agent already connected in Telegram.",
           "payment": {
-            "total": 0,
-            "paid": 0,
+            "total": 3000,
+            "paid": 1000,
+            "status": "Partial",
             "dueDate": "",
-            "status": "Unpaid",
             "lastFollowUp": "",
             "notes": ""
           }
