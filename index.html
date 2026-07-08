@@ -224,9 +224,9 @@
   .balshow .k{font:600 10px 'JetBrains Mono';letter-spacing:.12em;color:var(--mute);text-transform:uppercase}
   .balshow .v{margin-left:auto;font:700 16px 'JetBrains Mono';color:var(--amber)}
   .frow{grid-template-columns:1.3fr 1.6fr 90px 104px 92px 108px 40px}
-  .crow{grid-template-columns:1.4fr 168px 1.3fr 150px 118px 40px}
+  .crow{grid-template-columns:1.25fr 122px 150px 1.05fr 126px 96px 38px}
   .paytable{overflow-x:auto}
-  .frow,.crow{min-width:660px}
+  .frow{min-width:660px} .crow{min-width:740px}
   .foot{margin-top:22px;text-align:center;font:500 11px 'JetBrains Mono';color:var(--mute2)}
   .banner{margin-top:14px;border:1px solid rgba(245,166,35,.4);background:rgba(245,166,35,.08);color:var(--amber);border-radius:11px;padding:11px 15px;font:500 12px 'JetBrains Mono';display:none}
   .banner.on{display:block}
@@ -333,7 +333,7 @@
       <h2><span class="tick">📅</span> Booked Calls <span class="count" id="callCount"></span></h2>
       <div class="filters"><input class="search" id="callsearch" placeholder="Search who / purpose…" aria-label="Search calls"><button class="btn pri" id="addCall" style="display:none">➕ Add call</button></div>
       <div class="paytable">
-        <div class="payrow crow payhead"><span>Who</span><span>Date &amp; time</span><span>Purpose</span><span style="text-align:center">Status</span><span style="text-align:center">Reminder</span><span></span></div>
+        <div class="payrow crow payhead"><span>Who</span><span>Type</span><span>Date &amp; time</span><span>Purpose</span><span style="text-align:center">Status</span><span style="text-align:center">Reminder</span><span></span></div>
         <div id="calltable"></div>
       </div>
     </section>
@@ -559,6 +559,8 @@ document.getElementById("paysearch").oninput=()=>renderPayments();
 const FU_STATUS=["Pending","Done"];
 const FU_CHAN=["Call","Text","Email","DM","Other"];
 const CALL_STATUS=["Booked","Showed","No-show → rebook","Rebooked","Cancelled"];
+const CALL_TYPES=["Coaching","1 on 1","Discovery Call","Other"];
+const CTYPECLR={"Coaching":["#2a1650","#c9a8ff"],"1 on 1":["#13294a","#8ec2ff"],"Discovery Call":["#0c3524","#3de8a0"],"Other":["#1c2a3d","#8FA6C4"]};
 const FUCLR={"Pending":["#3a2408","#f5a623"],"Done":["#0c3524","#3de8a0"],"Overdue":["#2a0808","#ff5d5d"]};
 const CALLCLR={"Booked":["#13294a","#8ec2ff"],"Showed":["#0c3524","#3de8a0"],"No-show → rebook":["#3d0f0f","#ff8080"],"Rebooked":["#2a1650","#c9a8ff"],"Cancelled":["#1c2a3d","#8FA6C4"]};
 const followups=()=>DB.followups||(DB.followups=[]);
@@ -605,8 +607,10 @@ function renderCalls(){
   document.getElementById("calltable").innerHTML=rows.map(c=>{
     const st=c.status||"Booked",cl=CALLCLR[st]||CALLCLR.Booked;
     const edit=editorMode?`<button class="logbtn" data-call="${c.id}" title="Edit">✎</button>`:"";
+    const tc=CTYPECLR[c.type]||CTYPECLR.Other;
     return `<div class="payrow crow" data-call="${c.id}">
       <div class="pc"><div class="nm">${esc(c.who||"—")}</div></div>
+      <div>${c.type?`<span class="tag" style="background:${tc[0]};color:${tc[1]};width:auto;padding:3px 8px">${esc(c.type)}</span>`:'<span style="color:var(--mute2)">—</span>'}</div>
       <div class="flwup" style="text-align:left">${fmtWhen(c.when)}</div>
       <div class="pc"><div class="sub" style="color:var(--ink);font-size:12.5px;white-space:normal">${esc(c.purpose||"—")}</div></div>
       <div style="text-align:center"><span class="tag" style="background:${cl[0]};color:${cl[1]};width:auto;padding:3px 8px">${esc(st)}</span></div>
@@ -639,8 +643,9 @@ function openCall(id){
   const list=calls();const c=id?list.find(x=>x.id===id)||{}:{status:"Booked"};
   showDrawer(`<div class="dh"><div><div class="did">${id?esc(id)+" · call":"NEW CALL"}</div><h3>${id?"Edit call":"Add booked call"}</h3></div><button class="xbtn" id="xclose">✕</button></div>
     <div class="efield"><label>Who</label><input class="ein" id="k_who" value="${esc(c.who||"")}" placeholder="Client / lead name"></div>
-    <div class="efield"><label>Date &amp; time</label><input class="ein" id="k_when" type="datetime-local" value="${esc(c.when||"")}"></div>
-    <div class="efield"><label>Purpose</label><input class="ein" id="k_purpose" value="${esc(c.purpose||"")}" placeholder="Discovery, Onboarding…"></div>
+    <div class="erow"><div class="efield"><label>Type</label><select class="esel" id="k_type"><option value="">— select —</option>${CALL_TYPES.map(o=>`<option ${o===(c.type||"")?"selected":""}>${o}</option>`).join("")}</select></div>
+      <div class="efield"><label>Date &amp; time</label><input class="ein" id="k_when" type="datetime-local" value="${esc(c.when||"")}"></div></div>
+    <div class="efield"><label>Purpose / service</label><input class="ein" id="k_purpose" value="${esc(c.purpose||"")}" placeholder="Jarvis, AI Automation…"></div>
     <div class="erow"><div class="efield"><label>Status</label>${selHTML("k_status",CALL_STATUS,c.status||"Booked")}</div>
       <div class="efield"><label>Reminder date</label><input class="ein" id="k_reminder" type="date" value="${esc(c.reminder||"")}"></div></div>
     <div class="efield"><label>Notes</label><textarea class="eta" id="k_notes">${esc(c.notes||"")}</textarea></div>
@@ -648,7 +653,7 @@ function openCall(id){
   const g=x=>document.getElementById(x);
   g("xclose").onclick=closeDrawer;g("k_cancel").onclick=closeDrawer;
   if(id)g("k_del").onclick=()=>{if(!confirm("Delete this call?"))return;commitChange(data=>{data.calls=(data.calls||[]).filter(x=>x.id!==id);},"Delete call "+id,g("k_del"));};
-  g("k_save").onclick=()=>{const v={who:g("k_who").value.trim(),when:g("k_when").value,purpose:g("k_purpose").value.trim(),status:g("k_status").value,reminder:g("k_reminder").value,notes:g("k_notes").value.trim()};
+  g("k_save").onclick=()=>{const v={who:g("k_who").value.trim(),type:g("k_type").value,when:g("k_when").value,purpose:g("k_purpose").value.trim(),status:g("k_status").value,reminder:g("k_reminder").value,notes:g("k_notes").value.trim()};
     if(!v.who){toast("Who is required","err");return;}
     commitChange(data=>{data.calls=data.calls||[];if(id){const t=data.calls.find(x=>x.id===id);Object.assign(t,v);}else{v.id=nextId(data.calls,"K-");data.calls.push(v);}},(id?"Update ":"Add ")+"call "+v.who,g("k_save"));};
 }
