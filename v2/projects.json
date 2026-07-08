@@ -387,9 +387,9 @@
           "nextAction": "Follow up for payment, confirm scope, then move into onboarding and Jarvis setup.",
           "notes": "Bigheights LLC JV partnership. Marked urgent because payment follow-up is required.",
           "payment": {
-            "total": 0,
-            "paid": 0,
-            "status": "Unpaid",
+            "total": 1000,
+            "paid": 1000,
+            "status": "Paid",
             "dueDate": "",
             "lastFollowUp": "",
             "notes": ""
