@@ -639,10 +639,10 @@
           "nextAction": "Gather requirements and kick off build.",
           "notes": "Placeholder entry, details to be filled in.",
           "payment": {
-            "total": 0,
+            "total": 2000,
             "paid": 0,
+            "status": "Paid",
             "dueDate": "",
-            "status": "Unpaid",
             "lastFollowUp": "2026-07-08",
             "notes": ""
           }
