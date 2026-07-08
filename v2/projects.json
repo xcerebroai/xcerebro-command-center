@@ -530,7 +530,7 @@
           "id": "P-009",
           "name": "AI Agents Installation",
           "buildType": "AI Agent Installation",
-          "status": "Blocked",
+          "status": "Testing",
           "priority": "Normal",
           "owner": "Alexia / Q",
           "start": "2026-07-07",
