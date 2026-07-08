@@ -3,27 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-07-07"
-  },
-  "weights": {
-    "dashboard": 10,
-    "campaign": 15,
-    "automations": 15,
-    "aiAgent": 20,
-    "customWorkflow": 15,
-    "a2p": 10,
-    "jarvis": 10,
-    "jvPayment": 5
-  },
-  "componentLabels": {
-    "dashboard": "Dashboard",
-    "campaign": "Campaign",
-    "automations": "Automations",
-    "aiAgent": "AI Agent",
-    "customWorkflow": "Custom Workflow",
-    "a2p": "A2P Setup",
-    "jarvis": "Jarvis Build",
-    "jvPayment": "JV / Payment"
+    "updated": "2026-07-08"
   },
   "statusOptions": [
     "Planning",
@@ -34,222 +14,1018 @@
     "Ready",
     "Live"
   ],
-  "projects": [
+  "priorityOptions": [
+    "Urgent",
+    "High",
+    "Normal"
+  ],
+  "clients": [
     {
-      "id": "XC-001",
-      "client": "Alex Rodas",
-      "project": "Coastalgic Realtor Campaign",
-      "workstream": "Realtor Campaign",
-      "buildType": "Campaign + AI Follow-Up",
-      "owner": "Alexia / Q",
-      "start": "2026-06-26",
-      "targetEnd": "2026-07-05",
-      "status": "Payment Follow-Up",
-      "priority": "High",
-      "components": {
-        "dashboard": 0.3,
-        "campaign": 0.6,
-        "automations": 0.35,
-        "aiAgent": 0.4,
-        "customWorkflow": 0.25,
-        "a2p": 0.1,
-        "jarvis": 0.5,
-        "jvPayment": 1
-      },
-      "jarvisRelated": "Yes",
-      "paymentFollowUp": "No",
-      "blocker": "Need final campaign angle, Realtor offer, and exact handoff rules.",
-      "nextAction": "Build campaign copy, agent prompt, pipeline statuses, and test follow-up flow.",
-      "notes": "Realtor campaign under Coastalgic; build inside Jarvis and prepare AI follow-up."
+      "id": "C-001",
+      "name": "Alex Rodas",
+      "company": "Coastalgic",
+      "projects": [
+        {
+          "id": "P-001",
+          "name": "Coastalgic Realtor Campaign",
+          "buildType": "Campaign + AI Follow-Up",
+          "status": "Build Mode",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-06-26",
+          "targetEnd": "2026-07-05",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": true
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": true
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": true
+            },
+            {
+              "label": "Jarvis build",
+              "done": true
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": true
+            }
+          ],
+          "blocker": "Need final campaign angle, Realtor offer, and exact handoff rules.",
+          "nextAction": "Build campaign copy, agent prompt, pipeline statuses, and test follow-up flow.",
+          "notes": "Realtor campaign under Coastalgic; build inside Jarvis and prepare AI follow-up.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "dueDate": "",
+            "status": "Paid",
+            "lastFollowUp": "",
+            "notes": ""
+          }
+        }
+      ]
     },
     {
-      "id": "XC-002",
-      "client": "Alex Calderon",
-      "project": "AI Agent and Custom Workflow",
-      "workstream": "AI Agent + Custom Workflow",
-      "buildType": "Custom AI Agent",
-      "owner": "Alexia / Q",
-      "start": "2026-06-26",
-      "targetEnd": "2026-07-10",
-      "status": "Build Mode",
-      "priority": "High",
-      "components": {
-        "dashboard": 0.2,
-        "campaign": 0.25,
-        "automations": 0.35,
-        "aiAgent": 0.45,
-        "customWorkflow": 0.4,
-        "a2p": 0.2,
-        "jarvis": 0.35,
-        "jvPayment": 1
-      },
-      "jarvisRelated": "Yes",
-      "paymentFollowUp": "No",
-      "blocker": "Need final workflow scope, knowledgebase, triggers, and what the agent can/cannot do.",
-      "nextAction": "Confirm use case, map workflow logic, build agent instructions, then QA sample conversations.",
-      "notes": "Custom AI agent plus client-specific workflow logic."
+      "id": "C-002",
+      "name": "Alex Calderon",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-002",
+          "name": "AI Agent and Custom Workflow",
+          "buildType": "Custom AI Agent",
+          "status": "Build Mode",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-06-26",
+          "targetEnd": "2026-07-10",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": true
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": true
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": true
+            }
+          ],
+          "blocker": "Need final workflow scope, knowledgebase, triggers, and what the agent can/cannot do.",
+          "nextAction": "Confirm use case, map workflow logic, build agent instructions, then QA sample conversations.",
+          "notes": "Custom AI agent plus client-specific workflow logic.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "dueDate": "",
+            "status": "Paid",
+            "lastFollowUp": "",
+            "notes": ""
+          }
+        }
+      ]
     },
     {
-      "id": "XC-003",
-      "client": "Alejandro Carbajal",
-      "project": "AI Agents",
-      "workstream": "AI Agents",
-      "buildType": "AI Agent Project",
-      "owner": "Alexia / Q",
-      "start": "2026-06-26",
-      "targetEnd": "2026-07-08",
-      "status": "Testing",
-      "priority": "High",
-      "components": {
-        "dashboard": 0.15,
-        "campaign": 0.2,
-        "automations": 0.25,
-        "aiAgent": 0.4,
-        "customWorkflow": 0.2,
-        "a2p": 0.1,
-        "jarvis": 0.3,
-        "jvPayment": 1
-      },
-      "jarvisRelated": "Yes",
-      "paymentFollowUp": "No",
-      "blocker": "Need exact agent use case, channels, offer, FAQs, and escalation rules.",
-      "nextAction": "Collect intake answers and create first AI agent prompt + KB outline.",
-      "notes": "AI agent build; details still need to be scoped."
+      "id": "C-003",
+      "name": "Alejandro Carbajal",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-003",
+          "name": "AI Agents",
+          "buildType": "AI Agent Project",
+          "status": "Planning",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-06-26",
+          "targetEnd": "2026-07-08",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": true
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": true
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": true
+            },
+            {
+              "label": "Jarvis build",
+              "done": true
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": true
+            }
+          ],
+          "blocker": "Need exact agent use case, channels, offer, FAQs, and escalation rules.",
+          "nextAction": "Collect intake answers and create first AI agent prompt + KB outline.",
+          "notes": "AI agent build; details still need to be scoped.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "dueDate": "",
+            "status": "Paid",
+            "lastFollowUp": "",
+            "notes": ""
+          }
+        }
+      ]
     },
     {
-      "id": "XC-004",
-      "client": "Mark Fuller",
-      "project": "AI Agents",
-      "workstream": "AI Agents",
-      "buildType": "AI Agent Project",
-      "owner": "Alexia / Q",
-      "start": "2026-06-26",
-      "targetEnd": "2026-07-08",
-      "status": "Testing",
-      "priority": "High",
-      "components": {
-        "dashboard": 0.15,
-        "campaign": 0.2,
-        "automations": 0.25,
-        "aiAgent": 0.4,
-        "customWorkflow": 0.2,
-        "a2p": 0.1,
-        "jarvis": 0.3,
-        "jvPayment": 1
-      },
-      "jarvisRelated": "Yes",
-      "paymentFollowUp": "No",
-      "blocker": "Need agent objective, lead source, offer, and reply boundaries.",
-      "nextAction": "Gather client intake details and draft the initial agent structure.",
-      "notes": "AI agent build; currently scoped as agent project."
+      "id": "C-004",
+      "name": "Mark Fuller",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-004",
+          "name": "AI Agents",
+          "buildType": "AI Agent Project",
+          "status": "Planning",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-06-26",
+          "targetEnd": "2026-07-08",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": true
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": true
+            },
+            {
+              "label": "Create text campaign",
+              "done": false
+            }
+          ],
+          "blocker": "Need agent objective, lead source, offer, and reply boundaries.",
+          "nextAction": "Gather client intake details, draft agent structure, and create the text campaign.",
+          "notes": "AI agent build; currently scoped as agent project.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "dueDate": "",
+            "status": "Paid",
+            "lastFollowUp": "",
+            "notes": ""
+          }
+        }
+      ]
     },
     {
-      "id": "XC-005",
-      "client": "Raj",
-      "project": "Leads and JV Partnership",
-      "workstream": "Leads + JV Partnership",
-      "buildType": "JV Partner + Lead System",
-      "owner": "Alexia / Q",
-      "start": "2026-06-26",
-      "targetEnd": "2026-07-12",
-      "status": "Planning",
-      "priority": "High",
-      "components": {
-        "dashboard": 0.25,
-        "campaign": 0.3,
-        "automations": 0.25,
-        "aiAgent": 0.2,
-        "customWorkflow": 0.3,
-        "a2p": 0.15,
-        "jarvis": 0.25,
-        "jvPayment": 0.6
-      },
-      "jarvisRelated": "Yes",
-      "paymentFollowUp": "Maybe",
-      "blocker": "Need JV terms, lead source, access, responsibilities, and campaign direction.",
-      "nextAction": "Define JV role, confirm lead flow, then build partner onboarding checklist.",
-      "notes": "Leads + JV partnership project; likely needs Jarvis pipeline and lead management setup."
+      "id": "C-005",
+      "name": "Raj",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-005",
+          "name": "Leads and JV Partnership",
+          "buildType": "JV Partner + Lead System",
+          "status": "Planning",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-06-26",
+          "targetEnd": "2026-07-12",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": true
+            }
+          ],
+          "blocker": "Payment method issue on Jarvis account, needs to add credits.",
+          "nextAction": "Follow up with Raj to add credits to his Jarvis account; confirm once added.",
+          "notes": "Leads + JV partnership project; likely needs Jarvis pipeline and lead management setup.",
+          "creditsAdded": false,
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "dueDate": "",
+            "status": "Paid",
+            "lastFollowUp": "",
+            "notes": ""
+          }
+        }
+      ]
     },
     {
-      "id": "XC-006",
-      "client": "John - Bigheights LLC",
-      "project": "JV Partnership",
-      "workstream": "JV Partnership",
-      "buildType": "JV Partner Setup",
-      "owner": "Alexia / Q",
-      "start": "2026-06-26",
-      "targetEnd": "2026-07-10",
-      "status": "Planning",
-      "priority": "Urgent",
-      "components": {
-        "dashboard": 0.1,
-        "campaign": 0.1,
-        "automations": 0.1,
-        "aiAgent": 0.1,
-        "customWorkflow": 0.1,
-        "a2p": 0,
-        "jarvis": 0.15,
-        "jvPayment": 0.1
-      },
-      "jarvisRelated": "Yes",
-      "paymentFollowUp": "Yes",
-      "blocker": "Payment follow-up needed before build-out can move forward.",
-      "nextAction": "Follow up for payment, confirm scope, then move into onboarding and Jarvis setup.",
-      "notes": "Bigheights LLC JV partnership. Marked urgent because payment follow-up is required."
+      "id": "C-006",
+      "name": "John",
+      "company": "Bigheights LLC",
+      "projects": [
+        {
+          "id": "P-006",
+          "name": "JV Partnership",
+          "buildType": "JV Partner Setup",
+          "status": "Planning",
+          "priority": "Urgent",
+          "owner": "Alexia / Q",
+          "start": "2026-06-26",
+          "targetEnd": "2026-07-03",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "blocker": "Payment follow-up needed before build-out can move forward.",
+          "nextAction": "Follow up for payment, confirm scope, then move into onboarding and Jarvis setup.",
+          "notes": "Bigheights LLC JV partnership. Marked urgent because payment follow-up is required.",
+          "payment": {
+            "total": 1000,
+            "paid": 1000,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "",
+            "notes": ""
+          }
+        }
+      ]
     },
     {
-      "id": "XC-007",
-      "client": "Anthony Sosa",
-      "project": "AI Agents",
-      "workstream": "AI Agents",
-      "buildType": "AI Agent Project",
-      "owner": "Alexia / Q",
-      "start": "2026-06-26",
-      "targetEnd": "2026-07-08",
-      "status": "Planning",
-      "priority": "High",
-      "components": {
-        "dashboard": 0.2,
-        "campaign": 0.25,
-        "automations": 0.3,
-        "aiAgent": 0.45,
-        "customWorkflow": 0.25,
-        "a2p": 0.1,
-        "jarvis": 0.35,
-        "jvPayment": 1
-      },
-      "jarvisRelated": "Yes",
-      "paymentFollowUp": "No",
-      "blocker": "Need clear use case, agent goal, and business context for build-out.",
-      "nextAction": "Collect intake details, define agent outcome, and draft knowledgebase requirements.",
-      "notes": "AI agent project for Anthony; scope to be finalized."
+      "id": "C-007",
+      "name": "Anthony Sosa",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-007",
+          "name": "AI Agents",
+          "buildType": "AI Agent Project",
+          "status": "Planning",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-06-26",
+          "targetEnd": "2026-07-08",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": true
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": true
+            }
+          ],
+          "blocker": "Need clear use case, agent goal, and business context for build-out.",
+          "nextAction": "Collect intake details, define agent outcome, and draft knowledgebase requirements.",
+          "notes": "AI agent project for Anthony; scope to be finalized.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "dueDate": "",
+            "status": "Paid",
+            "lastFollowUp": "",
+            "notes": ""
+          }
+        }
+      ]
     },
     {
-      "id": "XC-008",
-      "client": "Jeff Richman",
-      "project": "Jarvis and Skool Build Campaign",
-      "workstream": "Jarvis + Skool Campaign",
-      "buildType": "Jarvis Build + Campaign",
-      "owner": "Alexia / Q",
-      "start": "2026-06-26",
-      "targetEnd": "2026-07-12",
-      "status": "Build Mode",
-      "priority": "High",
-      "components": {
-        "dashboard": 0.35,
-        "campaign": 0.5,
-        "automations": 0.4,
-        "aiAgent": 0.25,
-        "customWorkflow": 0.3,
-        "a2p": 0.15,
-        "jarvis": 0.55,
-        "jvPayment": 1
-      },
-      "jarvisRelated": "Yes",
-      "paymentFollowUp": "No",
-      "blocker": "Need Skool campaign structure, Jarvis funnel/campaign flow, and launch assets.",
-      "nextAction": "Map Skool campaign, build Jarvis campaign, create automations, and QA the full funnel.",
-      "notes": "Jarvis + Skool build campaign; needs campaign and automation build-out."
+      "id": "C-008",
+      "name": "Jeff Richman",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-008",
+          "name": "Jarvis and Skool Build Campaign",
+          "buildType": "Jarvis Build + Campaign",
+          "status": "Build Mode",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-06-26",
+          "targetEnd": "2026-07-12",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": true
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": true
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": true
+            }
+          ],
+          "blocker": "Need Skool campaign structure, Jarvis funnel/campaign flow, and launch assets.",
+          "nextAction": "Map Skool campaign, build Jarvis campaign, create automations, and QA the full funnel.",
+          "notes": "Jarvis + Skool build campaign; needs campaign and automation build-out.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "dueDate": "",
+            "status": "Paid",
+            "lastFollowUp": "",
+            "notes": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-009",
+      "name": "John Campbell",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-009",
+          "name": "AI Agents Installation",
+          "buildType": "AI Agent Installation",
+          "status": "Testing",
+          "priority": "Normal",
+          "owner": "Alexia / Q",
+          "start": "2026-07-07",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Website built",
+              "done": false
+            },
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": true
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "blocker": "Needs a website built before A2P registration can be submitted.",
+          "nextAction": "Build website, then register A2P. Connect agent to Jarvis once A2P clears.",
+          "notes": "AI agent already connected in Telegram.",
+          "payment": {
+            "total": 3000,
+            "paid": 1000,
+            "status": "Partial",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-08",
+            "notes": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-010",
+      "name": "Tony Gutierrez",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-010",
+          "name": "AI Agents Installation",
+          "buildType": "AI Agent Installation",
+          "status": "Planning",
+          "priority": "Normal",
+          "owner": "Alexia / Q",
+          "start": "2026-07-07",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "blocker": "Details pending.",
+          "nextAction": "Gather requirements and kick off build.",
+          "notes": "Placeholder entry, details to be filled in.",
+          "payment": {
+            "total": 2000,
+            "paid": 2000,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-08",
+            "notes": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-011",
+      "name": "Sam Vega",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-011",
+          "name": "AI Agents Installation",
+          "buildType": "AI Agent Installation",
+          "status": "Planning",
+          "priority": "Normal",
+          "owner": "Alexia / Q",
+          "start": "2026-07-07",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "blocker": "Details pending.",
+          "nextAction": "Gather requirements and kick off build.",
+          "notes": "Placeholder entry, details to be filled in.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-08",
+            "notes": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-012",
+      "name": "Jon Curtis",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-012",
+          "name": "AI Agents and JV Partnership Surplus Funds",
+          "buildType": "AI Agent Installation + JV Partnership",
+          "status": "Planning",
+          "priority": "Normal",
+          "owner": "Alexia / Q",
+          "start": "2026-07-07",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": true
+            },
+            {
+              "label": "Jarvis build",
+              "done": true
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": true
+            }
+          ],
+          "blocker": "Details pending.",
+          "nextAction": "Gather requirements and kick off build.",
+          "notes": "Placeholder entry, details to be filled in.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "dueDate": "",
+            "status": "Paid",
+            "lastFollowUp": "",
+            "notes": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-013",
+      "name": "Angel Rabago",
+      "company": "MaxTax Refunds Corp",
+      "projects": [
+        {
+          "id": "P-013",
+          "name": "DBA Campaign",
+          "buildType": "Campaign Build",
+          "status": "Planning",
+          "priority": "Normal",
+          "owner": "Alexia / Q",
+          "start": "2026-07-08",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": true
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "blocker": "Details pending.",
+          "nextAction": "Gather DBA campaign requirements and kick off build.",
+          "notes": "New client entry.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "",
+            "notes": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-014",
+      "name": "Alex Rodas",
+      "company": "Coastalgic AI",
+      "projects": [
+        {
+          "name": "AI Agents Installation",
+          "buildType": "AI Agent Project",
+          "status": "Planning",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "targetEnd": "",
+          "blocker": "",
+          "nextAction": "",
+          "notes": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "payment": {
+            "total": 1000,
+            "paid": 250,
+            "status": "Partial",
+            "dueDate": "",
+            "lastFollowUp": "",
+            "notes": ""
+          },
+          "id": "P-014",
+          "start": "2026-07-08"
+        }
+      ]
+    },
+    {
+      "id": "C-015",
+      "name": "Mike Dente",
+      "company": "",
+      "projects": [
+        {
+          "name": "Scrapers and System",
+          "buildType": "AI Agent Project",
+          "status": "Payment Follow-Up",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "targetEnd": "",
+          "blocker": "",
+          "nextAction": "",
+          "notes": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "payment": {
+            "total": 2000,
+            "paid": 1000,
+            "status": "Partial",
+            "dueDate": "",
+            "lastFollowUp": "",
+            "notes": ""
+          },
+          "id": "P-015",
+          "start": "2026-07-08"
+        }
+      ]
+    },
+    {
+      "id": "C-016",
+      "name": "Bretton Morin",
+      "company": "",
+      "projects": [
+        {
+          "name": "Jarvis Lifetime Software",
+          "buildType": "Jarvis Lifetime",
+          "status": "Build Mode",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "targetEnd": "",
+          "blocker": "",
+          "nextAction": "",
+          "notes": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "payment": {
+            "total": 500,
+            "paid": 250,
+            "status": "Partial",
+            "dueDate": "",
+            "lastFollowUp": "",
+            "notes": ""
+          },
+          "id": "P-016",
+          "start": "2026-07-08"
+        }
+      ]
     }
-  ]
+  ],
+  "paymentStatusOptions": [
+    "Paid",
+    "Partial",
+    "Unpaid"
+  ],
+  "currency": "USD"
 }
