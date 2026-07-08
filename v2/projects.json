@@ -834,6 +834,68 @@
           }
         }
       ]
+    },
+    {
+      "id": "C-014",
+      "name": "Alex Rodas",
+      "company": "Coastalgic AI",
+      "projects": [
+        {
+          "name": "AI Agents Installation",
+          "buildType": "AI Agent Project",
+          "status": "Planning",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "targetEnd": "",
+          "blocker": "",
+          "nextAction": "",
+          "notes": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "payment": {
+            "total": 1000,
+            "paid": 250,
+            "status": "Partial",
+            "dueDate": "",
+            "lastFollowUp": "",
+            "notes": ""
+          },
+          "id": "P-014",
+          "start": "2026-07-08"
+        }
+      ]
     }
   ],
   "paymentStatusOptions": [
