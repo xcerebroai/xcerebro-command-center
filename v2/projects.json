@@ -660,15 +660,15 @@
             },
             {
               "label": "A2P registration",
-              "done": false
+              "done": true
             },
             {
               "label": "Jarvis build",
-              "done": false
+              "done": true
             },
             {
               "label": "JV / Payment confirmed",
-              "done": false
+              "done": true
             }
           ],
           "blocker": "Details pending.",
