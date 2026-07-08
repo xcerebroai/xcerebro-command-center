@@ -958,6 +958,68 @@
           "start": "2026-07-08"
         }
       ]
+    },
+    {
+      "id": "C-016",
+      "name": "Bretton Morin",
+      "company": "",
+      "projects": [
+        {
+          "name": "Jarvis Lifetime Software",
+          "buildType": "Jarvis Lifetime",
+          "status": "Build Mode",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "targetEnd": "",
+          "blocker": "",
+          "nextAction": "",
+          "notes": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "payment": {
+            "total": 500,
+            "paid": 250,
+            "status": "Partial",
+            "dueDate": "",
+            "lastFollowUp": "",
+            "notes": ""
+          },
+          "id": "P-016",
+          "start": "2026-07-08"
+        }
+      ]
     }
   ],
   "paymentStatusOptions": [
