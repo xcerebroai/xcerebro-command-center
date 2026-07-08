@@ -223,6 +223,10 @@
   .balshow{margin-top:12px;display:flex;align-items:center;gap:10px;background:#0a1626;border:1px solid var(--line);border-radius:9px;padding:11px 13px}
   .balshow .k{font:600 10px 'JetBrains Mono';letter-spacing:.12em;color:var(--mute);text-transform:uppercase}
   .balshow .v{margin-left:auto;font:700 16px 'JetBrains Mono';color:var(--amber)}
+  .frow{grid-template-columns:1.3fr 1.6fr 90px 104px 92px 108px 40px}
+  .crow{grid-template-columns:1.4fr 168px 1.3fr 150px 118px 40px}
+  .paytable{overflow-x:auto}
+  .frow,.crow{min-width:660px}
   .foot{margin-top:22px;text-align:center;font:500 11px 'JetBrains Mono';color:var(--mute2)}
   .banner{margin-top:14px;border:1px solid rgba(245,166,35,.4);background:rgba(245,166,35,.08);color:var(--amber);border-radius:11px;padding:11px 15px;font:500 12px 'JetBrains Mono';display:none}
   .banner.on{display:block}
@@ -257,6 +261,8 @@
   <nav class="tabs" id="tabs">
     <button class="tab on" data-tab="command">◉ Command Center</button>
     <button class="tab" data-tab="payments">💲 Payments <span class="tabbadge" id="payBadge" style="display:none"></span></button>
+    <button class="tab" data-tab="followups">📞 Follow-ups <span class="tabbadge" id="fuBadge" style="display:none"></span></button>
+    <button class="tab" data-tab="calls">📅 Booked Calls <span class="tabbadge" id="callBadge" style="display:none"></span></button>
   </nav>
 
   <div id="view-command">
@@ -308,6 +314,30 @@
       </div>
     </section>
   </div><!-- /view-payments -->
+
+  <div id="view-followups" style="display:none">
+    <section class="kpis" id="fukpis"></section>
+    <section class="panel" style="margin-top:16px">
+      <h2><span class="tick">📞</span> Follow-ups <span class="count" id="fuCount"></span></h2>
+      <div class="filters"><input class="search" id="fusearch" placeholder="Search who / topic…" aria-label="Search follow-ups"><button class="btn pri" id="addFu" style="display:none">➕ Add follow-up</button></div>
+      <div class="paytable">
+        <div class="payrow frow payhead"><span>Who</span><span>Follow up on</span><span>Channel</span><span style="text-align:center">Due</span><span>Owner</span><span style="text-align:center">Status</span><span></span></div>
+        <div id="futable"></div>
+      </div>
+    </section>
+  </div><!-- /view-followups -->
+
+  <div id="view-calls" style="display:none">
+    <section class="kpis" id="callkpis"></section>
+    <section class="panel" style="margin-top:16px">
+      <h2><span class="tick">📅</span> Booked Calls <span class="count" id="callCount"></span></h2>
+      <div class="filters"><input class="search" id="callsearch" placeholder="Search who / purpose…" aria-label="Search calls"><button class="btn pri" id="addCall" style="display:none">➕ Add call</button></div>
+      <div class="paytable">
+        <div class="payrow crow payhead"><span>Who</span><span>Date &amp; time</span><span>Purpose</span><span style="text-align:center">Status</span><span style="text-align:center">Reminder</span><span></span></div>
+        <div id="calltable"></div>
+      </div>
+    </section>
+  </div><!-- /view-calls -->
 
   <p class="foot">Checklist-driven · every % is calculated from ticked tasks · team-readable + AI-readable from the same file.</p>
 
@@ -432,8 +462,10 @@ function render(){
   $("#copyRaw").onclick=()=>{navigator.clipboard.writeText(RAWURL);toast("Link copied ✓","ok");};
   $("#copyPrompt").onclick=()=>{navigator.clipboard.writeText(AGENT_PROMPT());toast("Agent instructions copied ✓","ok");};
 
-  bindBoard();updatePayBadge();
+  bindBoard();updatePayBadge();updateFuBadge();updateCallBadge();
   if(document.getElementById("paytable"))renderPayments();
+  if(document.getElementById("futable"))renderFollowups();
+  if(document.getElementById("calltable"))renderCalls();
 }
 
 function AGENT_PROMPT(){return `You are the status assistant for the X Cerebro command center.
@@ -513,13 +545,117 @@ function readPayment(base){const g=id=>document.getElementById(id);
     dueDate:g('pay_due').value,lastFollowUp:g('pay_follow').value,notes:g('pay_notes').value.trim()};}
 
 let activeTab="command";
+const VIEWS={command:"view-command",payments:"view-payments",followups:"view-followups",calls:"view-calls"};
 function switchTab(t){activeTab=t;
   document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("on",b.dataset.tab===t));
-  document.getElementById("view-command").style.display=t==="command"?"":"none";
-  document.getElementById("view-payments").style.display=t==="payments"?"":"none";
-  if(t==="payments")renderPayments();}
+  Object.keys(VIEWS).forEach(k=>{const el=document.getElementById(VIEWS[k]);if(el)el.style.display=k===t?"":"none";});
+  if(t==="payments")renderPayments();
+  if(t==="followups")renderFollowups();
+  if(t==="calls")renderCalls();}
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));
 document.getElementById("paysearch").oninput=()=>renderPayments();
+
+/* ---------- follow-ups (Dyan) ---------- */
+const FU_STATUS=["Pending","Done"];
+const FU_CHAN=["Call","Text","Email","DM","Other"];
+const CALL_STATUS=["Booked","Showed","No-show → rebook","Rebooked","Cancelled"];
+const FUCLR={"Pending":["#3a2408","#f5a623"],"Done":["#0c3524","#3de8a0"],"Overdue":["#2a0808","#ff5d5d"]};
+const CALLCLR={"Booked":["#13294a","#8ec2ff"],"Showed":["#0c3524","#3de8a0"],"No-show → rebook":["#3d0f0f","#ff8080"],"Rebooked":["#2a1650","#c9a8ff"],"Cancelled":["#1c2a3d","#8FA6C4"]};
+const followups=()=>DB.followups||(DB.followups=[]);
+const calls=()=>DB.calls||(DB.calls=[]);
+const nextId=(arr,pfx)=>{let m=0;arr.forEach(x=>{const g=/(\d+)/.exec(x.id||"");if(g)m=Math.max(m,+g[1]);});return pfx+String(m+1).padStart(3,"0");};
+const fuOverdue=f=>f.status!=="Done"&&f.due&&(()=>{const d=new Date(f.due),n=new Date();d.setHours(0,0,0,0);n.setHours(0,0,0,0);return d<n;})();
+const fmtWhen=w=>{if(!w)return"—";const d=new Date(w);if(isNaN(d))return esc(w);return d.toLocaleString([], {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});};
+
+function updateFuBadge(){const n=followups().filter(f=>f.status!=="Done").length,b=document.getElementById("fuBadge");if(!b)return;if(n){b.style.display="";b.textContent=n;}else b.style.display="none";}
+function updateCallBadge(){const n=calls().filter(c=>c.status==="No-show → rebook").length,b=document.getElementById("callBadge");if(!b)return;if(n){b.style.display="";b.textContent=n;}else b.style.display="none";}
+
+function renderFollowups(){
+  const list=followups(), t=(document.getElementById("fusearch").value||"").toLowerCase();
+  const rows=list.filter(f=>!t||((f.who||"")+" "+(f.what||"")).toLowerCase().includes(t))
+    .sort((a,b)=>(a.status==="Done")-(b.status==="Done") || String(a.due||"~").localeCompare(String(b.due||"~")));
+  const pending=list.filter(f=>f.status!=="Done").length, overdue=list.filter(fuOverdue).length, done=list.filter(f=>f.status==="Done").length;
+  const kp=[["Pending",pending,"Open follow-ups",pending>0?"warn":""],["Overdue",overdue,"Past due date",overdue>0?"crit":""],["Done",done,"Completed",""],["Total",list.length,"All follow-ups",""]];
+  const k=document.getElementById("fukpis");k.style.gridTemplateColumns="repeat(4,1fr)";
+  k.innerHTML=kp.map(x=>`<div class="kpi ${x[3]}"><div class="k-label">${x[0]}</div><div class="k-num">${x[1]}</div><div class="k-sub">${x[2]}</div></div>`).join("");
+  document.getElementById("fuCount").textContent=pending+" open";
+  document.getElementById("futable").innerHTML=rows.map(f=>{
+    const st=fuOverdue(f)?"Overdue":(f.status||"Pending"),c=FUCLR[st]||FUCLR.Pending;
+    const edit=editorMode?`<button class="logbtn" data-fu="${f.id}" title="Edit">✎</button>`:"";
+    return `<div class="payrow frow" data-fu="${f.id}">
+      <div class="pc"><div class="nm">${esc(f.who||"—")}</div>${f.owner?`<div class="sub">for ${esc(f.owner)}</div>`:""}</div>
+      <div class="pc"><div class="sub" style="color:var(--ink);font-size:12.5px;white-space:normal">${esc(f.what||"—")}</div></div>
+      <div class="flwup">${esc(f.channel||"—")}</div>
+      <div class="due"><span style="color:${st==='Overdue'?'var(--red)':'var(--mute)'}">${f.due?esc(f.due):'—'}</span></div>
+      <div class="flwup">${esc(f.owner||"Dyan")}</div>
+      <div style="text-align:center"><span class="tag" style="background:${c[0]};color:${c[1]};width:auto;padding:3px 8px">${esc(st)}</span></div>
+      <div style="text-align:center">${edit}</div></div>`;
+  }).join("")||`<div style="padding:26px;text-align:center;color:var(--mute)">No follow-ups yet.${editorMode?' Click <b>➕ Add follow-up</b>.':''}</div>`;
+  document.querySelectorAll('#futable [data-fu]').forEach(el=>{if(el.tagName==="BUTTON")el.onclick=e=>{e.stopPropagation();openFollowup(el.dataset.fu);};else el.onclick=()=>{if(editorMode)openFollowup(el.dataset.fu);};});
+}
+function renderCalls(){
+  const list=calls(), t=(document.getElementById("callsearch").value||"").toLowerCase();
+  const rows=list.filter(c=>!t||((c.who||"")+" "+(c.purpose||"")).toLowerCase().includes(t))
+    .sort((a,b)=>String(a.when||"~").localeCompare(String(b.when||"~")));
+  const upcoming=list.filter(c=>c.status==="Booked").length, rebook=list.filter(c=>c.status==="No-show → rebook").length, showed=list.filter(c=>c.status==="Showed").length;
+  const kp=[["Upcoming",upcoming,"Booked calls",upcoming>0?"":""],["Needs Rebooking",rebook,"No-shows",rebook>0?"crit":""],["Showed",showed,"Attended",""],["Total",list.length,"All calls",""]];
+  const k=document.getElementById("callkpis");k.style.gridTemplateColumns="repeat(4,1fr)";
+  k.innerHTML=kp.map(x=>`<div class="kpi ${x[3]}"><div class="k-label">${x[0]}</div><div class="k-num">${x[1]}</div><div class="k-sub">${x[2]}</div></div>`).join("");
+  document.getElementById("callCount").textContent=upcoming+" upcoming";
+  document.getElementById("calltable").innerHTML=rows.map(c=>{
+    const st=c.status||"Booked",cl=CALLCLR[st]||CALLCLR.Booked;
+    const edit=editorMode?`<button class="logbtn" data-call="${c.id}" title="Edit">✎</button>`:"";
+    return `<div class="payrow crow" data-call="${c.id}">
+      <div class="pc"><div class="nm">${esc(c.who||"—")}</div></div>
+      <div class="flwup" style="text-align:left">${fmtWhen(c.when)}</div>
+      <div class="pc"><div class="sub" style="color:var(--ink);font-size:12.5px;white-space:normal">${esc(c.purpose||"—")}</div></div>
+      <div style="text-align:center"><span class="tag" style="background:${cl[0]};color:${cl[1]};width:auto;padding:3px 8px">${esc(st)}</span></div>
+      <div class="flwup">${c.reminder?esc(c.reminder):'—'}</div>
+      <div style="text-align:center">${edit}</div></div>`;
+  }).join("")||`<div style="padding:26px;text-align:center;color:var(--mute)">No booked calls yet.${editorMode?' Click <b>➕ Add call</b>.':''}</div>`;
+  document.querySelectorAll('#calltable [data-call]').forEach(el=>{if(el.tagName==="BUTTON")el.onclick=e=>{e.stopPropagation();openCall(el.dataset.call);};else el.onclick=()=>{if(editorMode)openCall(el.dataset.call);};});
+}
+function selHTML(id,opts,cur){return `<select class="esel" id="${id}">`+opts.map(o=>`<option ${o===cur?"selected":""}>${esc(o)}</option>`).join("")+`</select>`;}
+
+function openFollowup(id){
+  const list=followups();const f=id?list.find(x=>x.id===id)||{}:{owner:"Dyan",channel:"Call",status:"Pending"};
+  showDrawer(`<div class="dh"><div><div class="did">${id?esc(id)+" · follow-up":"NEW FOLLOW-UP"}</div><h3>${id?"Edit follow-up":"Add follow-up"}</h3></div><button class="xbtn" id="xclose">✕</button></div>
+    <div class="efield"><label>Who</label><input class="ein" id="fu_who" value="${esc(f.who||"")}" placeholder="Client / lead name"></div>
+    <div class="efield"><label>Follow up on</label><textarea class="eta" id="fu_what">${esc(f.what||"")}</textarea></div>
+    <div class="erow"><div class="efield"><label>Channel</label>${selHTML("fu_channel",FU_CHAN,f.channel||"Call")}</div>
+      <div class="efield"><label>Due date</label><input class="ein" id="fu_due" type="date" value="${esc(f.due||"")}"></div></div>
+    <div class="erow"><div class="efield"><label>Owner</label><input class="ein" id="fu_owner" value="${esc(f.owner||"Dyan")}"></div>
+      <div class="efield"><label>Status</label>${selHTML("fu_status",FU_STATUS,f.status||"Pending")}</div></div>
+    <div class="efield"><label>Notes</label><textarea class="eta" id="fu_notes">${esc(f.notes||"")}</textarea></div>
+    <div class="esave"><button class="btn primary" id="fu_save">${id?"Save":"Add & Save"}</button><button class="ghost" id="fu_cancel">Cancel</button>${id?'<button class="ghost del" id="fu_del">Delete</button>':''}</div>`);
+  const g=x=>document.getElementById(x);
+  g("xclose").onclick=closeDrawer;g("fu_cancel").onclick=closeDrawer;
+  if(id)g("fu_del").onclick=()=>{if(!confirm("Delete this follow-up?"))return;commitChange(data=>{data.followups=(data.followups||[]).filter(x=>x.id!==id);},"Delete follow-up "+id,g("fu_del"));};
+  g("fu_save").onclick=()=>{const v={who:g("fu_who").value.trim(),what:g("fu_what").value.trim(),channel:g("fu_channel").value,due:g("fu_due").value,owner:g("fu_owner").value.trim()||"Dyan",status:g("fu_status").value,notes:g("fu_notes").value.trim()};
+    if(!v.who){toast("Who is required","err");return;}
+    commitChange(data=>{data.followups=data.followups||[];if(id){const t=data.followups.find(x=>x.id===id);Object.assign(t,v);}else{v.id=nextId(data.followups,"F-");data.followups.push(v);}},(id?"Update ":"Add ")+"follow-up "+v.who,g("fu_save"));};
+}
+function openCall(id){
+  const list=calls();const c=id?list.find(x=>x.id===id)||{}:{status:"Booked"};
+  showDrawer(`<div class="dh"><div><div class="did">${id?esc(id)+" · call":"NEW CALL"}</div><h3>${id?"Edit call":"Add booked call"}</h3></div><button class="xbtn" id="xclose">✕</button></div>
+    <div class="efield"><label>Who</label><input class="ein" id="k_who" value="${esc(c.who||"")}" placeholder="Client / lead name"></div>
+    <div class="efield"><label>Date &amp; time</label><input class="ein" id="k_when" type="datetime-local" value="${esc(c.when||"")}"></div>
+    <div class="efield"><label>Purpose</label><input class="ein" id="k_purpose" value="${esc(c.purpose||"")}" placeholder="Discovery, Onboarding…"></div>
+    <div class="erow"><div class="efield"><label>Status</label>${selHTML("k_status",CALL_STATUS,c.status||"Booked")}</div>
+      <div class="efield"><label>Reminder date</label><input class="ein" id="k_reminder" type="date" value="${esc(c.reminder||"")}"></div></div>
+    <div class="efield"><label>Notes</label><textarea class="eta" id="k_notes">${esc(c.notes||"")}</textarea></div>
+    <div class="esave"><button class="btn primary" id="k_save">${id?"Save":"Add & Save"}</button><button class="ghost" id="k_cancel">Cancel</button>${id?'<button class="ghost del" id="k_del">Delete</button>':''}</div>`);
+  const g=x=>document.getElementById(x);
+  g("xclose").onclick=closeDrawer;g("k_cancel").onclick=closeDrawer;
+  if(id)g("k_del").onclick=()=>{if(!confirm("Delete this call?"))return;commitChange(data=>{data.calls=(data.calls||[]).filter(x=>x.id!==id);},"Delete call "+id,g("k_del"));};
+  g("k_save").onclick=()=>{const v={who:g("k_who").value.trim(),when:g("k_when").value,purpose:g("k_purpose").value.trim(),status:g("k_status").value,reminder:g("k_reminder").value,notes:g("k_notes").value.trim()};
+    if(!v.who){toast("Who is required","err");return;}
+    commitChange(data=>{data.calls=data.calls||[];if(id){const t=data.calls.find(x=>x.id===id);Object.assign(t,v);}else{v.id=nextId(data.calls,"K-");data.calls.push(v);}},(id?"Update ":"Add ")+"call "+v.who,g("k_save"));};
+}
+document.getElementById("addFu").onclick=()=>{if(!editorMode)setEditor(true);openFollowup(null);};
+document.getElementById("addCall").onclick=()=>{if(!editorMode)setEditor(true);openCall(null);};
+document.getElementById("fusearch").oninput=()=>renderFollowups();
+document.getElementById("callsearch").oninput=()=>renderCalls();
 
 /* ---------- drawer / editor ---------- */
 function showDrawer(html){const d=$("#drawer");d.innerHTML=html;d.classList.add("on");d.setAttribute("aria-hidden","false");$("#scrim").classList.add("on");d.scrollTop=0;}
@@ -685,7 +821,9 @@ async function commitChange(mutator,message,btn){
 }
 
 function setEditor(on){editorMode=on;$("#editToggle").setAttribute("aria-pressed",on?"true":"false");
-  $("#editbar").classList.toggle("on",on);$("#addClient").style.display=on?"inline-flex":"none";refreshKeyState();if(!on)closeDrawer();render();}
+  $("#editbar").classList.toggle("on",on);$("#addClient").style.display=on?"inline-flex":"none";
+  ["addFu","addCall"].forEach(x=>{const el=document.getElementById(x);if(el)el.style.display=on?"inline-flex":"none";});
+  refreshKeyState();if(!on)closeDrawer();render();}
 $("#editToggle").onclick=()=>setEditor(!editorMode);
 $("#addClient").onclick=()=>{if(!editorMode)setEditor(true);openAddClient();};
 $("#keyBtn").onclick=openKeyModal;
