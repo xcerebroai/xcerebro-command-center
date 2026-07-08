@@ -703,8 +703,8 @@
           "payment": {
             "total": 0,
             "paid": 0,
+            "status": "Paid",
             "dueDate": "",
-            "status": "Unpaid",
             "lastFollowUp": "2026-07-08",
             "notes": ""
           }
