@@ -575,7 +575,7 @@
           ],
           "blocker": "Needs a website built before A2P registration can be submitted.",
           "nextAction": "Build website, then register A2P. Connect agent to Jarvis once A2P clears.",
-          "notes": "AI agent already connected in Telegram.",
+          "notes": "AI agent already connected in Telegram. Appointment tracker: scheduled July 2, meeting done.",
           "payment": {
             "total": 3000,
             "paid": 1000,
@@ -973,7 +973,7 @@
           "targetEnd": "",
           "blocker": "",
           "nextAction": "",
-          "notes": "",
+          "notes": "Appointment tracker: July 7 2pm meeting, half payment ($250) confirmed paid.",
           "tasks": [
             {
               "label": "Dashboard set up",
@@ -1020,6 +1020,440 @@
           "start": "2026-07-08"
         }
       ]
+    },
+    {
+      "id": "C-017",
+      "name": "Jim Galvin",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-017",
+          "name": "Jarvis Build - Jim Galvin",
+          "buildType": "Jarvis",
+          "status": "Ready",
+          "priority": "Normal",
+          "owner": "Alexia / Q",
+          "start": "2026-06-23",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "blocker": "",
+          "nextAction": "",
+          "notes": "Appointment scheduled June 23. Meeting done.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "status": "",
+            "dueDate": "",
+            "lastFollowUp": "",
+            "notes": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-018",
+      "name": "Aaron Howard",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-018",
+          "name": "AI Automation - Aaron Howard",
+          "buildType": "AI Automation",
+          "status": "Ready",
+          "priority": "Normal",
+          "owner": "Alexia / Q",
+          "start": "2026-06-17",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "blocker": "",
+          "nextAction": "",
+          "notes": "Appointment scheduled June 17. Meeting done.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "status": "",
+            "dueDate": "",
+            "lastFollowUp": "",
+            "notes": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-019",
+      "name": "Mario Garcia",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-019",
+          "name": "Jarvis Build - Mario Garcia",
+          "buildType": "Jarvis",
+          "status": "Ready",
+          "priority": "Normal",
+          "owner": "Alexia / Q",
+          "start": "2026-07-02",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "blocker": "",
+          "nextAction": "",
+          "notes": "Appointment scheduled July 2. Meeting done.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-02",
+            "notes": "Paid July 2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-020",
+      "name": "Marcus Fard",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-020",
+          "name": "Jarvis Agency Build - Marcus Fard",
+          "buildType": "Jarvis Agency",
+          "status": "Ready",
+          "priority": "Normal",
+          "owner": "Alexia / Q",
+          "start": "2026-07-06",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "blocker": "",
+          "nextAction": "",
+          "notes": "Appointment scheduled July 6. Meeting done.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-06",
+            "notes": "Invoice paid"
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-021",
+      "name": "James Byron Raeford",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-021",
+          "name": "Jarvis Build - James Byron Raeford",
+          "buildType": "Jarvis",
+          "status": "Planning",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-07-08",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "blocker": "",
+          "nextAction": "Appointment tonight 7/8/2026 7:00 PM - confirm meeting happens.",
+          "notes": "Scheduled 7/8/2026 7:00 PM.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-02",
+            "notes": "Paid July 2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-022",
+      "name": "Marcus Strong",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-022",
+          "name": "Scraper Build - Marcus Strong",
+          "buildType": "Scraper",
+          "status": "Payment Follow-Up",
+          "priority": "Normal",
+          "owner": "Alexia / Q",
+          "start": "2026-07-06",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "blocker": "No budget confirmed yet.",
+          "nextAction": "Follow up on budget before proceeding.",
+          "notes": "Appointment scheduled July 6. No budget.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "status": "",
+            "dueDate": "",
+            "lastFollowUp": "",
+            "notes": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-023",
+      "name": "Arelys Santamaria",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-023",
+          "name": "AI Agent Build - Arelys Santamaria",
+          "buildType": "AI Agent",
+          "status": "Ready",
+          "priority": "Normal",
+          "owner": "Alexia / Q",
+          "start": "2026-07-08",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "blocker": "",
+          "nextAction": "",
+          "notes": "Appointment July 8, webinar offer $250. Meeting done.",
+          "payment": {
+            "total": 250,
+            "paid": 250,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-08",
+            "notes": "Paid July 8"
+          }
+        }
+      ]
     }
   ],
   "paymentStatusOptions": [
@@ -1027,5 +1461,88 @@
     "Partial",
     "Unpaid"
   ],
-  "currency": "USD"
+  "currency": "USD",
+  "calls": [
+    {
+      "id": "K-001",
+      "who": "Jim Galvin",
+      "when": "2026-06-23T14:00",
+      "purpose": "Jarvis",
+      "status": "Showed",
+      "reminder": "",
+      "notes": ""
+    },
+    {
+      "id": "K-002",
+      "who": "Aaron Howard",
+      "when": "2026-06-17T14:00",
+      "purpose": "AI Automation",
+      "status": "Showed",
+      "reminder": "",
+      "notes": ""
+    },
+    {
+      "id": "K-003",
+      "who": "Mario Garcia",
+      "when": "2026-07-02T14:00",
+      "purpose": "Jarvis",
+      "status": "Showed",
+      "reminder": "",
+      "notes": "Paid July 2."
+    },
+    {
+      "id": "K-004",
+      "who": "Bretton Morin",
+      "when": "2026-07-07T14:00",
+      "purpose": "Jarvis",
+      "status": "Booked",
+      "reminder": "",
+      "notes": "Half payment $250 paid; was waiting on Q's confirmation - now settled."
+    },
+    {
+      "id": "K-005",
+      "who": "Marcus Fard",
+      "when": "2026-07-06T14:00",
+      "purpose": "Jarvis Agency",
+      "status": "Showed",
+      "reminder": "",
+      "notes": "Invoice paid."
+    },
+    {
+      "id": "K-006",
+      "who": "James Byron Raeford",
+      "when": "2026-07-08T19:00",
+      "purpose": "Jarvis",
+      "status": "Booked",
+      "reminder": "2026-07-08",
+      "notes": "Paid July 2. Upcoming tonight at 7:00 PM."
+    },
+    {
+      "id": "K-007",
+      "who": "Marcus Strong",
+      "when": "2026-07-06T14:00",
+      "purpose": "Scraper",
+      "status": "Booked",
+      "reminder": "",
+      "notes": "No budget confirmed yet - budget blocker."
+    },
+    {
+      "id": "K-008",
+      "who": "John Campbell",
+      "when": "2026-07-02T14:00",
+      "purpose": "Jarvis",
+      "status": "Showed",
+      "reminder": "",
+      "notes": ""
+    },
+    {
+      "id": "K-009",
+      "who": "Arelys Santamaria",
+      "when": "2026-07-08T14:00",
+      "purpose": "AI Agent - webinar offer $250",
+      "status": "Showed",
+      "reminder": "",
+      "notes": "Paid July 8."
+    }
+  ]
 }
