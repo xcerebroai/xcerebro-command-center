@@ -804,7 +804,8 @@ function openCall(id){
     <div class="efield"><label>Who</label><input class="ein" id="k_who" value="${esc(c.who||"")}" placeholder="Client / lead name"></div>
     <div class="erow"><div class="efield"><label>Service / lead type</label><select class="esel" id="k_service"><option value="">— select —</option>${SERVICES.map(o=>`<option ${o===(c.service||"")?"selected":""}>${o}</option>`).join("")}</select></div>
       <div class="efield"><label>Call type</label><select class="esel" id="k_type"><option value="">— select —</option>${CALL_TYPES.map(o=>`<option ${o===(c.type||"")?"selected":""}>${o}</option>`).join("")}</select></div></div>
-    <div class="efield"><label>Date &amp; time</label><input class="ein" id="k_when" type="datetime-local" value="${esc(c.when||"")}"></div>
+    <div class="erow"><div class="efield"><label>Date</label><input class="ein" id="k_date" type="date" value="${esc((c.when||"").split("T")[0]||"")}"></div>
+      <div class="efield"><label>Time</label><input class="ein" id="k_time" type="time" value="${esc((c.when||"").split("T")[1]||"")}"></div></div>
     <div class="efield"><label>Purpose / notes</label><input class="ein" id="k_purpose" value="${esc(c.purpose||"")}" placeholder="e.g. demo, onboarding…"></div>
     <div class="erow"><div class="efield"><label>Status</label>${selHTML("k_status",CALL_STATUS,c.status||"Booked")}</div>
       <div class="efield"><label>Reminder date</label><input class="ein" id="k_reminder" type="date" value="${esc(c.reminder||"")}"></div></div>
@@ -818,7 +819,8 @@ function openCall(id){
   if(id)g("k_del").onclick=()=>{if(!confirm("Delete this call?"))return;commitChange(data=>{data.calls=(data.calls||[]).filter(x=>x.id!==id);},"Delete call "+id,g("k_del"));};
   if(id){const w=g("k_convert_wrap");g("k_status").onchange=()=>{if(w)w.style.display=g("k_status").value==="Closed/Won"?"block":"none";};
     g("k_convert").onclick=()=>convertCallToClient(id);}
-  g("k_save").onclick=()=>{const v={who:g("k_who").value.trim(),service:g("k_service").value,type:g("k_type").value,when:g("k_when").value,purpose:g("k_purpose").value.trim(),status:g("k_status").value,reminder:g("k_reminder").value,notes:g("k_notes").value.trim()};
+  g("k_save").onclick=()=>{const when=g("k_date").value?g("k_date").value+"T"+(g("k_time").value||"09:00"):"";
+    const v={who:g("k_who").value.trim(),service:g("k_service").value,type:g("k_type").value,when:when,purpose:g("k_purpose").value.trim(),status:g("k_status").value,reminder:g("k_reminder").value,notes:g("k_notes").value.trim()};
     if(!v.who){toast("Who is required","err");return;}
     commitChange(data=>{data.calls=data.calls||[];if(id){const t=data.calls.find(x=>x.id===id);Object.assign(t,v);}else{v.id=nextId(data.calls,"K-");data.calls.push(v);}},(id?"Update ":"Add ")+"call "+v.who,g("k_save"));};
 }
