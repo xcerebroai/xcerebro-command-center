@@ -1335,63 +1335,7 @@
       "id": "C-022",
       "name": "Marcus Strong",
       "company": "",
-      "projects": [
-        {
-          "id": "P-022",
-          "name": "Scraper Build - Marcus Strong",
-          "buildType": "Scraper",
-          "status": "Payment Follow-Up",
-          "priority": "Normal",
-          "owner": "Alexia / Q",
-          "start": "2026-07-06",
-          "targetEnd": "",
-          "tasks": [
-            {
-              "label": "Dashboard set up",
-              "done": false
-            },
-            {
-              "label": "Campaign built",
-              "done": false
-            },
-            {
-              "label": "Automations wired",
-              "done": false
-            },
-            {
-              "label": "AI Agent configured",
-              "done": false
-            },
-            {
-              "label": "Custom workflow mapped",
-              "done": false
-            },
-            {
-              "label": "A2P registration",
-              "done": false
-            },
-            {
-              "label": "Jarvis build",
-              "done": false
-            },
-            {
-              "label": "JV / Payment confirmed",
-              "done": false
-            }
-          ],
-          "blocker": "No budget confirmed yet.",
-          "nextAction": "Follow up on budget before proceeding.",
-          "notes": "Appointment scheduled July 6. No budget.",
-          "payment": {
-            "total": 0,
-            "paid": 0,
-            "status": "",
-            "dueDate": "",
-            "lastFollowUp": "",
-            "notes": ""
-          }
-        }
-      ]
+      "projects": []
     },
     {
       "id": "C-023",
