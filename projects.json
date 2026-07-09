@@ -1568,6 +1568,16 @@
       "status": "Pending",
       "notes": "Follow up $500 - Scraper/Surplus",
       "id": "F-006"
+    },
+    {
+      "who": "Corey Milton",
+      "service": "Other",
+      "channel": "Instagram",
+      "due": "2026-07-09",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Will send Bootcamp Invite once available/IG",
+      "id": "F-007"
     }
   ]
 }
