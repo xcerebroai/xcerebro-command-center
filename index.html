@@ -394,7 +394,7 @@
       <h2><span class="tick">📞</span> Follow-ups <span class="count" id="fuCount"></span></h2>
       <div class="filters"><input class="search" id="fusearch" placeholder="Search who / topic…" aria-label="Search follow-ups"><button class="btn pri" id="addFu" style="display:none">➕ Add follow-up</button></div>
       <div class="paytable">
-        <div class="payrow frow payhead"><span>Who</span><span>Follow up on</span><span>Channel</span><span style="text-align:center">Due</span><span>Owner</span><span style="text-align:center">Status</span><span></span></div>
+        <div class="payrow frow payhead"><span>Who</span><span>Details</span><span>Channel</span><span style="text-align:center">Follow-up date</span><span>Owner</span><span style="text-align:center">Status</span><span></span></div>
         <div id="futable"></div>
       </div>
     </section>
@@ -710,7 +710,7 @@ function updateCallBadge(){const n=calls().filter(c=>c.status==="No-show → reb
 
 function renderFollowups(){
   const list=followups(), t=(document.getElementById("fusearch").value||"").toLowerCase();
-  const rows=list.filter(f=>!t||((f.who||"")+" "+(f.what||"")).toLowerCase().includes(t))
+  const rows=list.filter(f=>!t||((f.who||"")+" "+(f.what||"")+" "+(f.notes||"")).toLowerCase().includes(t))
     .sort((a,b)=>(a.status==="Done")-(b.status==="Done") || String(a.due||"~").localeCompare(String(b.due||"~")));
   const pending=list.filter(f=>f.status!=="Done").length, overdue=list.filter(fuOverdue).length, done=list.filter(f=>f.status==="Done").length;
   const kp=[["Pending",pending,"Open follow-ups",pending>0?"warn":""],["Overdue",overdue,"Past due date",overdue>0?"crit":""],["Done",done,"Completed",""],["Total",list.length,"All follow-ups",""]];
@@ -731,7 +731,7 @@ function renderFollowups(){
     const edit=editorMode?`<button class="logbtn" data-fu="${f.id}" title="Edit">✎</button>`:"";
     return `<div class="payrow frow" data-fu="${f.id}">
       <div class="pc"><div class="nm">${esc(f.who||"—")}</div>${f.service?`<div class="sub">${svcTag(f.service)}</div>`:(f.owner?`<div class="sub">for ${esc(f.owner)}</div>`:"")}</div>
-      <div class="pc"><div class="sub" style="color:var(--ink);font-size:12.5px;white-space:normal">${esc(f.what||"—")}</div></div>
+      <div class="pc"><div class="sub" style="color:var(--ink);font-size:12.5px;white-space:normal">${esc(f.notes||f.what||"—")}</div></div>
       <div class="flwup">${esc(f.channel||"—")}</div>
       <div class="due"><span style="color:${st==='Overdue'?'var(--red)':'var(--mute)'}">${f.due?esc(f.due):'—'}</span></div>
       <div class="flwup">${esc(f.owner||"Dyan")}</div>
@@ -786,7 +786,6 @@ function openFollowup(id){
   const list=followups();const f=id?list.find(x=>x.id===id)||{}:{owner:"Dyan",channel:"Call",status:"Pending"};
   showDrawer(`<div class="dh"><div><div class="did">${id?esc(id)+" · follow-up":"NEW FOLLOW-UP"}</div><h3>${id?"Edit follow-up":"Add follow-up"}</h3></div><button class="xbtn" id="xclose">✕</button></div>
     <div class="efield"><label>Who</label><input class="ein" id="fu_who" value="${esc(f.who||"")}" placeholder="Client / lead name"></div>
-    <div class="efield"><label>Follow up on</label><textarea class="eta" id="fu_what">${esc(f.what||"")}</textarea></div>
     <div class="erow"><div class="efield"><label>Service / lead type</label><select class="esel" id="fu_service"><option value="">— select —</option>${SERVICES.map(o=>`<option ${o===(f.service||"")?"selected":""}>${o}</option>`).join("")}</select></div>
       <div class="efield"><label>Channel</label>${selHTML("fu_channel",FU_CHAN,f.channel||"Call")}</div></div>
     <div class="erow"><div class="efield"><label>📅 Follow-up date</label><input class="ein" id="fu_due" type="date" value="${esc(f.due||"")}"></div>
@@ -797,7 +796,7 @@ function openFollowup(id){
   const g=x=>document.getElementById(x);
   g("xclose").onclick=closeDrawer;g("fu_cancel").onclick=closeDrawer;
   if(id)g("fu_del").onclick=()=>{if(!confirm("Delete this follow-up?"))return;commitChange(data=>{data.followups=(data.followups||[]).filter(x=>x.id!==id);},"Delete follow-up "+id,g("fu_del"));};
-  g("fu_save").onclick=()=>{const v={who:g("fu_who").value.trim(),service:g("fu_service").value,what:g("fu_what").value.trim(),channel:g("fu_channel").value,due:g("fu_due").value,owner:g("fu_owner").value.trim()||"Dyan",status:g("fu_status").value,notes:g("fu_notes").value.trim()};
+  g("fu_save").onclick=()=>{const v={who:g("fu_who").value.trim(),service:g("fu_service").value,channel:g("fu_channel").value,due:g("fu_due").value,owner:g("fu_owner").value.trim()||"Dyan",status:g("fu_status").value,notes:g("fu_notes").value.trim()};
     if(!v.who){toast("Who is required","err");return;}
     commitChange(data=>{data.followups=data.followups||[];if(id){const t=data.followups.find(x=>x.id===id);Object.assign(t,v);}else{v.id=nextId(data.followups,"F-");data.followups.push(v);}},(id?"Update ":"Add ")+"follow-up "+v.who,g("fu_save"));};
 }
@@ -1095,7 +1094,7 @@ function checkCallAlerts(){
       <div><span class="who">${esc(o.c.who||"—")}</span> — <b>no-show?</b> (${alertLabel(o.mins)})${o.c.service?" · "+esc(o.c.service):""} · ${fmtWhen(o.c.when)}</div>
       <button class="btn go" data-noshow="${o.c.id}">Mark no-show → rebook</button></div>`).join("")
     + due.map(o=>`<div class="callalert fudue"><span class="ai">📋</span>
-      <div><span class="who">${esc(o.f.who||"—")}</span> — follow-up <b>${fuDueLabel(o.days)}</b>${o.f.service?" · "+esc(o.f.service):""}${o.f.what?" · "+esc(o.f.what):""}</div>
+      <div><span class="who">${esc(o.f.who||"—")}</span> — follow-up <b>${fuDueLabel(o.days)}</b>${o.f.service?" · "+esc(o.f.service):""}${(o.f.notes||o.f.what)?" · "+esc(o.f.notes||o.f.what):""}</div>
       <div class="acts"><button class="btn" data-fudone="${o.f.id}">Done</button><button class="btn" data-fuopen="${o.f.id}">Open</button></div></div>`).join("");
     bar.querySelectorAll("[data-goto]").forEach(b=>b.onclick=()=>{switchTab("calls");openCall(b.dataset.goto);});
     bar.querySelectorAll("[data-noshow]").forEach(b=>b.onclick=()=>markNoShow(b.dataset.noshow,b));
@@ -1108,7 +1107,7 @@ function checkCallAlerts(){
     ns.forEach(o=>{if(!notifiedNoShow.has(o.c.id)){notifiedNoShow.add(o.c.id);
       try{new Notification("⚠️ Possible no-show",{body:(o.c.who||"")+" — call time passed, still marked Booked",tag:"ns-"+o.c.id});}catch(e){}}});
     due.forEach(o=>{if(!notifiedFu.has(o.f.id)){notifiedFu.add(o.f.id);
-      try{new Notification("📋 Follow-up "+fuDueLabel(o.days),{body:(o.f.who||"")+(o.f.what?" · "+o.f.what:""),tag:"fu-"+o.f.id});}catch(e){}}});
+      try{new Notification("📋 Follow-up "+fuDueLabel(o.days),{body:(o.f.who||"")+((o.f.notes||o.f.what)?" · "+(o.f.notes||o.f.what):""),tag:"fu-"+o.f.id});}catch(e){}}});
   }
   if(activeTab==="followups"&&typeof renderFollowups==="function")renderFollowups();
 }
