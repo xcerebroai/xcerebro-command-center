@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-07-08"
+    "updated": "2026-07-09"
   },
   "statusOptions": [
     "Planning",
@@ -1577,7 +1577,8 @@
       "purpose": "Jarvis",
       "status": "Booked",
       "reminder": "2026-07-08",
-      "notes": "Paid July 2. Upcoming tonight at 7:00 PM."
+      "notes": "Paid July 2. Upcoming tonight at 7:00 PM.",
+      "type": "Coaching"
     },
     {
       "id": "K-007",
