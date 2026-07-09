@@ -258,6 +258,14 @@
   .leg{display:flex;flex-direction:column;gap:9px}
   .leg .li{display:flex;align-items:center;gap:9px;font:600 11.5px 'JetBrains Mono';color:var(--mute)}
   .leg .sw{width:11px;height:11px;border-radius:3px;flex-shrink:0}
+  /* gradient heading (vanilla-CSS equivalent of the shadcn GradientHeading) */
+  .hero{padding:4px 2px 2px;margin-top:2px}
+  .ghead{font-family:'Orbitron';font-weight:900;letter-spacing:.03em;line-height:1.02;margin:0;
+    background:linear-gradient(180deg,#ffffff 0%,var(--cyan) 120%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+    filter:drop-shadow(0 0 22px rgba(32,217,255,.25))}
+  .ghead.xxl{font-size:clamp(32px,6vw,66px)}
+  .hero p{margin:8px 0 0;color:var(--mute);font:500 12px 'JetBrains Mono';letter-spacing:.16em;text-transform:uppercase}
   .foot{margin-top:22px;text-align:center;font:500 11px 'JetBrains Mono';color:var(--mute2)}
   .banner{margin-top:14px;border:1px solid rgba(245,166,35,.4);background:rgba(245,166,35,.08);color:var(--amber);border-radius:11px;padding:11px 15px;font:500 12px 'JetBrains Mono';display:none}
   .banner.on{display:block}
@@ -298,6 +306,7 @@
   </nav>
 
   <div id="view-overview">
+    <div class="hero"><h1 class="ghead xxl">Command Center</h1><p id="heroSub">AI Agents + Jarvis · live overview</p></div>
     <section class="ov-row ov-4" id="ovStats"></section>
     <div class="ov-row ov-3">
       <section class="panel"><h2><span class="tick">📊</span> Projects by Status</h2><div class="bars" id="ovBars"></div></section>
