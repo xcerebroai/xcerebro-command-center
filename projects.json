@@ -1608,5 +1608,17 @@
       "reminder": "",
       "notes": "Paid July 8."
     }
+  ],
+  "followups": [
+    {
+      "who": "Meeting Arelys Santamaria",
+      "what": "",
+      "channel": "Other",
+      "due": "",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "For webinar offer of $250 Paid - follow up availability",
+      "id": "F-001"
+    }
   ]
 }
