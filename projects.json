@@ -1548,6 +1548,16 @@
       "status": "Pending",
       "notes": "Will send Bootcamp invite once available/ FB",
       "id": "F-004"
+    },
+    {
+      "who": "Hector Ramirez",
+      "service": "AI Skool",
+      "channel": "Skool",
+      "due": "2026-07-09",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Will send Bootcamp Invite once available/AI",
+      "id": "F-005"
     }
   ]
 }
