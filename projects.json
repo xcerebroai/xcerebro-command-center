@@ -1559,7 +1559,8 @@
       "purpose": "Jarvis",
       "status": "Booked",
       "reminder": "",
-      "notes": "Half payment $250 paid; was waiting on Q's confirmation - now settled."
+      "notes": "Half payment $250 paid; was waiting on Q's confirmation - now settled.",
+      "type": ""
     },
     {
       "id": "K-005",
