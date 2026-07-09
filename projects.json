@@ -1633,12 +1633,13 @@
     {
       "who": "Tamika Johnson",
       "what": "07/10/2026",
-      "channel": "Other",
+      "channel": "Skool",
       "due": "",
       "owner": "Dyan",
       "status": "Pending",
       "notes": "Follow up on Jarvis sign up 25% off",
-      "id": "F-002"
+      "id": "F-002",
+      "service": ""
     }
   ]
 }
