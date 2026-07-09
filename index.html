@@ -690,7 +690,7 @@ function renderOverview(){
 
 /* ---------- follow-ups (Dyan) ---------- */
 const FU_STATUS=["Pending","Done"];
-const FU_CHAN=["Call","Text","Email","DM","Other"];
+const FU_CHAN=["Call","Text","Email","DM","Skool","Facebook","Instagram","Other"];
 const CALL_STATUS=["Booked","Showed","No-show → rebook","Rebooked","Cancelled","Closed/Won"];
 const CALL_TYPES=["Coaching","1 on 1","Discovery Call","Other"];
 const CTYPECLR={"Coaching":["#2a1650","#c9a8ff"],"1 on 1":["#13294a","#8ec2ff"],"Discovery Call":["#0c3524","#3de8a0"],"Other":["#1c2a3d","#8FA6C4"]};
@@ -789,7 +789,7 @@ function openFollowup(id){
     <div class="efield"><label>Follow up on</label><textarea class="eta" id="fu_what">${esc(f.what||"")}</textarea></div>
     <div class="erow"><div class="efield"><label>Service / lead type</label><select class="esel" id="fu_service"><option value="">— select —</option>${SERVICES.map(o=>`<option ${o===(f.service||"")?"selected":""}>${o}</option>`).join("")}</select></div>
       <div class="efield"><label>Channel</label>${selHTML("fu_channel",FU_CHAN,f.channel||"Call")}</div></div>
-    <div class="erow"><div class="efield"><label>Due date</label><input class="ein" id="fu_due" type="date" value="${esc(f.due||"")}"></div>
+    <div class="erow"><div class="efield"><label>📅 Follow-up date</label><input class="ein" id="fu_due" type="date" value="${esc(f.due||"")}"></div>
       <div class="efield"><label>Owner</label><input class="ein" id="fu_owner" value="${esc(f.owner||"Dyan")}"></div></div>
     <div class="efield"><label>Status</label>${selHTML("fu_status",FU_STATUS,f.status||"Pending")}</div>
     <div class="efield"><label>Notes</label><textarea class="eta" id="fu_notes">${esc(f.notes||"")}</textarea></div>
