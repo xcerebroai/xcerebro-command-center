@@ -266,6 +266,18 @@
     filter:drop-shadow(0 0 18px rgba(231,178,75,.22))}
   .ghead.xxl{font-size:clamp(32px,6vw,66px)}
   .hero p{margin:8px 0 0;color:var(--mute);font:500 12px 'JetBrains Mono';letter-spacing:.16em;text-transform:uppercase}
+  /* 30-min call alerts */
+  .btn.armed{background:var(--green);color:var(--void);border-color:var(--green)}
+  .alertbar{margin-top:14px;display:none;flex-direction:column;gap:8px}
+  .alertbar.on{display:flex}
+  .callalert{display:flex;align-items:center;gap:13px;border:1px solid var(--red);background:rgba(255,93,93,.10);
+    border-radius:12px;padding:12px 16px;color:var(--ink);font:500 13px 'Inter';animation:alertpulse 1.8s infinite}
+  @keyframes alertpulse{0%,100%{box-shadow:0 0 0 0 rgba(255,93,93,0)}50%{box-shadow:0 0 0 5px rgba(255,93,93,.13)}}
+  .callalert .ai{font-size:20px;flex-shrink:0}
+  .callalert b{color:var(--red);font-weight:700}
+  .callalert .who{font-weight:700;color:#fff}
+  .callalert .go{margin-left:auto;flex-shrink:0}
+  .fualert{border-color:rgba(255,93,93,.5)!important;background:rgba(255,93,93,.07)}
   .foot{margin-top:22px;text-align:center;font:500 11px 'JetBrains Mono';color:var(--mute2)}
   .banner{margin-top:14px;border:1px solid rgba(245,166,35,.4);background:rgba(245,166,35,.08);color:var(--amber);border-radius:11px;padding:11px 15px;font:500 12px 'JetBrains Mono';display:none}
   .banner.on{display:block}
@@ -284,6 +296,7 @@
       <div class="live"><span class="dot"></span><span>Live</span></div>
       <div class="stamp">SOURCE <b id="src">projects.json</b><br>SYNCED <b id="synced">—</b></div>
       <button class="btn" id="refresh" title="Reload data">↻ Refresh</button>
+      <button class="btn" id="notifBtn" title="Enable desktop pop-up alerts for calls within 30 minutes">🔔 Alerts: off</button>
       <button class="btn edit" id="editToggle" aria-pressed="false" title="Turn in-page editing on/off">✎ Editor</button>
       <button class="btn pri" id="addClient" title="Add a new client" style="display:none">➕ Add Client</button>
     </div>
@@ -296,6 +309,8 @@
     <span class="etxt">Access key: <b id="keyState" class="keyno">not set</b></span>
     <button class="elink" id="keyBtn">set / change key</button>
   </div>
+
+  <div class="alertbar" id="callAlerts"></div>
 
   <nav class="tabs" id="tabs">
     <button class="tab on" data-tab="overview">◎ Overview</button>
@@ -694,7 +709,16 @@ function renderFollowups(){
   const k=document.getElementById("fukpis");k.style.gridTemplateColumns="repeat(4,1fr)";
   k.innerHTML=kp.map(x=>`<div class="kpi ${x[3]}"><div class="k-label">${x[0]}</div><div class="k-num">${x[1]}</div><div class="k-sub">${x[2]}</div></div>`).join("");
   document.getElementById("fuCount").textContent=pending+" open";
-  document.getElementById("futable").innerHTML=rows.map(f=>{
+  const alerts=(typeof imminentCalls==="function")?imminentCalls():[];
+  const alertHtml=alerts.map(o=>`<div class="payrow frow fualert" data-goto="${o.c.id}">
+      <div class="pc"><div class="nm">⏰ ${esc(o.c.who||"—")}</div><div class="sub" style="color:var(--red)">upcoming call</div></div>
+      <div class="pc"><div class="sub" style="color:var(--ink);font-size:12.5px;white-space:normal">Call <b>${alertLabel(o.mins)}</b>${o.c.purpose?" · "+esc(o.c.purpose):""}</div></div>
+      <div class="flwup">${esc(o.c.type||"Call")}</div>
+      <div class="due"><span style="color:var(--red)">${fmtWhen(o.c.when)}</span></div>
+      <div class="flwup">Dyan</div>
+      <div style="text-align:center"><span class="tag" style="background:#3d0f0f;color:#ff8080;width:auto;padding:3px 8px">Call soon</span></div>
+      <div style="text-align:center"></div></div>`).join("");
+  const bodyHtml=rows.map(f=>{
     const st=fuOverdue(f)?"Overdue":(f.status||"Pending"),c=FUCLR[st]||FUCLR.Pending;
     const edit=editorMode?`<button class="logbtn" data-fu="${f.id}" title="Edit">✎</button>`:"";
     return `<div class="payrow frow" data-fu="${f.id}">
@@ -705,8 +729,10 @@ function renderFollowups(){
       <div class="flwup">${esc(f.owner||"Dyan")}</div>
       <div style="text-align:center"><span class="tag" style="background:${c[0]};color:${c[1]};width:auto;padding:3px 8px">${esc(st)}</span></div>
       <div style="text-align:center">${edit}</div></div>`;
-  }).join("")||`<div style="padding:26px;text-align:center;color:var(--mute)">No follow-ups yet.${editorMode?' Click <b>➕ Add follow-up</b>.':''}</div>`;
+  }).join("");
+  document.getElementById("futable").innerHTML=alertHtml+(bodyHtml||(alerts.length?"":`<div style="padding:26px;text-align:center;color:var(--mute)">No follow-ups yet.${editorMode?' Click <b>➕ Add follow-up</b>.':''}</div>`));
   document.querySelectorAll('#futable [data-fu]').forEach(el=>{if(el.tagName==="BUTTON")el.onclick=e=>{e.stopPropagation();openFollowup(el.dataset.fu);};else el.onclick=()=>{if(editorMode)openFollowup(el.dataset.fu);};});
+  document.querySelectorAll('#futable [data-goto]').forEach(el=>el.onclick=()=>{switchTab("calls");openCall(el.dataset.goto);});
 }
 function renderCalls(){
   const list=calls(), t=(document.getElementById("callsearch").value||"").toLowerCase();
@@ -1019,10 +1045,47 @@ async function load(manual){
   }
   if(!DB.statusOptions)DB.statusOptions=["Planning","Build Mode","Testing","Payment Follow-Up","Blocked","Ready","Live"];
   if(Object.keys(openClients).length===0)clients().forEach((c,i)=>{if(i<2)openClients[c.id]=true;});
-  refreshKeyState();render();stamp();
+  refreshKeyState();render();stamp();checkCallAlerts();
 }
+
+/* ---------- 30-minute call alerts ---------- */
+const ALERT_WINDOW=30; // minutes before a call to start alerting
+let notifiedCalls=new Set();
+function minsUntil(when){if(!when)return null;const d=new Date(when);if(isNaN(d))return null;return (d-new Date())/60000;}
+function imminentCalls(){return (DB&&DB.calls?DB.calls:[])
+  .map(c=>({c,mins:minsUntil(c.when)}))
+  .filter(o=>o.c.status==="Booked"&&o.mins!==null&&o.mins<=ALERT_WINDOW&&o.mins>=-15)
+  .sort((a,b)=>a.mins-b.mins);}
+function alertLabel(mins){const m=Math.round(mins);return m>0?`in ${m} min`:(m===0?"now":`${-m} min ago`);}
+function checkCallAlerts(){
+  const list=imminentCalls();
+  const bar=document.getElementById("callAlerts");
+  if(bar){
+    bar.className="alertbar"+(list.length?" on":"");
+    bar.innerHTML=list.map(o=>`<div class="callalert"><span class="ai">⏰</span>
+      <div><span class="who">${esc(o.c.who||"—")}</span> — call <b>${alertLabel(o.mins)}</b>${o.c.type?" · "+esc(o.c.type):""}${o.c.purpose?" · "+esc(o.c.purpose):""} · ${fmtWhen(o.c.when)}</div>
+      <button class="btn go" data-goto="${o.c.id}">Open call</button></div>`).join("");
+    bar.querySelectorAll("[data-goto]").forEach(b=>b.onclick=()=>{switchTab("calls");openCall(b.dataset.goto);});
+  }
+  // desktop notifications for calls newly inside the window
+  if(window.Notification&&Notification.permission==="granted"){
+    list.forEach(o=>{if(o.mins<=ALERT_WINDOW&&o.mins>=0&&!notifiedCalls.has(o.c.id)){notifiedCalls.add(o.c.id);
+      try{new Notification("⏰ Upcoming call "+alertLabel(o.mins),{body:(o.c.who||"")+(o.c.purpose?" · "+o.c.purpose:""),tag:o.c.id});}catch(e){}}});
+  }
+  // surface in the Follow-ups tab too
+  if(activeTab==="followups"&&typeof renderFollowups==="function")renderFollowups();
+}
+document.getElementById("notifBtn").onclick=()=>{
+  if(!window.Notification){toast("This browser can't show desktop alerts","err");return;}
+  if(Notification.permission==="granted"){armNotif();return;}
+  Notification.requestPermission().then(p=>{if(p==="granted"){armNotif();toast("Desktop alerts on ✓","ok");}else toast("Alerts blocked in browser settings","err");});
+};
+function armNotif(){const b=document.getElementById("notifBtn");b.textContent="🔔 Alerts: on";b.classList.add("armed");checkCallAlerts();}
+if(window.Notification&&Notification.permission==="granted")armNotif();
+
 load();
 setInterval(load,60000);
+setInterval(checkCallAlerts,30000); // re-check imminent calls every 30s
 </script>
 </body>
 </html>
