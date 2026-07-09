@@ -1404,6 +1404,68 @@
       "name": "Jenn Waldman",
       "company": "",
       "projects": []
+    },
+    {
+      "id": "C-025",
+      "name": "Raymund Mendez",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-025",
+          "name": "Scraper + AI Agent Build - Raymund Mendez",
+          "buildType": "Scraper + AI Agent",
+          "status": "Ready",
+          "priority": "Normal",
+          "owner": "Alexia / Q",
+          "start": "2026-07-09",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": true
+            }
+          ],
+          "blocker": "",
+          "nextAction": "",
+          "notes": "Paid $700 for Scraper and AI Agent. Joining for the bootcamp.",
+          "payment": {
+            "total": 700,
+            "paid": 700,
+            "dueDate": "",
+            "status": "Paid",
+            "lastFollowUp": "2026-07-09",
+            "notes": "Paid in full July 9."
+          }
+        }
+      ]
     }
   ],
   "paymentStatusOptions": [
@@ -1505,6 +1567,15 @@
       "reminder": "2026-07-09",
       "notes": "She upgraded to VIP for AI Business Mastermind with our promo. Target market is Knox county.\nContact details:  410-591-9007.",
       "id": "K-010"
+    },
+    {
+      "id": "K-011",
+      "who": "Raymund Mendez",
+      "when": "2026-07-09T00:00",
+      "purpose": "Scraper + AI Agent",
+      "status": "Showed",
+      "reminder": "",
+      "notes": "Paid $700 for Scraper and AI Agent. Joining for the bootcamp."
     }
   ],
   "followups": [
@@ -1528,56 +1599,6 @@
       "notes": "Follow up on Jarvis sign up 25% off",
       "id": "F-002",
       "service": "Jarvis"
-    },
-    {
-      "who": "Will Moleon",
-      "service": "Other",
-      "channel": "Skool",
-      "due": "2026-07-09",
-      "owner": "Dyan",
-      "status": "Pending",
-      "notes": "Will send Bootcamp Invite once available/Wholesaling 101",
-      "id": "F-003"
-    },
-    {
-      "who": "Ahmed Sherif",
-      "service": "Other",
-      "channel": "Facebook",
-      "due": "2026-07-09",
-      "owner": "Dyan",
-      "status": "Pending",
-      "notes": "Will send Bootcamp invite once available/ FB",
-      "id": "F-004"
-    },
-    {
-      "who": "Hector Ramirez",
-      "service": "AI Skool",
-      "channel": "Skool",
-      "due": "2026-07-09",
-      "owner": "Dyan",
-      "status": "Pending",
-      "notes": "Will send Bootcamp Invite once available/AI",
-      "id": "F-005"
-    },
-    {
-      "who": "Tony Gutierrez",
-      "service": "REI Skool",
-      "channel": "Skool",
-      "due": "2026-07-13",
-      "owner": "Dyan",
-      "status": "Pending",
-      "notes": "Follow up $500 - Scraper/Surplus",
-      "id": "F-006"
-    },
-    {
-      "who": "Corey Milton",
-      "service": "Other",
-      "channel": "Instagram",
-      "due": "2026-07-09",
-      "owner": "Dyan",
-      "status": "Pending",
-      "notes": "Will send Bootcamp Invite once available/IG",
-      "id": "F-007"
     }
   ]
 }
