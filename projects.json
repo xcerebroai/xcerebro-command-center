@@ -1528,6 +1528,16 @@
       "notes": "Follow up on Jarvis sign up 25% off",
       "id": "F-002",
       "service": "Jarvis"
+    },
+    {
+      "who": "Will Moleon",
+      "service": "Other",
+      "channel": "Skool",
+      "due": "2026-07-09",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Will send Bootcamp Invite once available/Wholesaling 101",
+      "id": "F-003"
     }
   ]
 }
