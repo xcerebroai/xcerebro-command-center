@@ -1558,6 +1558,16 @@
       "status": "Pending",
       "notes": "Will send Bootcamp Invite once available/AI",
       "id": "F-005"
+    },
+    {
+      "who": "Tont Gutierez",
+      "service": "REI Skool",
+      "channel": "Skool",
+      "due": "",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Follow up $500 - Scraper/Surplus",
+      "id": "F-006"
     }
   ]
 }
