@@ -1538,6 +1538,16 @@
       "status": "Pending",
       "notes": "Will send Bootcamp Invite once available/Wholesaling 101",
       "id": "F-003"
+    },
+    {
+      "who": "Ahmed Sherif",
+      "service": "Other",
+      "channel": "Facebook",
+      "due": "2026-07-09",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Will send Bootcamp invite once available/ FB",
+      "id": "F-004"
     }
   ]
 }
