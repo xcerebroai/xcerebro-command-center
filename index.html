@@ -277,6 +277,8 @@
   .callalert b{color:var(--red);font-weight:700}
   .callalert .who{font-weight:700;color:#fff}
   .callalert .go{margin-left:auto;flex-shrink:0}
+  .callalert.noshow{border-color:var(--amber);background:rgba(245,166,35,.10);animation:none}
+  .callalert.noshow b{color:var(--amber)}
   .fualert{border-color:rgba(255,93,93,.5)!important;background:rgba(255,93,93,.07)}
   .foot{margin-top:22px;text-align:center;font:500 11px 'JetBrains Mono';color:var(--mute2)}
   .banner{margin-top:14px;border:1px solid rgba(245,166,35,.4);background:rgba(245,166,35,.08);color:var(--amber);border-radius:11px;padding:11px 15px;font:500 12px 'JetBrains Mono';display:none}
@@ -689,6 +691,9 @@ const FU_CHAN=["Call","Text","Email","DM","Other"];
 const CALL_STATUS=["Booked","Showed","No-show → rebook","Rebooked","Cancelled","Closed/Won"];
 const CALL_TYPES=["Coaching","1 on 1","Discovery Call","Other"];
 const CTYPECLR={"Coaching":["#2a1650","#c9a8ff"],"1 on 1":["#13294a","#8ec2ff"],"Discovery Call":["#0c3524","#3de8a0"],"Other":["#1c2a3d","#8FA6C4"]};
+const SERVICES=["Jarvis","REI Skool","AI Skool","AI Agent","Other"];
+const SVCCLR={"Jarvis":["#13294a","#67B0FF"],"REI Skool":["#3a2408","#f5a623"],"AI Skool":["#2a1650","#B57BFF"],"AI Agent":["#0c3524","#3DE8A0"],"Other":["#1c2a3d","#8FA6C4"]};
+const svcTag=s=>s?`<span class="tag" style="background:${(SVCCLR[s]||SVCCLR.Other)[0]};color:${(SVCCLR[s]||SVCCLR.Other)[1]};width:auto;padding:2px 7px">${esc(s)}</span>`:'';
 const FUCLR={"Pending":["#3a2408","#f5a623"],"Done":["#0c3524","#3de8a0"],"Overdue":["#2a0808","#ff5d5d"]};
 const CALLCLR={"Booked":["#13294a","#8ec2ff"],"Showed":["#0c3524","#3de8a0"],"No-show → rebook":["#3d0f0f","#ff8080"],"Rebooked":["#2a1650","#c9a8ff"],"Cancelled":["#1c2a3d","#8FA6C4"],"Closed/Won":["#083b2c","#3de8a0"]};
 const followups=()=>DB.followups||(DB.followups=[]);
@@ -722,7 +727,7 @@ function renderFollowups(){
     const st=fuOverdue(f)?"Overdue":(f.status||"Pending"),c=FUCLR[st]||FUCLR.Pending;
     const edit=editorMode?`<button class="logbtn" data-fu="${f.id}" title="Edit">✎</button>`:"";
     return `<div class="payrow frow" data-fu="${f.id}">
-      <div class="pc"><div class="nm">${esc(f.who||"—")}</div>${f.owner?`<div class="sub">for ${esc(f.owner)}</div>`:""}</div>
+      <div class="pc"><div class="nm">${esc(f.who||"—")}</div>${f.service?`<div class="sub">${svcTag(f.service)}</div>`:(f.owner?`<div class="sub">for ${esc(f.owner)}</div>`:"")}</div>
       <div class="pc"><div class="sub" style="color:var(--ink);font-size:12.5px;white-space:normal">${esc(f.what||"—")}</div></div>
       <div class="flwup">${esc(f.channel||"—")}</div>
       <div class="due"><span style="color:${st==='Overdue'?'var(--red)':'var(--mute)'}">${f.due?esc(f.due):'—'}</span></div>
@@ -762,7 +767,7 @@ function renderCalls(){
     const edit=editorMode?`<button class="logbtn" data-call="${c.id}" title="Edit">✎</button>`:"";
     const tc=CTYPECLR[c.type]||CTYPECLR.Other;
     return `<div class="payrow crow" data-call="${c.id}">
-      <div class="pc"><div class="nm">${esc(c.who||"—")}</div></div>
+      <div class="pc"><div class="nm">${esc(c.who||"—")}</div>${c.service?`<div class="sub">${svcTag(c.service)}</div>`:''}</div>
       <div>${c.type?`<span class="tag" style="background:${tc[0]};color:${tc[1]};width:auto;padding:3px 8px">${esc(c.type)}</span>`:'<span style="color:var(--mute2)">—</span>'}</div>
       <div class="flwup" style="text-align:left">${fmtWhen(c.when)}</div>
       <div class="pc"><div class="sub" style="color:var(--ink);font-size:12.5px;white-space:normal">${esc(c.purpose||"—")}</div></div>
@@ -779,16 +784,17 @@ function openFollowup(id){
   showDrawer(`<div class="dh"><div><div class="did">${id?esc(id)+" · follow-up":"NEW FOLLOW-UP"}</div><h3>${id?"Edit follow-up":"Add follow-up"}</h3></div><button class="xbtn" id="xclose">✕</button></div>
     <div class="efield"><label>Who</label><input class="ein" id="fu_who" value="${esc(f.who||"")}" placeholder="Client / lead name"></div>
     <div class="efield"><label>Follow up on</label><textarea class="eta" id="fu_what">${esc(f.what||"")}</textarea></div>
-    <div class="erow"><div class="efield"><label>Channel</label>${selHTML("fu_channel",FU_CHAN,f.channel||"Call")}</div>
-      <div class="efield"><label>Due date</label><input class="ein" id="fu_due" type="date" value="${esc(f.due||"")}"></div></div>
-    <div class="erow"><div class="efield"><label>Owner</label><input class="ein" id="fu_owner" value="${esc(f.owner||"Dyan")}"></div>
-      <div class="efield"><label>Status</label>${selHTML("fu_status",FU_STATUS,f.status||"Pending")}</div></div>
+    <div class="erow"><div class="efield"><label>Service / lead type</label><select class="esel" id="fu_service"><option value="">— select —</option>${SERVICES.map(o=>`<option ${o===(f.service||"")?"selected":""}>${o}</option>`).join("")}</select></div>
+      <div class="efield"><label>Channel</label>${selHTML("fu_channel",FU_CHAN,f.channel||"Call")}</div></div>
+    <div class="erow"><div class="efield"><label>Due date</label><input class="ein" id="fu_due" type="date" value="${esc(f.due||"")}"></div>
+      <div class="efield"><label>Owner</label><input class="ein" id="fu_owner" value="${esc(f.owner||"Dyan")}"></div></div>
+    <div class="efield"><label>Status</label>${selHTML("fu_status",FU_STATUS,f.status||"Pending")}</div>
     <div class="efield"><label>Notes</label><textarea class="eta" id="fu_notes">${esc(f.notes||"")}</textarea></div>
     <div class="esave"><button class="btn primary" id="fu_save">${id?"Save":"Add & Save"}</button><button class="ghost" id="fu_cancel">Cancel</button>${id?'<button class="ghost del" id="fu_del">Delete</button>':''}</div>`);
   const g=x=>document.getElementById(x);
   g("xclose").onclick=closeDrawer;g("fu_cancel").onclick=closeDrawer;
   if(id)g("fu_del").onclick=()=>{if(!confirm("Delete this follow-up?"))return;commitChange(data=>{data.followups=(data.followups||[]).filter(x=>x.id!==id);},"Delete follow-up "+id,g("fu_del"));};
-  g("fu_save").onclick=()=>{const v={who:g("fu_who").value.trim(),what:g("fu_what").value.trim(),channel:g("fu_channel").value,due:g("fu_due").value,owner:g("fu_owner").value.trim()||"Dyan",status:g("fu_status").value,notes:g("fu_notes").value.trim()};
+  g("fu_save").onclick=()=>{const v={who:g("fu_who").value.trim(),service:g("fu_service").value,what:g("fu_what").value.trim(),channel:g("fu_channel").value,due:g("fu_due").value,owner:g("fu_owner").value.trim()||"Dyan",status:g("fu_status").value,notes:g("fu_notes").value.trim()};
     if(!v.who){toast("Who is required","err");return;}
     commitChange(data=>{data.followups=data.followups||[];if(id){const t=data.followups.find(x=>x.id===id);Object.assign(t,v);}else{v.id=nextId(data.followups,"F-");data.followups.push(v);}},(id?"Update ":"Add ")+"follow-up "+v.who,g("fu_save"));};
 }
@@ -796,9 +802,10 @@ function openCall(id){
   const list=calls();const c=id?list.find(x=>x.id===id)||{}:{status:"Booked"};
   showDrawer(`<div class="dh"><div><div class="did">${id?esc(id)+" · call":"NEW CALL"}</div><h3>${id?"Edit call":"Add booked call"}</h3></div><button class="xbtn" id="xclose">✕</button></div>
     <div class="efield"><label>Who</label><input class="ein" id="k_who" value="${esc(c.who||"")}" placeholder="Client / lead name"></div>
-    <div class="erow"><div class="efield"><label>Type</label><select class="esel" id="k_type"><option value="">— select —</option>${CALL_TYPES.map(o=>`<option ${o===(c.type||"")?"selected":""}>${o}</option>`).join("")}</select></div>
-      <div class="efield"><label>Date &amp; time</label><input class="ein" id="k_when" type="datetime-local" value="${esc(c.when||"")}"></div></div>
-    <div class="efield"><label>Purpose / service</label><input class="ein" id="k_purpose" value="${esc(c.purpose||"")}" placeholder="Jarvis, AI Automation…"></div>
+    <div class="erow"><div class="efield"><label>Service / lead type</label><select class="esel" id="k_service"><option value="">— select —</option>${SERVICES.map(o=>`<option ${o===(c.service||"")?"selected":""}>${o}</option>`).join("")}</select></div>
+      <div class="efield"><label>Call type</label><select class="esel" id="k_type"><option value="">— select —</option>${CALL_TYPES.map(o=>`<option ${o===(c.type||"")?"selected":""}>${o}</option>`).join("")}</select></div></div>
+    <div class="efield"><label>Date &amp; time</label><input class="ein" id="k_when" type="datetime-local" value="${esc(c.when||"")}"></div>
+    <div class="efield"><label>Purpose / notes</label><input class="ein" id="k_purpose" value="${esc(c.purpose||"")}" placeholder="e.g. demo, onboarding…"></div>
     <div class="erow"><div class="efield"><label>Status</label>${selHTML("k_status",CALL_STATUS,c.status||"Booked")}</div>
       <div class="efield"><label>Reminder date</label><input class="ein" id="k_reminder" type="date" value="${esc(c.reminder||"")}"></div></div>
     <div class="efield"><label>Notes</label><textarea class="eta" id="k_notes">${esc(c.notes||"")}</textarea></div>
@@ -811,7 +818,7 @@ function openCall(id){
   if(id)g("k_del").onclick=()=>{if(!confirm("Delete this call?"))return;commitChange(data=>{data.calls=(data.calls||[]).filter(x=>x.id!==id);},"Delete call "+id,g("k_del"));};
   if(id){const w=g("k_convert_wrap");g("k_status").onchange=()=>{if(w)w.style.display=g("k_status").value==="Closed/Won"?"block":"none";};
     g("k_convert").onclick=()=>convertCallToClient(id);}
-  g("k_save").onclick=()=>{const v={who:g("k_who").value.trim(),type:g("k_type").value,when:g("k_when").value,purpose:g("k_purpose").value.trim(),status:g("k_status").value,reminder:g("k_reminder").value,notes:g("k_notes").value.trim()};
+  g("k_save").onclick=()=>{const v={who:g("k_who").value.trim(),service:g("k_service").value,type:g("k_type").value,when:g("k_when").value,purpose:g("k_purpose").value.trim(),status:g("k_status").value,reminder:g("k_reminder").value,notes:g("k_notes").value.trim()};
     if(!v.who){toast("Who is required","err");return;}
     commitChange(data=>{data.calls=data.calls||[];if(id){const t=data.calls.find(x=>x.id===id);Object.assign(t,v);}else{v.id=nextId(data.calls,"K-");data.calls.push(v);}},(id?"Update ":"Add ")+"call "+v.who,g("k_save"));};
 }
@@ -1050,29 +1057,39 @@ async function load(manual){
 
 /* ---------- 30-minute call alerts ---------- */
 const ALERT_WINDOW=30; // minutes before a call to start alerting
-let notifiedCalls=new Set();
+const NOSHOW_FLOOR=-240; // stop nagging about no-shows older than 4h
+let notifiedCalls=new Set(), notifiedNoShow=new Set();
 function minsUntil(when){if(!when)return null;const d=new Date(when);if(isNaN(d))return null;return (d-new Date())/60000;}
 function imminentCalls(){return (DB&&DB.calls?DB.calls:[])
   .map(c=>({c,mins:minsUntil(c.when)}))
   .filter(o=>o.c.status==="Booked"&&o.mins!==null&&o.mins<=ALERT_WINDOW&&o.mins>=-15)
   .sort((a,b)=>a.mins-b.mins);}
+function noShowCalls(){return (DB&&DB.calls?DB.calls:[])
+  .map(c=>({c,mins:minsUntil(c.when)}))
+  .filter(o=>o.c.status==="Booked"&&o.mins!==null&&o.mins<-15&&o.mins>=NOSHOW_FLOOR)
+  .sort((a,b)=>b.mins-a.mins);}
 function alertLabel(mins){const m=Math.round(mins);return m>0?`in ${m} min`:(m===0?"now":`${-m} min ago`);}
+function markNoShow(id,btn){commitChange(data=>{const c=(data.calls||[]).find(x=>x.id===id);if(!c)throw new Error("call not found");c.status="No-show → rebook";},"Mark no-show → rebook "+id,btn);}
 function checkCallAlerts(){
-  const list=imminentCalls();
+  const list=imminentCalls(), ns=noShowCalls();
   const bar=document.getElementById("callAlerts");
   if(bar){
-    bar.className="alertbar"+(list.length?" on":"");
+    bar.className="alertbar"+((list.length||ns.length)?" on":"");
     bar.innerHTML=list.map(o=>`<div class="callalert"><span class="ai">⏰</span>
-      <div><span class="who">${esc(o.c.who||"—")}</span> — call <b>${alertLabel(o.mins)}</b>${o.c.type?" · "+esc(o.c.type):""}${o.c.purpose?" · "+esc(o.c.purpose):""} · ${fmtWhen(o.c.when)}</div>
-      <button class="btn go" data-goto="${o.c.id}">Open call</button></div>`).join("");
+      <div><span class="who">${esc(o.c.who||"—")}</span> — call <b>${alertLabel(o.mins)}</b>${o.c.service?" · "+esc(o.c.service):""}${o.c.type?" · "+esc(o.c.type):""} · ${fmtWhen(o.c.when)}</div>
+      <button class="btn go" data-goto="${o.c.id}">Open call</button></div>`).join("")
+    + ns.map(o=>`<div class="callalert noshow"><span class="ai">⚠️</span>
+      <div><span class="who">${esc(o.c.who||"—")}</span> — <b>no-show?</b> (${alertLabel(o.mins)})${o.c.service?" · "+esc(o.c.service):""} · ${fmtWhen(o.c.when)}</div>
+      <button class="btn go" data-noshow="${o.c.id}">Mark no-show → rebook</button></div>`).join("");
     bar.querySelectorAll("[data-goto]").forEach(b=>b.onclick=()=>{switchTab("calls");openCall(b.dataset.goto);});
+    bar.querySelectorAll("[data-noshow]").forEach(b=>b.onclick=()=>markNoShow(b.dataset.noshow,b));
   }
-  // desktop notifications for calls newly inside the window
   if(window.Notification&&Notification.permission==="granted"){
     list.forEach(o=>{if(o.mins<=ALERT_WINDOW&&o.mins>=0&&!notifiedCalls.has(o.c.id)){notifiedCalls.add(o.c.id);
       try{new Notification("⏰ Upcoming call "+alertLabel(o.mins),{body:(o.c.who||"")+(o.c.purpose?" · "+o.c.purpose:""),tag:o.c.id});}catch(e){}}});
+    ns.forEach(o=>{if(!notifiedNoShow.has(o.c.id)){notifiedNoShow.add(o.c.id);
+      try{new Notification("⚠️ Possible no-show",{body:(o.c.who||"")+" — call time passed, still marked Booked",tag:"ns-"+o.c.id});}catch(e){}}});
   }
-  // surface in the Follow-ups tab too
   if(activeTab==="followups"&&typeof renderFollowups==="function")renderFollowups();
 }
 document.getElementById("notifBtn").onclick=()=>{
