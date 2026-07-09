@@ -279,6 +279,9 @@
   .callalert .go{margin-left:auto;flex-shrink:0}
   .callalert.noshow{border-color:var(--amber);background:rgba(245,166,35,.10);animation:none}
   .callalert.noshow b{color:var(--amber)}
+  .callalert.fudue{border-color:var(--cyan-dim);background:rgba(32,217,255,.08);animation:none}
+  .callalert.fudue b{color:var(--cyan)}
+  .callalert .acts{margin-left:auto;display:flex;gap:8px;flex-shrink:0}
   .fualert{border-color:rgba(255,93,93,.5)!important;background:rgba(255,93,93,.07)}
   .foot{margin-top:22px;text-align:center;font:500 11px 'JetBrains Mono';color:var(--mute2)}
   .banner{margin-top:14px;border:1px solid rgba(245,166,35,.4);background:rgba(245,166,35,.08);color:var(--amber);border-radius:11px;padding:11px 15px;font:500 12px 'JetBrains Mono';display:none}
@@ -699,7 +702,7 @@ const CALLCLR={"Booked":["#13294a","#8ec2ff"],"Showed":["#0c3524","#3de8a0"],"No
 const followups=()=>DB.followups||(DB.followups=[]);
 const calls=()=>DB.calls||(DB.calls=[]);
 const nextId=(arr,pfx)=>{let m=0;arr.forEach(x=>{const g=/(\d+)/.exec(x.id||"");if(g)m=Math.max(m,+g[1]);});return pfx+String(m+1).padStart(3,"0");};
-const fuOverdue=f=>f.status!=="Done"&&f.due&&(()=>{const d=new Date(f.due),n=new Date();d.setHours(0,0,0,0);n.setHours(0,0,0,0);return d<n;})();
+const fuOverdue=f=>f.status!=="Done"&&f.due&&(()=>{const d=dateLocal(f.due),n=new Date();n.setHours(0,0,0,0);return d&&d<n;})();
 const fmtWhen=w=>{if(!w)return"—";const d=new Date(w);if(isNaN(d))return esc(w);return d.toLocaleString([], {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});};
 
 function updateFuBadge(){const n=followups().filter(f=>f.status!=="Done").length,b=document.getElementById("fuBadge");if(!b)return;if(n){b.style.display="";b.textContent=n;}else b.style.display="none";}
@@ -1072,25 +1075,40 @@ function noShowCalls(){return (DB&&DB.calls?DB.calls:[])
   .sort((a,b)=>b.mins-a.mins);}
 function alertLabel(mins){const m=Math.round(mins);return m>0?`in ${m} min`:(m===0?"now":`${-m} min ago`);}
 function markNoShow(id,btn){commitChange(data=>{const c=(data.calls||[]).find(x=>x.id===id);if(!c)throw new Error("call not found");c.status="No-show → rebook";},"Mark no-show → rebook "+id,btn);}
+let notifiedFu=new Set();
+function dateLocal(s){if(!s)return null;const p=String(s).split("-");const d=new Date(+p[0],(+p[1]||1)-1,+p[2]||1);d.setHours(0,0,0,0);return isNaN(d)?null:d;}
+function dueFollowups(){const t=new Date();t.setHours(0,0,0,0);
+  return (DB&&DB.followups?DB.followups:[]).filter(f=>f.status!=="Done"&&f.due)
+    .map(f=>{const d=dateLocal(f.due);return {f,days:d?Math.round((d-t)/86400000):NaN};})
+    .filter(o=>!isNaN(o.days)&&o.days<=0).sort((a,b)=>a.days-b.days);}
+function fuDueLabel(days){return days===0?"due today":"overdue "+(-days)+"d";}
+function markFuDone(id,btn){commitChange(data=>{const f=(data.followups||[]).find(x=>x.id===id);if(!f)throw new Error("follow-up not found");f.status="Done";},"Mark follow-up done "+id,btn);}
 function checkCallAlerts(){
-  const list=imminentCalls(), ns=noShowCalls();
+  const list=imminentCalls(), ns=noShowCalls(), due=dueFollowups();
   const bar=document.getElementById("callAlerts");
   if(bar){
-    bar.className="alertbar"+((list.length||ns.length)?" on":"");
+    bar.className="alertbar"+((list.length||ns.length||due.length)?" on":"");
     bar.innerHTML=list.map(o=>`<div class="callalert"><span class="ai">⏰</span>
       <div><span class="who">${esc(o.c.who||"—")}</span> — call <b>${alertLabel(o.mins)}</b>${o.c.service?" · "+esc(o.c.service):""}${o.c.type?" · "+esc(o.c.type):""} · ${fmtWhen(o.c.when)}</div>
       <button class="btn go" data-goto="${o.c.id}">Open call</button></div>`).join("")
     + ns.map(o=>`<div class="callalert noshow"><span class="ai">⚠️</span>
       <div><span class="who">${esc(o.c.who||"—")}</span> — <b>no-show?</b> (${alertLabel(o.mins)})${o.c.service?" · "+esc(o.c.service):""} · ${fmtWhen(o.c.when)}</div>
-      <button class="btn go" data-noshow="${o.c.id}">Mark no-show → rebook</button></div>`).join("");
+      <button class="btn go" data-noshow="${o.c.id}">Mark no-show → rebook</button></div>`).join("")
+    + due.map(o=>`<div class="callalert fudue"><span class="ai">📋</span>
+      <div><span class="who">${esc(o.f.who||"—")}</span> — follow-up <b>${fuDueLabel(o.days)}</b>${o.f.service?" · "+esc(o.f.service):""}${o.f.what?" · "+esc(o.f.what):""}</div>
+      <div class="acts"><button class="btn" data-fudone="${o.f.id}">Done</button><button class="btn" data-fuopen="${o.f.id}">Open</button></div></div>`).join("");
     bar.querySelectorAll("[data-goto]").forEach(b=>b.onclick=()=>{switchTab("calls");openCall(b.dataset.goto);});
     bar.querySelectorAll("[data-noshow]").forEach(b=>b.onclick=()=>markNoShow(b.dataset.noshow,b));
+    bar.querySelectorAll("[data-fudone]").forEach(b=>b.onclick=()=>markFuDone(b.dataset.fudone,b));
+    bar.querySelectorAll("[data-fuopen]").forEach(b=>b.onclick=()=>{switchTab("followups");openFollowup(b.dataset.fuopen);});
   }
   if(window.Notification&&Notification.permission==="granted"){
     list.forEach(o=>{if(o.mins<=ALERT_WINDOW&&o.mins>=0&&!notifiedCalls.has(o.c.id)){notifiedCalls.add(o.c.id);
       try{new Notification("⏰ Upcoming call "+alertLabel(o.mins),{body:(o.c.who||"")+(o.c.purpose?" · "+o.c.purpose:""),tag:o.c.id});}catch(e){}}});
     ns.forEach(o=>{if(!notifiedNoShow.has(o.c.id)){notifiedNoShow.add(o.c.id);
       try{new Notification("⚠️ Possible no-show",{body:(o.c.who||"")+" — call time passed, still marked Booked",tag:"ns-"+o.c.id});}catch(e){}}});
+    due.forEach(o=>{if(!notifiedFu.has(o.f.id)){notifiedFu.add(o.f.id);
+      try{new Notification("📋 Follow-up "+fuDueLabel(o.days),{body:(o.f.who||"")+(o.f.what?" · "+o.f.what:""),tag:"fu-"+o.f.id});}catch(e){}}});
   }
   if(activeTab==="followups"&&typeof renderFollowups==="function")renderFollowups();
 }
