@@ -1607,6 +1607,16 @@
       "status": "Showed",
       "reminder": "",
       "notes": "Paid July 8."
+    },
+    {
+      "who": "Jenn Waldman",
+      "type": "1 on 1",
+      "when": "2026-07-10T12:00",
+      "purpose": "AI Automation",
+      "status": "Booked",
+      "reminder": "2026-07-10",
+      "notes": "She upgraded to VIP for AI Business Mastermind with our promo. Target market is Knox county.\nContact details:  410-591-9007.",
+      "id": "K-010"
     }
   ],
   "followups": [
