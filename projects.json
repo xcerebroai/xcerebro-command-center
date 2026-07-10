@@ -1587,7 +1587,8 @@
       "owner": "Dyan",
       "status": "Pending",
       "notes": "For webinar offer of $250 Paid - follow up availability",
-      "id": "F-001"
+      "id": "F-001",
+      "service": ""
     },
     {
       "who": "Tamika Johnson",
