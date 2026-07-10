@@ -1609,6 +1609,16 @@
       "status": "Pending",
       "notes": "Remind Lexy. Zoom call 1pm CST",
       "id": "F-003"
+    },
+    {
+      "who": "Garett",
+      "service": "Jarvis",
+      "channel": "Call",
+      "due": "2026-07-10",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Onboarding / Remind Lexy - Meeting with Garett 2PM CST",
+      "id": "F-004"
     }
   ]
 }
