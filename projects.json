@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-07-09"
+    "updated": "2026-07-10"
   },
   "statusOptions": [
     "Planning",
@@ -1599,6 +1599,16 @@
       "notes": "Follow up on Jarvis sign up 25% off",
       "id": "F-002",
       "service": "Jarvis"
+    },
+    {
+      "who": "Angel Rabago",
+      "service": "Jarvis",
+      "channel": "Call",
+      "due": "2026-07-10",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Remind Lexy. Zoom call 1pm CST",
+      "id": "F-003"
     }
   ]
 }
