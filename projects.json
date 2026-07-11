@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-07-10"
+    "updated": "2026-07-11"
   },
   "statusOptions": [
     "Planning",
@@ -1620,6 +1620,16 @@
       "status": "Done",
       "notes": "Onboarding / Remind Lexy - Meeting with Garett 2PM CST",
       "id": "F-004"
+    },
+    {
+      "who": "Corey Milton",
+      "service": "Other",
+      "channel": "DM",
+      "due": "2026-07-13",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Bootcamp payment follow up",
+      "id": "F-005"
     }
   ]
 }
