@@ -1216,7 +1216,7 @@
           "id": "P-020",
           "name": "Jarvis Agency Build - Marcus Fard",
           "buildType": "Jarvis Agency",
-          "status": "Ready",
+          "status": "Live",
           "priority": "Normal",
           "owner": "Alexia / Q",
           "start": "2026-07-06",
@@ -1224,15 +1224,15 @@
           "tasks": [
             {
               "label": "Dashboard set up",
-              "done": false
+              "done": true
             },
             {
               "label": "Campaign built",
-              "done": false
+              "done": true
             },
             {
               "label": "Automations wired",
-              "done": false
+              "done": true
             },
             {
               "label": "AI Agent configured",
@@ -1240,19 +1240,19 @@
             },
             {
               "label": "Custom workflow mapped",
-              "done": false
+              "done": true
             },
             {
               "label": "A2P registration",
-              "done": false
+              "done": true
             },
             {
               "label": "Jarvis build",
-              "done": false
+              "done": true
             },
             {
               "label": "JV / Payment confirmed",
-              "done": false
+              "done": true
             }
           ],
           "blocker": "",
