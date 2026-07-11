@@ -91,7 +91,7 @@
           "id": "P-002",
           "name": "AI Agent and Custom Workflow",
           "buildType": "Custom AI Agent",
-          "status": "Ready",
+          "status": "Testing",
           "priority": "High",
           "owner": "Alexia / Q",
           "start": "2026-06-26",
