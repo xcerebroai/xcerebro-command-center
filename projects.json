@@ -1278,7 +1278,7 @@
           "id": "P-021",
           "name": "Jarvis Build - James Byron Raeford",
           "buildType": "Jarvis",
-          "status": "Planning",
+          "status": "Build Mode",
           "priority": "High",
           "owner": "Alexia / Q",
           "start": "2026-07-08",
@@ -1286,7 +1286,7 @@
           "tasks": [
             {
               "label": "Dashboard set up",
-              "done": false
+              "done": true
             },
             {
               "label": "Campaign built",
@@ -1310,7 +1310,7 @@
             },
             {
               "label": "Jarvis build",
-              "done": false
+              "done": true
             },
             {
               "label": "JV / Payment confirmed",
@@ -1321,8 +1321,8 @@
           "nextAction": "Appointment tonight 7/8/2026 7:00 PM - confirm meeting happens.",
           "notes": "Scheduled 7/8/2026 7:00 PM.",
           "payment": {
-            "total": 0,
-            "paid": 0,
+            "total": 500,
+            "paid": 500,
             "status": "Paid",
             "dueDate": "",
             "lastFollowUp": "2026-07-02",
