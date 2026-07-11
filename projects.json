@@ -538,11 +538,11 @@
           "tasks": [
             {
               "label": "Website built",
-              "done": false
+              "done": true
             },
             {
               "label": "Dashboard set up",
-              "done": false
+              "done": true
             },
             {
               "label": "Campaign built",
@@ -566,7 +566,7 @@
             },
             {
               "label": "Jarvis build",
-              "done": false
+              "done": true
             },
             {
               "label": "JV / Payment confirmed",
