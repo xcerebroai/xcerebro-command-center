@@ -153,7 +153,7 @@
           "id": "P-003",
           "name": "AI Agents",
           "buildType": "AI Agent Project",
-          "status": "Planning",
+          "status": "Ready",
           "priority": "High",
           "owner": "Alexia / Q",
           "start": "2026-06-26",
@@ -165,11 +165,11 @@
             },
             {
               "label": "Campaign built",
-              "done": false
+              "done": true
             },
             {
               "label": "Automations wired",
-              "done": false
+              "done": true
             },
             {
               "label": "AI Agent configured",
@@ -177,7 +177,7 @@
             },
             {
               "label": "Custom workflow mapped",
-              "done": false
+              "done": true
             },
             {
               "label": "A2P registration",
@@ -198,8 +198,8 @@
           "payment": {
             "total": 0,
             "paid": 0,
-            "dueDate": "",
             "status": "Paid",
+            "dueDate": "",
             "lastFollowUp": "",
             "notes": ""
           }
