@@ -658,7 +658,7 @@
           "id": "P-011",
           "name": "AI Agents Installation",
           "buildType": "AI Agent Installation",
-          "status": "Planning",
+          "status": "Build Mode",
           "priority": "Normal",
           "owner": "Alexia / Q",
           "start": "2026-07-07",
