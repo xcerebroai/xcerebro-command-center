@@ -782,7 +782,7 @@
           "id": "P-013",
           "name": "DBA Campaign",
           "buildType": "Campaign Build",
-          "status": "Planning",
+          "status": "Build Mode",
           "priority": "Normal",
           "owner": "Alexia / Q",
           "start": "2026-07-08",
@@ -790,7 +790,7 @@
           "tasks": [
             {
               "label": "Dashboard set up",
-              "done": false
+              "done": true
             },
             {
               "label": "Campaign built",
@@ -806,7 +806,7 @@
             },
             {
               "label": "Custom workflow mapped",
-              "done": false
+              "done": true
             },
             {
               "label": "A2P registration",
@@ -814,7 +814,7 @@
             },
             {
               "label": "Jarvis build",
-              "done": false
+              "done": true
             },
             {
               "label": "JV / Payment confirmed",
