@@ -596,7 +596,7 @@
           "id": "P-010",
           "name": "AI Agents Installation",
           "buildType": "AI Agent Installation",
-          "status": "Planning",
+          "status": "Testing",
           "priority": "Normal",
           "owner": "Alexia / Q",
           "start": "2026-07-07",
@@ -604,7 +604,7 @@
           "tasks": [
             {
               "label": "Dashboard set up",
-              "done": false
+              "done": true
             },
             {
               "label": "Campaign built",
@@ -616,7 +616,7 @@
             },
             {
               "label": "AI Agent configured",
-              "done": false
+              "done": true
             },
             {
               "label": "Custom workflow mapped",
@@ -624,15 +624,15 @@
             },
             {
               "label": "A2P registration",
-              "done": false
+              "done": true
             },
             {
               "label": "Jarvis build",
-              "done": false
+              "done": true
             },
             {
               "label": "JV / Payment confirmed",
-              "done": false
+              "done": true
             }
           ],
           "blocker": "Details pending.",
