@@ -843,7 +843,7 @@
         {
           "name": "AI Agents Installation",
           "buildType": "AI Agent Project",
-          "status": "Planning",
+          "status": "Payment Follow-Up",
           "priority": "High",
           "owner": "Alexia / Q",
           "targetEnd": "",
@@ -853,7 +853,7 @@
           "tasks": [
             {
               "label": "Dashboard set up",
-              "done": false
+              "done": true
             },
             {
               "label": "Campaign built",
@@ -869,15 +869,15 @@
             },
             {
               "label": "Custom workflow mapped",
-              "done": false
+              "done": true
             },
             {
               "label": "A2P registration",
-              "done": false
+              "done": true
             },
             {
               "label": "Jarvis build",
-              "done": false
+              "done": true
             },
             {
               "label": "JV / Payment confirmed",
