@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-07-11"
+    "updated": "2026-07-13"
   },
   "statusOptions": [
     "Planning",
@@ -1660,6 +1660,16 @@
       "status": "Pending",
       "notes": "Bootcamp payment follow up",
       "id": "F-008"
+    },
+    {
+      "who": "Fouad Mohammed",
+      "service": "Other",
+      "channel": "Call",
+      "due": "2026-07-13",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "PPL platform",
+      "id": "F-009"
     }
   ]
 }
