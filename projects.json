@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-07-13"
+    "updated": "2026-07-14"
   },
   "statusOptions": [
     "Planning",
@@ -1680,6 +1680,16 @@
       "status": "Pending",
       "notes": "Bootcamp payment follow up",
       "id": "F-010"
+    },
+    {
+      "who": "Jenn Waldman",
+      "service": "Other",
+      "channel": "Skool",
+      "due": "2026-07-17",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "1-on-1 Call with Q",
+      "id": "F-011"
     }
   ]
 }
