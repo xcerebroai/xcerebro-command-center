@@ -1680,6 +1680,16 @@
       "status": "Pending",
       "notes": "Set a meeting with Q/AI Agent",
       "id": "F-012"
+    },
+    {
+      "who": "Philippe Francois",
+      "service": "AI Agent",
+      "channel": "Call",
+      "due": "2026-07-14",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Interested in Scraper/AI agents. (His partner will be taking over the real estate lead generation) - waiting for Q's availability",
+      "id": "F-013"
     }
   ]
 }
