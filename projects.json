@@ -1670,6 +1670,16 @@
       "status": "Pending",
       "notes": "1-on-1 Call with Q",
       "id": "F-011"
+    },
+    {
+      "who": "Brandon Boyce",
+      "service": "AI Agent",
+      "channel": "Call",
+      "due": "2026-07-15",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Set a meeting with Q/AI Agent",
+      "id": "F-012"
     }
   ]
 }
