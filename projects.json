@@ -1466,6 +1466,60 @@
           }
         }
       ]
+    },
+    {
+      "id": "C-026",
+      "name": "X Cerebro AI",
+      "company": "Internal Event",
+      "projects": [
+        {
+          "id": "P-026",
+          "name": "The Bot Army Bootcamp",
+          "buildType": "Live AI Bot Bootcamp",
+          "status": "Ready",
+          "priority": "Urgent",
+          "owner": "Alexia / Q",
+          "start": "2026-07-15",
+          "targetEnd": "2026-07-15",
+          "tasks": [
+            {
+              "label": "Landing page live",
+              "done": true
+            },
+            {
+              "label": "Payment link live",
+              "done": true
+            },
+            {
+              "label": "Paid attendee count verified",
+              "done": true
+            },
+            {
+              "label": "Final start time and Zoom link confirmed",
+              "done": false
+            },
+            {
+              "label": "Attendee reminders sent",
+              "done": false
+            },
+            {
+              "label": "Bootcamp delivered",
+              "done": false
+            }
+          ],
+          "blocker": "Final start time, timezone, and Zoom link are not recorded in the Command Center.",
+          "nextAction": "Confirm the final schedule and Zoom link, send reminders to 8 paid attendees, and follow up with Will Moleon on the failed payment.",
+          "notes": "Jarvis verified: 8 paid signups at $250 each ($2,000 collected). Paid attendees: James Raeford, Max Adamson, Steve Rodriguez Jr, Dennis Alvarado, Tony Gutierrez, Alejandro Carbajal, Samuel Elizondo, and Jenn Waldman. Will Moleon had 2 failed payment attempts and is not included in the paid signup count. Source: AI Bot Building Bootcamp payment link in Quentin Flores (Q@awmastermind.com).",
+          "payment": {
+            "total": 2000,
+            "paid": 2000,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-14",
+            "notes": "8 successful $250 payments. One unpaid prospect, Will Moleon, had 2 failed attempts."
+          }
+        }
+      ]
     }
   ],
   "paymentStatusOptions": [
