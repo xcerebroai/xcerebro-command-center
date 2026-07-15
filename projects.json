@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-07-14"
+    "updated": "2026-07-15"
   },
   "statusOptions": [
     "Planning",
@@ -1680,6 +1680,16 @@
       "status": "Pending",
       "notes": "Interested in Scraper/AI agents. (His partner will be taking over the real estate lead generation) - waiting for Q's availability",
       "id": "F-013"
+    },
+    {
+      "who": "Brandon Boyce",
+      "service": "AI Agent",
+      "channel": "Facebook",
+      "due": "2026-07-15",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Brandon Boyce is interested in AI agent. His goal is to have a quality data and get better in lead generation. He set up Jarvis last year.) - waiting Q's availability",
+      "id": "F-014"
     }
   ]
 }
