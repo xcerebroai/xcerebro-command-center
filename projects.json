@@ -1508,15 +1508,15 @@
             }
           ],
           "blocker": "Final start time, timezone, and Zoom link are not recorded in the Command Center.",
-          "nextAction": "Confirm the final schedule and Zoom link, send reminders to 8 paid attendees, and follow up with Will Moleon on the failed payment.",
-          "notes": "Jarvis verified: 8 paid signups at $250 each ($2,000 collected). Paid attendees: James Raeford, Max Adamson, Steve Rodriguez Jr, Dennis Alvarado, Tony Gutierrez, Alejandro Carbajal, Samuel Elizondo, and Jenn Waldman. Will Moleon had 2 failed payment attempts and is not included in the paid signup count. Source: AI Bot Building Bootcamp payment link in Quentin Flores (Q@awmastermind.com).",
+          "nextAction": "Confirm the final schedule and Zoom link, send reminders to 10 paid attendees, and follow up with Will Moleon on the failed payment.",
+          "notes": "Jarvis verified: 10 paid signups at $250 each ($2,500 collected). Paid attendees: Jenn Waldman, Samuel Elizondo, Alejandro Carbajal, Tony Gutierrez, Dennis Alvarado, Steve Rodriguez Jr, Max Adamson, James Raeford, Javier Navarro, and Debra Batterson. Will Moleon had 2 failed payment attempts and is not included in the paid signup count. Source: AI Bot Building Bootcamp payment link in Quentin Flores (Q@awmastermind.com).",
           "payment": {
-            "total": 2000,
-            "paid": 2000,
+            "total": 2500,
+            "paid": 2500,
             "status": "Paid",
             "dueDate": "",
-            "lastFollowUp": "2026-07-14",
-            "notes": "8 successful $250 payments. One unpaid prospect, Will Moleon, had 2 failed attempts."
+            "lastFollowUp": "2026-07-15",
+            "notes": "10 successful $250 payments. One unpaid prospect, Will Moleon, had 2 failed attempts."
           }
         }
       ]
