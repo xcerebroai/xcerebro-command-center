@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-07-15"
+    "updated": "2026-07-16"
   },
   "statusOptions": [
     "Planning",
@@ -1630,6 +1630,16 @@
       "status": "Showed",
       "reminder": "",
       "notes": "Paid $700 for Scraper and AI Agent. Joining for the bootcamp."
+    },
+    {
+      "id": "K-012",
+      "who": "Alex Rodas",
+      "type": "1 on 1",
+      "when": "2026-07-16T20:00",
+      "purpose": "Meeting",
+      "status": "Booked",
+      "reminder": "2026-07-16",
+      "notes": "Scheduled for 8:00 PM Central."
     }
   ],
   "followups": [
