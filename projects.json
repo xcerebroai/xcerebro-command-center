@@ -1637,9 +1637,9 @@
       "type": "1 on 1",
       "when": "2026-07-16T20:00",
       "purpose": "Meeting",
-      "status": "Booked",
-      "reminder": "2026-07-16",
-      "notes": "Scheduled for 8:00 PM Central."
+      "status": "Rebooked",
+      "reminder": "",
+      "notes": "Rescheduled. New date and time pending."
     }
   ],
   "followups": [
