@@ -1754,6 +1754,16 @@
       "status": "Pending",
       "notes": "Get Whatsapp Number so we can set up his Jarvis Account (Paid Scrapper bot he never got so he wants Jarvis instead)",
       "id": "F-015"
+    },
+    {
+      "who": "Haus Argun",
+      "service": "AI Agent",
+      "channel": "Facebook",
+      "due": "2026-07-20",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Follow up bootcamp signup (FB)",
+      "id": "F-016"
     }
   ],
   "bootcampAttendees": [
