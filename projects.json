@@ -1774,6 +1774,16 @@
       "status": "Pending",
       "notes": "Follow up bootcamp signup",
       "id": "F-017"
+    },
+    {
+      "who": "Joseph Castaneda",
+      "service": "Jarvis",
+      "channel": "Facebook",
+      "due": "2026-07-20",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Interested in Jarvis CRM. Areas to improve or automate; intake and emails - ffup and set a meeting with Q",
+      "id": "F-018"
     }
   ],
   "bootcampAttendees": [
