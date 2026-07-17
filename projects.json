@@ -1804,6 +1804,16 @@
       "status": "Pending",
       "notes": "Follow up bootcamp signup (FB)",
       "id": "F-020"
+    },
+    {
+      "who": "Travis Weaver",
+      "service": "AI Agent",
+      "channel": "Skool",
+      "due": "2026-07-20",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Follow up bootcamp signup (Skool)",
+      "id": "F-021"
     }
   ],
   "bootcampAttendees": [
