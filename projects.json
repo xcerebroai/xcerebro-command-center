@@ -1764,6 +1764,16 @@
       "status": "Pending",
       "notes": "Follow up bootcamp signup (FB)",
       "id": "F-016"
+    },
+    {
+      "who": "Derrick DaMan Anderson",
+      "service": "AI Agent",
+      "channel": "Facebook",
+      "due": "2026-07-20",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Follow up bootcamp signup",
+      "id": "F-017"
     }
   ],
   "bootcampAttendees": [
