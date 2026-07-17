@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-07-16"
+    "updated": "2026-07-17"
   },
   "statusOptions": [
     "Planning",
@@ -1742,22 +1742,130 @@
       "due": "2026-07-17",
       "owner": "Dyan",
       "status": "Pending",
-      "notes": "Brandon Boyce is interested in AI agent. His goal is to have a quality data and get better in lead generation. He set up Jarvis last year.) - Call on on July 17 1pm CST with Q",
+      "notes": "Brandon Boyce is interested in AI agent. His goal is to have a quality data and get better in lead generation. He set up Jarvis last year.) - Call on on July 17 2pm CST with Q",
       "id": "F-014"
     }
   ],
   "bootcampAttendees": [
-    {"id":"BA-001","name":"Adam Pasternak","aiAgentInstalled":false,"jarvisConnected":false,"jarvisCrmUser":false,"recordingSent":false,"attended":false,"notes":""},
-    {"id":"BA-002","name":"Alejandro Carbajal","aiAgentInstalled":true,"jarvisConnected":false,"jarvisCrmUser":false,"recordingSent":false,"attended":false,"notes":""},
-    {"id":"BA-003","name":"David Roberts","aiAgentInstalled":false,"jarvisConnected":false,"jarvisCrmUser":false,"recordingSent":false,"attended":false,"notes":""},
-    {"id":"BA-004","name":"Debra Batterson","aiAgentInstalled":false,"jarvisConnected":false,"jarvisCrmUser":false,"recordingSent":false,"attended":false,"notes":""},
-    {"id":"BA-005","name":"Dennis Alvarado","aiAgentInstalled":false,"jarvisConnected":false,"jarvisCrmUser":false,"recordingSent":false,"attended":false,"notes":""},
-    {"id":"BA-006","name":"James Raeford","aiAgentInstalled":false,"jarvisConnected":false,"jarvisCrmUser":false,"recordingSent":false,"attended":false,"notes":""},
-    {"id":"BA-007","name":"Javier Navarro","aiAgentInstalled":false,"jarvisConnected":false,"jarvisCrmUser":false,"recordingSent":false,"attended":false,"notes":""},
-    {"id":"BA-008","name":"Jenn Waldman","aiAgentInstalled":false,"jarvisConnected":false,"jarvisCrmUser":false,"recordingSent":false,"attended":false,"notes":""},
-    {"id":"BA-009","name":"Max Adamson","aiAgentInstalled":false,"jarvisConnected":false,"jarvisCrmUser":false,"recordingSent":false,"attended":false,"notes":""},
-    {"id":"BA-010","name":"Samuel Elizondo","aiAgentInstalled":false,"jarvisConnected":false,"jarvisCrmUser":false,"recordingSent":false,"attended":false,"notes":""},
-    {"id":"BA-011","name":"Deborah Rodriguez","aiAgentInstalled":false,"jarvisConnected":false,"jarvisCrmUser":false,"recordingSent":false,"attended":false,"notes":""},
-    {"id":"BA-012","name":"Tony Gutierrez","aiAgentInstalled":true,"jarvisConnected":false,"jarvisCrmUser":false,"recordingSent":false,"attended":false,"notes":""}
+    {
+      "id": "BA-001",
+      "name": "Adam Pasternak",
+      "aiAgentInstalled": false,
+      "jarvisConnected": false,
+      "jarvisCrmUser": false,
+      "recordingSent": false,
+      "attended": false,
+      "notes": ""
+    },
+    {
+      "id": "BA-002",
+      "name": "Alejandro Carbajal",
+      "aiAgentInstalled": true,
+      "jarvisConnected": false,
+      "jarvisCrmUser": false,
+      "recordingSent": false,
+      "attended": false,
+      "notes": ""
+    },
+    {
+      "id": "BA-003",
+      "name": "David Roberts",
+      "aiAgentInstalled": false,
+      "jarvisConnected": false,
+      "jarvisCrmUser": false,
+      "recordingSent": false,
+      "attended": false,
+      "notes": ""
+    },
+    {
+      "id": "BA-004",
+      "name": "Debra Batterson",
+      "aiAgentInstalled": false,
+      "jarvisConnected": false,
+      "jarvisCrmUser": false,
+      "recordingSent": false,
+      "attended": false,
+      "notes": ""
+    },
+    {
+      "id": "BA-005",
+      "name": "Dennis Alvarado",
+      "aiAgentInstalled": false,
+      "jarvisConnected": false,
+      "jarvisCrmUser": false,
+      "recordingSent": false,
+      "attended": false,
+      "notes": ""
+    },
+    {
+      "id": "BA-006",
+      "name": "James Raeford",
+      "aiAgentInstalled": false,
+      "jarvisConnected": false,
+      "jarvisCrmUser": false,
+      "recordingSent": false,
+      "attended": false,
+      "notes": ""
+    },
+    {
+      "id": "BA-007",
+      "name": "Javier Navarro",
+      "aiAgentInstalled": false,
+      "jarvisConnected": false,
+      "jarvisCrmUser": false,
+      "recordingSent": false,
+      "attended": false,
+      "notes": ""
+    },
+    {
+      "id": "BA-008",
+      "name": "Jenn Waldman",
+      "aiAgentInstalled": false,
+      "jarvisConnected": false,
+      "jarvisCrmUser": false,
+      "recordingSent": false,
+      "attended": false,
+      "notes": ""
+    },
+    {
+      "id": "BA-009",
+      "name": "Max Adamson",
+      "aiAgentInstalled": false,
+      "jarvisConnected": false,
+      "jarvisCrmUser": false,
+      "recordingSent": false,
+      "attended": false,
+      "notes": ""
+    },
+    {
+      "id": "BA-010",
+      "name": "Samuel Elizondo",
+      "aiAgentInstalled": false,
+      "jarvisConnected": false,
+      "jarvisCrmUser": false,
+      "recordingSent": false,
+      "attended": false,
+      "notes": ""
+    },
+    {
+      "id": "BA-011",
+      "name": "Deborah Rodriguez",
+      "aiAgentInstalled": false,
+      "jarvisConnected": false,
+      "jarvisCrmUser": false,
+      "recordingSent": false,
+      "attended": false,
+      "notes": ""
+    },
+    {
+      "id": "BA-012",
+      "name": "Tony Gutierrez",
+      "aiAgentInstalled": true,
+      "jarvisConnected": false,
+      "jarvisCrmUser": false,
+      "recordingSent": false,
+      "attended": false,
+      "notes": ""
+    }
   ]
 }
