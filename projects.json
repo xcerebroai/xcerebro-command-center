@@ -1794,6 +1794,16 @@
       "status": "Pending",
       "notes": "Follow up. Interested in AI (Skool)",
       "id": "F-019"
+    },
+    {
+      "who": "Ben Robertos",
+      "service": "AI Agent",
+      "channel": "Facebook",
+      "due": "2026-07-20",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Follow up bootcamp signup (FB)",
+      "id": "F-020"
     }
   ],
   "bootcampAttendees": [
