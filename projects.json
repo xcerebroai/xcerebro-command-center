@@ -1744,6 +1744,16 @@
       "status": "Pending",
       "notes": "Brandon Boyce is interested in AI agent. His goal is to have a quality data and get better in lead generation. He set up Jarvis last year.) - Call on July 17 2pm CST with Q (Done calendar invite)",
       "id": "F-014"
+    },
+    {
+      "who": "Adam Pasternak",
+      "service": "Jarvis",
+      "channel": "Call",
+      "due": "2026-07-17",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Get Whatsapp Number so we can set up his Jarvis Account",
+      "id": "F-015"
     }
   ],
   "bootcampAttendees": [
