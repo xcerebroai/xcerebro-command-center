@@ -1784,6 +1784,16 @@
       "status": "Pending",
       "notes": "Interested in Jarvis CRM. Areas to improve or automate; intake and emails - ffup and set a meeting with Q",
       "id": "F-018"
+    },
+    {
+      "who": "Carlos Altamirano",
+      "service": "AI Skool",
+      "channel": "Facebook",
+      "due": "2026-07-20",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Follow up. Interested in AI (Skool)",
+      "id": "F-019"
     }
   ],
   "bootcampAttendees": [
