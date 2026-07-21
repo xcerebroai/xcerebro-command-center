@@ -1880,7 +1880,7 @@
     {
       "id": "BA-007",
       "name": "Javier Navarro",
-      "aiAgentInstalled": false,
+      "aiAgentInstalled": true,
       "jarvisConnected": false,
       "jarvisCrmUser": false,
       "recordingSent": true,
