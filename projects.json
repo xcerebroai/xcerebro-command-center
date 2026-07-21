@@ -1025,63 +1025,7 @@
       "id": "C-017",
       "name": "Jim Galvin",
       "company": "",
-      "projects": [
-        {
-          "id": "P-017",
-          "name": "Jarvis Build - Jim Galvin",
-          "buildType": "Jarvis",
-          "status": "Ready",
-          "priority": "Normal",
-          "owner": "Alexia / Q",
-          "start": "2026-06-23",
-          "targetEnd": "",
-          "tasks": [
-            {
-              "label": "Dashboard set up",
-              "done": false
-            },
-            {
-              "label": "Campaign built",
-              "done": false
-            },
-            {
-              "label": "Automations wired",
-              "done": false
-            },
-            {
-              "label": "AI Agent configured",
-              "done": false
-            },
-            {
-              "label": "Custom workflow mapped",
-              "done": false
-            },
-            {
-              "label": "A2P registration",
-              "done": false
-            },
-            {
-              "label": "Jarvis build",
-              "done": false
-            },
-            {
-              "label": "JV / Payment confirmed",
-              "done": false
-            }
-          ],
-          "blocker": "",
-          "nextAction": "",
-          "notes": "Appointment scheduled June 23. Meeting done.",
-          "payment": {
-            "total": 0,
-            "paid": 0,
-            "status": "",
-            "dueDate": "",
-            "lastFollowUp": "2026-07-21",
-            "notes": ""
-          }
-        }
-      ]
+      "projects": []
     },
     {
       "id": "C-018",
