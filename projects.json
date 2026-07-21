@@ -1832,7 +1832,7 @@
       "name": "Alejandro Carbajal",
       "aiAgentInstalled": true,
       "jarvisConnected": true,
-      "jarvisCrmUser": false,
+      "jarvisCrmUser": true,
       "recordingSent": true,
       "attended": true,
       "notes": ""
