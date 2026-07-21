@@ -1850,7 +1850,7 @@
     {
       "id": "BA-004",
       "name": "Debra Batterson",
-      "aiAgentInstalled": false,
+      "aiAgentInstalled": true,
       "jarvisConnected": false,
       "jarvisCrmUser": false,
       "recordingSent": false,
