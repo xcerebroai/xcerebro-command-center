@@ -1931,7 +1931,7 @@
       "id": "BA-012",
       "name": "Tony Gutierrez",
       "aiAgentInstalled": true,
-      "jarvisConnected": false,
+      "jarvisConnected": true,
       "jarvisCrmUser": false,
       "recordingSent": true,
       "attended": false,
