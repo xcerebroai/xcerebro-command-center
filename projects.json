@@ -1900,7 +1900,7 @@
     {
       "id": "BA-009",
       "name": "Max Adamson",
-      "aiAgentInstalled": false,
+      "aiAgentInstalled": true,
       "jarvisConnected": false,
       "jarvisCrmUser": false,
       "recordingSent": true,
