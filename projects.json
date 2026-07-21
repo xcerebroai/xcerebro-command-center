@@ -1923,7 +1923,7 @@
       "aiAgentInstalled": false,
       "jarvisConnected": false,
       "jarvisCrmUser": false,
-      "recordingSent": true,
+      "recordingSent": false,
       "attended": false,
       "notes": ""
     },
