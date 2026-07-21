@@ -1834,7 +1834,7 @@
       "jarvisConnected": true,
       "jarvisCrmUser": false,
       "recordingSent": true,
-      "attended": false,
+      "attended": true,
       "notes": ""
     },
     {
