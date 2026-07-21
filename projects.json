@@ -1932,7 +1932,7 @@
       "name": "Tony Gutierrez",
       "aiAgentInstalled": true,
       "jarvisConnected": true,
-      "jarvisCrmUser": false,
+      "jarvisCrmUser": true,
       "recordingSent": true,
       "attended": false,
       "notes": ""
