@@ -1892,7 +1892,7 @@
       "name": "Jenn Waldman",
       "aiAgentInstalled": false,
       "jarvisConnected": false,
-      "jarvisCrmUser": false,
+      "jarvisCrmUser": true,
       "recordingSent": true,
       "attended": false,
       "notes": ""
