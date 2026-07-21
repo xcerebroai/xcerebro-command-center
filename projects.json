@@ -1920,7 +1920,7 @@
     {
       "id": "BA-011",
       "name": "Deborah Rodriguez",
-      "aiAgentInstalled": false,
+      "aiAgentInstalled": true,
       "jarvisConnected": false,
       "jarvisCrmUser": false,
       "recordingSent": true,
