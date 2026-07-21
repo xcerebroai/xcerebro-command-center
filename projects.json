@@ -1833,7 +1833,7 @@
       "aiAgentInstalled": true,
       "jarvisConnected": false,
       "jarvisCrmUser": false,
-      "recordingSent": false,
+      "recordingSent": true,
       "attended": false,
       "notes": ""
     },
