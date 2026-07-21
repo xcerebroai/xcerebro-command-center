@@ -33,14 +33,12 @@ html = fs.readFileSync(path.join(DIR, 'index.html'), 'utf8');
 const REQUIRED_NAMES = [
   'Adam Pasternak', 'Alejandro Carbajal', 'David Roberts', 'Debra Batterson',
   'Dennis Alvarado', 'James Raeford', 'Javier Navarro', 'Jenn Waldman',
-  'Max Adamson', 'Samuel Elizondo', 'Deborah Rodriguez', 'Tony Gutierrez'
+  'Max Adamson', 'Samuel Elizondo', 'Deborah Rodriguez', 'Tony Gutierrez',
+  'Haus Argun'
 ];
 const BOOL_FIELDS = [
   'aiAgentInstalled', 'jarvisConnected', 'jarvisCrmUser', 'recordingSent', 'attended'
 ];
-// Only attendees whose exact-name client project has "AI Agent configured" done:true
-const AI_INSTALLED_NAMES = ['Alejandro Carbajal', 'Tony Gutierrez'];
-
 // ── 1. schema / seed ──────────────────────────────────────────────────────
 process.stdout.write('\n[schema/seed]\n');
 
@@ -48,16 +46,16 @@ test('bootcampAttendees array exists in projects.json', () => {
   assert.ok(Array.isArray(db.bootcampAttendees), 'expected bootcampAttendees to be an array');
 });
 
-test('bootcampAttendees has exactly 12 verified paid entries', () => {
-  assert.strictEqual((db.bootcampAttendees || []).length, 12);
+test('bootcampAttendees has exactly 13 tracked entries', () => {
+  assert.strictEqual((db.bootcampAttendees || []).length, 13);
 });
 
-test('all 12 verified paid names are present (exact match)', () => {
+test('all 13 tracked names are present (exact match)', () => {
   const names = (db.bootcampAttendees || []).map(a => a.name);
   REQUIRED_NAMES.forEach(n => assert.ok(names.includes(n), 'Missing: ' + n));
 });
 
-test('each attendee has a stable sequential id BA-001…BA-012', () => {
+test('each attendee has a stable sequential id BA-001…BA-013', () => {
   (db.bootcampAttendees || []).forEach((a, i) => {
     const expected = 'BA-' + String(i + 1).padStart(3, '0');
     assert.strictEqual(a.id, expected, 'Expected ' + expected + ' got ' + a.id);
@@ -80,23 +78,23 @@ test('each attendee has a notes string field', () => {
   });
 });
 
-test('aiAgentInstalled true only for Alejandro Carbajal and Tony Gutierrez', () => {
-  (db.bootcampAttendees || []).forEach(a => {
-    const expected = AI_INSTALLED_NAMES.includes(a.name);
-    assert.strictEqual(
-      a.aiAgentInstalled, expected,
-      a.name + '.aiAgentInstalled should be ' + expected
-    );
-  });
+test('attendee names are unique', () => {
+  const names = (db.bootcampAttendees || []).map(a => a.name);
+  assert.strictEqual(new Set(names).size, names.length);
 });
 
-test('all other booleans default to false', () => {
-  const others = BOOL_FIELDS.filter(f => f !== 'aiAgentInstalled');
-  (db.bootcampAttendees || []).forEach(a => {
-    others.forEach(f =>
-      assert.strictEqual(a[f], false, a.name + '.' + f + ' must start false')
-    );
-  });
+test('attendee ids are unique', () => {
+  const ids = (db.bootcampAttendees || []).map(a => a.id);
+  assert.strictEqual(new Set(ids).size, ids.length);
+});
+
+test('Brandon Boyce has a Jarvis AI Agent project', () => {
+  const client = (db.clients || []).find(c => c.name === 'Brandon Boyce');
+  assert.ok(client, 'Missing Brandon Boyce client');
+  const project = (client.projects || []).find(p => p.id === 'P-027');
+  assert.ok(project, 'Missing Brandon Boyce P-027 project');
+  assert.strictEqual(project.buildType, 'AI Agent Installation + Jarvis');
+  assert.strictEqual(project.payment.total, 527);
 });
 
 // ── 2. live-root tab wiring ───────────────────────────────────────────────

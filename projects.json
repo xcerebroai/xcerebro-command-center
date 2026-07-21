@@ -1408,6 +1408,68 @@
           }
         }
       ]
+    },
+    {
+      "id": "C-027",
+      "name": "Brandon Boyce",
+      "company": "Boyce Property Solutions",
+      "projects": [
+        {
+          "id": "P-027",
+          "name": "Jarvis AI Agent Installation",
+          "buildType": "AI Agent Installation + Jarvis",
+          "status": "Payment Follow-Up",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-07-17",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "blocker": "Payment status and final Jarvis AI Agent scope need confirmation.",
+          "nextAction": "Confirm payment and intake, configure the AI agent in Jarvis, wire the required workflows, and QA the full inbound flow.",
+          "notes": "Booked July 17 for AI agent installation and Jarvis setup. Follow-up record references a $527 payment.",
+          "payment": {
+            "total": 527,
+            "paid": 0,
+            "status": "Unpaid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-20",
+            "notes": "Payment amount referenced in follow-up; payment confirmation is not recorded."
+          }
+        }
+      ]
     }
   ],
   "paymentStatusOptions": [
@@ -1824,6 +1886,16 @@
       "recordingSent": true,
       "attended": true,
       "notes": ""
+    },
+    {
+      "id": "BA-013",
+      "name": "Haus Argun",
+      "aiAgentInstalled": false,
+      "jarvisConnected": false,
+      "jarvisCrmUser": false,
+      "recordingSent": false,
+      "attended": false,
+      "notes": "Added to the AI Agent Bootcamp tracker on July 21, 2026."
     }
   ]
 }
