@@ -1831,7 +1831,7 @@
       "id": "BA-002",
       "name": "Alejandro Carbajal",
       "aiAgentInstalled": true,
-      "jarvisConnected": false,
+      "jarvisConnected": true,
       "jarvisCrmUser": false,
       "recordingSent": true,
       "attended": false,
