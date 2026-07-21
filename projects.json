@@ -1870,7 +1870,7 @@
     {
       "id": "BA-006",
       "name": "James Raeford",
-      "aiAgentInstalled": false,
+      "aiAgentInstalled": true,
       "jarvisConnected": false,
       "jarvisCrmUser": false,
       "recordingSent": false,
