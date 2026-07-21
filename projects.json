@@ -1872,7 +1872,7 @@
       "name": "James Raeford",
       "aiAgentInstalled": true,
       "jarvisConnected": false,
-      "jarvisCrmUser": false,
+      "jarvisCrmUser": true,
       "recordingSent": true,
       "attended": false,
       "notes": ""
