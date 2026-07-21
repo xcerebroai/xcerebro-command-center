@@ -1031,63 +1031,7 @@
       "id": "C-018",
       "name": "Aaron Howard",
       "company": "",
-      "projects": [
-        {
-          "id": "P-018",
-          "name": "AI Automation - Aaron Howard",
-          "buildType": "AI Automation",
-          "status": "Ready",
-          "priority": "Normal",
-          "owner": "Alexia / Q",
-          "start": "2026-06-17",
-          "targetEnd": "",
-          "tasks": [
-            {
-              "label": "Dashboard set up",
-              "done": false
-            },
-            {
-              "label": "Campaign built",
-              "done": false
-            },
-            {
-              "label": "Automations wired",
-              "done": false
-            },
-            {
-              "label": "AI Agent configured",
-              "done": false
-            },
-            {
-              "label": "Custom workflow mapped",
-              "done": false
-            },
-            {
-              "label": "A2P registration",
-              "done": false
-            },
-            {
-              "label": "Jarvis build",
-              "done": false
-            },
-            {
-              "label": "JV / Payment confirmed",
-              "done": false
-            }
-          ],
-          "blocker": "",
-          "nextAction": "",
-          "notes": "Appointment scheduled June 17. Meeting done.",
-          "payment": {
-            "total": 0,
-            "paid": 0,
-            "status": "",
-            "dueDate": "",
-            "lastFollowUp": "",
-            "notes": ""
-          }
-        }
-      ]
+      "projects": []
     },
     {
       "id": "C-019",
