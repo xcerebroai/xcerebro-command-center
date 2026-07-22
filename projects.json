@@ -1764,6 +1764,16 @@
       "status": "Pending",
       "notes": "Follow up bootcamp signup (Skool) sent 7/20",
       "id": "F-021"
+    },
+    {
+      "who": "Nikki Medina",
+      "service": "AI Skool",
+      "channel": "Facebook",
+      "due": "2026-07-22",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Follow up membership - AI skool $17",
+      "id": "F-022"
     }
   ],
   "bootcampAttendees": [
