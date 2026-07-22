@@ -1418,7 +1418,7 @@
           "id": "P-027",
           "name": "Jarvis AI Agent Installation",
           "buildType": "AI Agent Installation + Jarvis",
-          "status": "Payment Follow-Up",
+          "status": "Planning",
           "priority": "High",
           "owner": "Alexia / Q",
           "start": "2026-07-17",
@@ -1463,7 +1463,7 @@
           "payment": {
             "total": 527,
             "paid": 0,
-            "status": "Unpaid",
+            "status": "Paid",
             "dueDate": "",
             "lastFollowUp": "2026-07-20",
             "notes": "Payment amount referenced in follow-up; payment confirmation is not recorded."
