@@ -97,6 +97,17 @@ test('Brandon Boyce has a Jarvis AI Agent project', () => {
   assert.strictEqual(project.payment.total, 527);
 });
 
+test('X Cerebro AI tracks the Dark Phoenix operations knowledgebase', () => {
+  const client = (db.clients || []).find(c => c.id === 'C-026' && c.name === 'X Cerebro AI');
+  assert.ok(client, 'Missing X Cerebro AI internal client');
+  const project = (client.projects || []).find(p => p.id === 'P-028');
+  assert.ok(project, 'Missing Dark Phoenix P-028 project');
+  assert.strictEqual(project.name, 'Dark Phoenix Bot Operations Knowledgebase');
+  assert.strictEqual(project.buildType, 'AI Agent Knowledgebase + SOPs');
+  assert.ok(project.tasks.some(t => t.label === 'Knowledgebase rebuilt around Alexia operations' && t.done));
+  assert.ok(project.tasks.some(t => t.label === 'Install knowledgebase into Dark Phoenix bot' && !t.done));
+});
+
 // ── 2. live-root tab wiring ───────────────────────────────────────────────
 process.stdout.write('\n[live-root tab wiring]\n');
 
