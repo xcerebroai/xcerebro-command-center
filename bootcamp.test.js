@@ -97,15 +97,10 @@ test('Brandon Boyce has a Jarvis AI Agent project', () => {
   assert.strictEqual(project.payment.total, 527);
 });
 
-test('X Cerebro AI tracks the Dark Phoenix operations knowledgebase', () => {
-  const client = (db.clients || []).find(c => c.id === 'C-026' && c.name === 'X Cerebro AI');
-  assert.ok(client, 'Missing X Cerebro AI internal client');
-  const project = (client.projects || []).find(p => p.id === 'P-028');
-  assert.ok(project, 'Missing Dark Phoenix P-028 project');
-  assert.strictEqual(project.name, 'Dark Phoenix Bot Operations Knowledgebase');
-  assert.strictEqual(project.buildType, 'AI Agent Knowledgebase + SOPs');
-  assert.ok(project.tasks.some(t => t.label === 'Knowledgebase rebuilt around Alexia operations' && t.done));
-  assert.ok(project.tasks.some(t => t.label === 'Install knowledgebase into Dark Phoenix bot' && !t.done));
+test('Dark Phoenix knowledgebase is not exposed on the Command Center', () => {
+  const projects = (db.clients || []).flatMap(c => c.projects || []);
+  assert.ok(!projects.some(p => p.id === 'P-028'), 'P-028 must not be stored on the Command Center');
+  assert.ok(!projects.some(p => /dark phoenix.*knowledgebase/i.test(p.name || '')), 'knowledgebase project must not be displayed');
 });
 
 // ── 2. live-root tab wiring ───────────────────────────────────────────────
@@ -186,6 +181,29 @@ test('render() conditionally calls renderBootcamp via bctable check', () => {
     html.includes("getElementById('bctable'))renderBootcamp"),
     'render() must guard-call renderBootcamp with bctable check'
   );
+});
+
+// ── 5. daily progress reporting ──────────────────────────────────────────
+process.stdout.write('\n[daily progress reporting]\n');
+
+test('Daily Progress tab and view exist', () => {
+  assert.ok(html.includes('data-tab="progress"'), 'missing Daily Progress tab');
+  assert.ok(html.includes('id="view-progress"'), 'missing Daily Progress view');
+  assert.ok(html.includes('id="dailyProgress"'), 'missing daily progress report container');
+});
+
+test('Daily Progress is routed through VIEWS and switchTab', () => {
+  assert.ok(html.includes('progress:"view-progress"'), 'VIEWS should map progress to view-progress');
+  assert.ok(html.includes('if(t==="progress")renderDailyProgress()'), 'switchTab should render daily progress');
+});
+
+test('Daily Progress computes live project, task, risk, payment, and follow-up data', () => {
+  const start = html.indexOf('function renderDailyProgress');
+  assert.ok(start >= 0, 'missing renderDailyProgress function');
+  const body = html.slice(start, start + 7000);
+  ['allProjects()', 'projPct', 'health(', 'payment', 'followups()'].forEach(token => {
+    assert.ok(body.includes(token), 'renderDailyProgress missing ' + token);
+  });
 });
 
 // ── summary ───────────────────────────────────────────────────────────────

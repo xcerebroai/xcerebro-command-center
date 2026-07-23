@@ -1350,69 +1350,6 @@
             "lastFollowUp": "2026-07-15",
             "notes": "11 paid attendees at $250 each: 10 direct Bootcamp payment-link payments plus Arelys Santamaria’s earlier $250 webinar-offer payment. Will Moleon remains unpaid after 2 failed attempts."
           }
-        },
-        {
-          "id": "P-028",
-          "name": "Dark Phoenix Bot Operations Knowledgebase",
-          "buildType": "AI Agent Knowledgebase + SOPs",
-          "status": "Build Mode",
-          "priority": "High",
-          "owner": "Alexia",
-          "start": "2026-07-23",
-          "targetEnd": "",
-          "tasks": [
-            {
-              "label": "Dark Phoenix source knowledge reviewed",
-              "done": true
-            },
-            {
-              "label": "Knowledgebase rebuilt around Alexia operations",
-              "done": true
-            },
-            {
-              "label": "Social media management SOP added",
-              "done": true
-            },
-            {
-              "label": "CRM and Jarvis management SOP added",
-              "done": true
-            },
-            {
-              "label": "Task handling and project management SOPs added",
-              "done": true
-            },
-            {
-              "label": "Coding and development SOP added",
-              "done": true
-            },
-            {
-              "label": "Installation and troubleshooting SOPs added",
-              "done": true
-            },
-            {
-              "label": "Markdown, HTML, and PDF generated and verified",
-              "done": true
-            },
-            {
-              "label": "Install knowledgebase into Dark Phoenix bot",
-              "done": false
-            },
-            {
-              "label": "Validate live bot responses against SOPs",
-              "done": false
-            }
-          ],
-          "blocker": "The target Dark Phoenix bot instance and its knowledgebase installation path are not recorded in the Command Center.",
-          "nextAction": "Identify the live Dark Phoenix bot configuration, install the approved knowledgebase, and test social media, CRM, task handling, coding, and installation response paths.",
-          "notes": "Standalone Dark Phoenix operations knowledgebase completed in Markdown, HTML, and PDF. It is centered on Alexia's operating SOPs; Q voice appears only for confirmed Q-facing content.",
-          "payment": {
-            "total": 0,
-            "paid": 0,
-            "status": "Paid",
-            "dueDate": "",
-            "lastFollowUp": "2026-07-23",
-            "notes": "Internal X Cerebro AI project."
-          }
         }
       ]
     },

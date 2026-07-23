@@ -337,6 +337,7 @@
 
   <nav class="tabs" id="tabs">
     <button class="tab on" data-tab="overview">◎ Overview</button>
+    <button class="tab" data-tab="progress">📈 Daily Progress</button>
     <button class="tab" data-tab="command">◉ Command Center</button>
     <button class="tab" data-tab="payments">💲 Payments <span class="tabbadge" id="payBadge" style="display:none"></span></button>
     <button class="tab" data-tab="followups">📞 Follow-ups <span class="tabbadge" id="fuBadge" style="display:none"></span></button>
@@ -356,6 +357,18 @@
       <section class="panel"><h2><span class="tick">💲</span> Payments Health</h2><div id="ovPay" style="padding:16px 18px"></div></section>
     </div>
   </div><!-- /view-overview -->
+
+  <div id="view-progress" style="display:none">
+    <div class="hero"><h1 class="ghead xxl">Daily Progress</h1><p id="progressStamp">Live operational report</p></div>
+    <div id="dailyProgress">
+      <section class="kpis" id="progressKpis"></section>
+      <div class="grid2">
+        <section class="panel"><h2><span class="tick">📊</span> Project Progress</h2><div class="moves" id="progressProjects"></div></section>
+        <section class="panel"><h2><span class="tick">⚠️</span> Needs Attention</h2><div class="moves" id="progressAttention"></div></section>
+      </div>
+      <section class="panel" style="margin-top:16px"><h2><span class="tick">⚡</span> Next Actions</h2><div class="moves" id="progressMoves"></div></section>
+    </div>
+  </div><!-- /view-progress -->
 
   <div id="view-command" style="display:none">
   <section class="kpis" id="kpis"></section>
@@ -581,6 +594,7 @@ function render(){
 
   bindBoard();updatePayBadge();updateFuBadge();updateCallBadge();updateBootcampBadge();
   if(document.getElementById("ovStats"))renderOverview();
+  if(document.getElementById("dailyProgress"))renderDailyProgress();
   if(document.getElementById("paytable"))renderPayments();
   if(document.getElementById("futable"))renderFollowups();
   if(document.getElementById("calltable"))renderCalls();
@@ -664,11 +678,12 @@ function readPayment(base){const g=id=>document.getElementById(id);
     dueDate:g('pay_due').value,lastFollowUp:g('pay_follow').value,notes:g('pay_notes').value.trim()};}
 
 let activeTab="overview";
-const VIEWS={overview:"view-overview",command:"view-command",payments:"view-payments",followups:"view-followups",calls:"view-calls",bootcamp:"view-bootcamp"};
+const VIEWS={overview:"view-overview",progress:"view-progress",command:"view-command",payments:"view-payments",followups:"view-followups",calls:"view-calls",bootcamp:"view-bootcamp"};
 function switchTab(t){activeTab=t;
   document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("on",b.dataset.tab===t));
   Object.keys(VIEWS).forEach(k=>{const el=document.getElementById(VIEWS[k]);if(el)el.style.display=k===t?"":"none";});
   if(t==="overview")renderOverview();
+  if(t==="progress")renderDailyProgress();
   if(t==="payments")renderPayments();
   if(t==="followups")renderFollowups();
   if(t==="calls")renderCalls();
@@ -728,6 +743,45 @@ function renderOverview(){
   document.getElementById("ovMoves").innerHTML=moves.map((x,i)=>{const d=daysLeft(x.p);const col=d<0?"var(--red)":d<=3?"var(--amber)":"var(--mute)";
     return `<div class="move" data-cid="${x.c.id}" data-pid="${x.p.id}"><div class="rank">${String(i+1).padStart(2,"0")}</div><div><div class="m-cl">${esc(x.c.name)}</div><div class="m-ac">${esc(x.p.nextAction||"")}</div></div><div class="m-days" style="color:${col}">${d}d</div></div>`;}).join("")||'<div style="padding:16px;color:var(--mute)">All clear.</div>';
   document.querySelectorAll('#ovMoves .move[data-pid]').forEach(el=>el.onclick=()=>{switchTab('command');openProject(el.dataset.cid,el.dataset.pid);});
+}
+
+/* ---------- daily operational progress ---------- */
+function renderDailyProgress(){
+  if(!document.getElementById("dailyProgress"))return;
+  const PRJ=allProjects();
+  let doneT=0,totT=0;
+  PRJ.forEach(x=>(x.p.tasks||[]).forEach(t=>{totT++;if(t.done)doneT++;}));
+  const avg=totT?doneT/totT:0;
+  const live=PRJ.filter(x=>["Ready","Live"].includes(x.p.status)).length;
+  const risks=PRJ.filter(x=>["Overdue","At Risk","Blocked"].includes(health(x.p)));
+  const paymentOpen=PRJ.filter(x=>{const payment=x.p.payment||{};return Math.max(0,(+payment.total||0)-(+payment.paid||0))>0;});
+  const pendingFollowups=followups().filter(f=>f.status!=="Done");
+  const overdueFollowups=pendingFollowups.filter(f=>fuOverdue(f));
+  const stamp=DB.meta&&DB.meta.updated?DB.meta.updated:new Date().toISOString().slice(0,10);
+  document.getElementById("progressStamp").textContent=`Live report · board updated ${stamp}`;
+  const kpis=[
+    ["Portfolio Progress",pct(avg),doneT+" of "+totT+" tasks complete",avg<.5?"warn":""],
+    ["Ready / Live",live,PRJ.length+" projects tracked",""],
+    ["Needs Attention",risks.length,"Overdue, at risk, or blocked",risks.length?"crit":""],
+    ["Open Follow-ups",pendingFollowups.length,overdueFollowups.length+" overdue",overdueFollowups.length?"warn":""],
+    ["Open Payments",paymentOpen.length,"Projects with a balance",paymentOpen.length?"warn":""]
+  ];
+  document.getElementById("progressKpis").innerHTML=kpis.map(k=>`<div class="kpi ${k[3]}"><div class="k-label">${k[0]}</div><div class="k-num">${k[1]}</div><div class="k-sub">${k[2]}</div></div>`).join("");
+
+  const ranked=PRJ.slice().sort((a,b)=>urgency(a.p)-urgency(b.p));
+  document.getElementById("progressProjects").innerHTML=ranked.map(x=>{
+    const open=(x.p.tasks||[]).filter(t=>!t.done).length;
+    return `<div class="move" data-progress-cid="${x.c.id}" data-progress-pid="${x.p.id}"><div class="rank">${pct(projPct(x.p))}</div><div><div class="m-cl">${esc(x.c.name)} · ${esc(x.p.name)}</div><div class="m-ac">${open} open task${open===1?'':'s'} · ${esc(x.p.status)}</div></div><div class="m-days">${esc(health(x.p))}</div></div>`;
+  }).join("")||'<div style="padding:18px;color:var(--mute)">No projects recorded.</div>';
+
+  const attention=[];
+  risks.forEach(x=>attention.push(["PROJECT",x.c.name+" · "+x.p.name,health(x.p)]));
+  paymentOpen.forEach(x=>{const payment=x.p.payment||{};const balance=Math.max(0,(+payment.total||0)-(+payment.paid||0));attention.push(["PAYMENT",x.c.name+" · "+x.p.name,money(balance)+" open"]);});
+  overdueFollowups.forEach(f=>attention.push(["FOLLOW-UP",f.who||"Unassigned",f.due||"Overdue"]));
+  document.getElementById("progressAttention").innerHTML=attention.slice(0,12).map((a,i)=>`<div class="move"><div class="rank">${String(i+1).padStart(2,"0")}</div><div><div class="m-cl">${esc(a[0])} · ${esc(a[1])}</div><div class="m-ac">${esc(a[2])}</div></div></div>`).join("")||'<div style="padding:18px;color:var(--green)">No urgent items.</div>';
+
+  document.getElementById("progressMoves").innerHTML=ranked.filter(x=>x.p.nextAction).slice(0,8).map((x,i)=>`<div class="move" data-progress-cid="${x.c.id}" data-progress-pid="${x.p.id}"><div class="rank">${String(i+1).padStart(2,"0")}</div><div><div class="m-cl">${esc(x.c.name)} · ${esc(x.p.name)}</div><div class="m-ac">${esc(x.p.nextAction)}</div></div><div class="m-days">${esc(x.p.owner||"")}</div></div>`).join("")||'<div style="padding:18px;color:var(--mute)">No next actions recorded.</div>';
+  document.querySelectorAll('[data-progress-pid]').forEach(el=>el.onclick=()=>{switchTab('command');openProject(el.dataset.progressCid,el.dataset.progressPid);});
 }
 
 /* ---------- follow-ups (Dyan) ---------- */
