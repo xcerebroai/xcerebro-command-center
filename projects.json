@@ -1244,7 +1244,7 @@
       "projects": [
         {
           "id": "P-025",
-          "name": "Scraper + AI Agent Build - Raymund Mendez",
+          "name": "Scraper + AI Agent Build - Ray Cervantes",
           "buildType": "Scraper + AI Agent",
           "status": "Ready",
           "priority": "Normal",
@@ -1291,8 +1291,8 @@
           "payment": {
             "total": 700,
             "paid": 700,
-            "dueDate": "",
             "status": "Paid",
+            "dueDate": "",
             "lastFollowUp": "2026-07-09",
             "notes": "Paid in full July 9."
           }
