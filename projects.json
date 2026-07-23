@@ -1362,7 +1362,7 @@
           "id": "P-027",
           "name": "Jarvis AI Agent Installation",
           "buildType": "AI Agent Installation + Jarvis",
-          "status": "Planning",
+          "status": "Testing",
           "priority": "High",
           "owner": "Alexia / Q",
           "start": "2026-07-17",
@@ -1382,7 +1382,7 @@
             },
             {
               "label": "AI Agent configured",
-              "done": false
+              "done": true
             },
             {
               "label": "Custom workflow mapped",
@@ -1390,11 +1390,11 @@
             },
             {
               "label": "A2P registration",
-              "done": false
+              "done": true
             },
             {
               "label": "Jarvis build",
-              "done": false
+              "done": true
             },
             {
               "label": "JV / Payment confirmed",
