@@ -901,63 +901,7 @@
       "id": "C-015",
       "name": "Mike Dente",
       "company": "",
-      "projects": [
-        {
-          "name": "Scrapers and System",
-          "buildType": "AI Agent Project",
-          "status": "Payment Follow-Up",
-          "priority": "High",
-          "owner": "Alexia / Q",
-          "targetEnd": "",
-          "blocker": "",
-          "nextAction": "",
-          "notes": "",
-          "tasks": [
-            {
-              "label": "Dashboard set up",
-              "done": false
-            },
-            {
-              "label": "Campaign built",
-              "done": false
-            },
-            {
-              "label": "Automations wired",
-              "done": false
-            },
-            {
-              "label": "AI Agent configured",
-              "done": false
-            },
-            {
-              "label": "Custom workflow mapped",
-              "done": false
-            },
-            {
-              "label": "A2P registration",
-              "done": false
-            },
-            {
-              "label": "Jarvis build",
-              "done": false
-            },
-            {
-              "label": "JV / Payment confirmed",
-              "done": false
-            }
-          ],
-          "payment": {
-            "total": 2000,
-            "paid": 1000,
-            "status": "Partial",
-            "dueDate": "",
-            "lastFollowUp": "2026-07-23",
-            "notes": ""
-          },
-          "id": "P-015",
-          "start": "2026-07-08"
-        }
-      ]
+      "projects": []
     },
     {
       "id": "C-016",
