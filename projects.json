@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-07-23"
+    "updated": "2026-07-24"
   },
   "statusOptions": [
     "Planning",
@@ -1718,6 +1718,16 @@
       "status": "Pending",
       "notes": "Follow up membership - AI skool $17",
       "id": "F-022"
+    },
+    {
+      "who": "Gee Cris / Christian Gamboa",
+      "service": "Jarvis",
+      "channel": "Call",
+      "due": "2026-07-24",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Set a meeting with Q. Insterested in Jarvis Lifetime",
+      "id": "F-023"
     }
   ],
   "bootcampAttendees": [
