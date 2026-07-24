@@ -1728,6 +1728,16 @@
       "status": "Pending",
       "notes": "Set a meeting with Q. Insterested in Jarvis Lifetime",
       "id": "F-023"
+    },
+    {
+      "who": "Aaron Hulse",
+      "service": "Jarvis",
+      "channel": "Call",
+      "due": "2026-07-24",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Set up a meeting with Q / Jarvis Subscription",
+      "id": "F-024"
     }
   ],
   "bootcampAttendees": [
