@@ -1370,15 +1370,15 @@
           "tasks": [
             {
               "label": "Dashboard set up",
-              "done": false
+              "done": true
             },
             {
               "label": "Campaign built",
-              "done": false
+              "done": true
             },
             {
               "label": "Automations wired",
-              "done": false
+              "done": true
             },
             {
               "label": "AI Agent configured",
