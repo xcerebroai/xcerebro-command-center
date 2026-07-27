@@ -1738,6 +1738,16 @@
       "status": "Pending",
       "notes": "Set up a meeting with Q / Jarvis Subscription meeting at 2pm CST July 27",
       "id": "F-024"
+    },
+    {
+      "who": "Cameron Villaruel",
+      "service": "Other",
+      "channel": "Call",
+      "due": "2026-07-27",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "$2500 custom project. Need to set up a meeting with Q.",
+      "id": "F-025"
     }
   ],
   "bootcampAttendees": [
