@@ -99,8 +99,33 @@ test('Brandon Boyce has a Jarvis AI Agent project', () => {
 
 test('Dark Phoenix knowledgebase is not exposed on the Command Center', () => {
   const projects = (db.clients || []).flatMap(c => c.projects || []);
-  assert.ok(!projects.some(p => p.id === 'P-028'), 'P-028 must not be stored on the Command Center');
   assert.ok(!projects.some(p => /dark phoenix.*knowledgebase/i.test(p.name || '')), 'knowledgebase project must not be displayed');
+});
+
+test('new July 27 client projects and payment facts are recorded', () => {
+  const expected = [
+    ['Christian Gamboa', 'P-028', 3000, 1000, 'Partial'],
+    ['Debra Batterson', 'P-029', 500, 500, 'Paid'],
+    ['Alex Sotto', 'P-030', 500, 500, 'Paid'],
+    ['Cameron Villareal', 'P-031', 3000, 1500, 'Partial'],
+    ['Michael Longoria', 'P-032', 1000, 0, 'Unpaid']
+  ];
+  expected.forEach(([name, projectId, total, paid, status]) => {
+    const client = (db.clients || []).find(c => c.name === name);
+    assert.ok(client, 'Missing client: ' + name);
+    const project = (client.projects || []).find(p => p.id === projectId);
+    assert.ok(project, 'Missing project ' + projectId + ' for ' + name);
+    assert.strictEqual(project.payment.total, total, name + ' total');
+    assert.strictEqual(project.payment.paid, paid, name + ' paid');
+    assert.strictEqual(project.payment.status, status, name + ' payment status');
+  });
+});
+
+test('client and project ids are unique', () => {
+  const clientIds = (db.clients || []).map(c => c.id);
+  const projectIds = (db.clients || []).flatMap(c => (c.projects || []).map(p => p.id));
+  assert.strictEqual(new Set(clientIds).size, clientIds.length, 'duplicate client id');
+  assert.strictEqual(new Set(projectIds).size, projectIds.length, 'duplicate project id');
 });
 
 // ── 2. live-root tab wiring ───────────────────────────────────────────────

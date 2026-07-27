@@ -1414,6 +1414,304 @@
           }
         }
       ]
+    },
+    {
+      "id": "C-028",
+      "name": "Christian Gamboa",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-028",
+          "name": "Jarvis Lifetime Account and AI Agent",
+          "buildType": "Jarvis Lifetime + AI Agent",
+          "status": "Payment Follow-Up",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-07-27",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "blocker": "$2,000 balance remains unpaid on the $3,000 project.",
+          "nextAction": "Follow up on the $2,000 balance, then confirm scope and begin onboarding.",
+          "notes": "Jarvis Lifetime account and AI Agent project. $1,000 paid; $2,000 remains.",
+          "payment": {
+            "total": 3000,
+            "paid": 1000,
+            "status": "Partial",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-27",
+            "notes": "$1,000 paid; $2,000 outstanding."
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-029",
+      "name": "Debra Batterson",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-029",
+          "name": "AI Agent Coaching",
+          "buildType": "AI Agent Coaching",
+          "status": "Ready",
+          "priority": "Normal",
+          "owner": "Alexia / Q",
+          "start": "2026-07-27",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Coaching intake completed",
+              "done": false
+            },
+            {
+              "label": "Coaching session scheduled",
+              "done": false
+            },
+            {
+              "label": "AI Agent use case defined",
+              "done": false
+            },
+            {
+              "label": "Coaching delivered",
+              "done": false
+            },
+            {
+              "label": "Implementation follow-up completed",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": true
+            }
+          ],
+          "blocker": "Coaching scope and schedule need confirmation.",
+          "nextAction": "Confirm coaching goals, schedule the session, and prepare the AI Agent coaching plan.",
+          "notes": "Paid $500 for AI Agent coaching.",
+          "payment": {
+            "total": 500,
+            "paid": 500,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-27",
+            "notes": "$500 payment confirmed for AI Agent coaching."
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-030",
+      "name": "Alex Sotto",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-030",
+          "name": "AI Agents",
+          "buildType": "AI Agent Project",
+          "status": "Ready",
+          "priority": "Normal",
+          "owner": "Alexia / Q",
+          "start": "2026-07-27",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": true
+            }
+          ],
+          "blocker": "AI Agent use case and build scope need confirmation.",
+          "nextAction": "Collect intake details, define the agent outcome, and map the build.",
+          "notes": "Paid $500 for AI Agents.",
+          "payment": {
+            "total": 500,
+            "paid": 500,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-27",
+            "notes": "$500 payment confirmed for AI Agents."
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-031",
+      "name": "Cameron Villareal",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-031",
+          "name": "Custom AI Project",
+          "buildType": "Custom AI Project",
+          "status": "Payment Follow-Up",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-07-27",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Project scope confirmed",
+              "done": false
+            },
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "QA completed",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "blocker": "$1,500 balance remains unpaid on the $3,000 project.",
+          "nextAction": "Follow up on the $1,500 balance and confirm the custom project scope.",
+          "notes": "$1,500 paid; $1,500 remains on the $3,000 custom project. Existing follow-up used the spelling Cameron Villaruel.",
+          "payment": {
+            "total": 3000,
+            "paid": 1500,
+            "status": "Partial",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-27",
+            "notes": "$1,500 paid; $1,500 outstanding."
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-032",
+      "name": "Michael Longoria",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-032",
+          "name": "Jarvis Lifetime and AI Agent",
+          "buildType": "Jarvis Lifetime + AI Agent",
+          "status": "Payment Follow-Up",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-07-27",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "blocker": "Payment confirmation and final scope are needed.",
+          "nextAction": "Confirm payment status for the $500 Jarvis Lifetime account and $500 AI Agent project, then begin onboarding.",
+          "notes": "Offer recorded as $500 Jarvis Lifetime plus $500 AI Agent. Payment was not stated as confirmed.",
+          "payment": {
+            "total": 1000,
+            "paid": 0,
+            "status": "Unpaid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-27",
+            "notes": "Payment confirmation not provided; recorded as unpaid pending verification."
+          }
+        }
+      ]
     }
   ],
   "paymentStatusOptions": [
@@ -1726,7 +2024,7 @@
       "due": "2026-07-27",
       "owner": "Dyan",
       "status": "Pending",
-      "notes": "Done meeting with Q. He’s signing up for one on one coaching. Invoice sent. Agreement made. $3.000 paid over 3 month period of time. Awaiting first month payment. Need to follow up and see if he send money on zelle sent ffup 7/27 1pm cst",
+      "notes": "Done meeting with Q. Jarvis Lifetime account and AI Agent project total is $3,000. $1,000 paid; $2,000 remains unpaid. Follow up on outstanding balance.",
       "id": "F-023"
     },
     {
@@ -1740,13 +2038,13 @@
       "id": "F-024"
     },
     {
-      "who": "Cameron Villaruel",
-      "service": "Other",
+      "who": "Cameron Villareal",
+      "service": "Custom AI Project",
       "channel": "Call",
       "due": "2026-07-27",
       "owner": "Dyan",
       "status": "Pending",
-      "notes": "$2500 custom project. Need to set up a meeting with Q.",
+      "notes": "$3,000 custom project. $1,500 paid; $1,500 remains unpaid. Follow up on balance and confirm scope with Q.",
       "id": "F-025"
     }
   ],
