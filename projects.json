@@ -2046,6 +2046,16 @@
       "status": "Pending",
       "notes": "$3,000 custom project. $1,500 paid; $1,500 remains unpaid. Follow up on balance and confirm scope with Q. Done meeting July 28 6pm cst. Set a call for Q for building a software for him. Also sent $500 for Jarvis Lifetime (ffup)",
       "id": "F-025"
+    },
+    {
+      "who": "Narciso Lara",
+      "service": "AI Agent",
+      "channel": "Call",
+      "due": "",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Follow up if interested.",
+      "id": "F-026"
     }
   ],
   "bootcampAttendees": [
