@@ -203,6 +203,49 @@
             "lastFollowUp": "",
             "notes": ""
           }
+        },
+        {
+          "id": "P-034",
+          "name": "Jarvis Onboarding Follow-Up",
+          "buildType": "Jarvis Onboarding Check-Up",
+          "status": "Testing",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-07-29",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "AI Agent installed",
+              "done": true
+            },
+            {
+              "label": "Jarvis CRM user confirmed",
+              "done": true
+            },
+            {
+              "label": "Jarvis connected",
+              "done": true
+            },
+            {
+              "label": "Jarvis onboarding call completed",
+              "done": false
+            },
+            {
+              "label": "Post-onboarding check-up completed",
+              "done": false
+            }
+          ],
+          "blocker": "Final onboarding check and follow-up remain.",
+          "nextAction": "Attend the Jarvis onboarding call at 3:00 PM CST on July 29, confirm CRM access and connection status, then complete the follow-up.",
+          "notes": "Added from the Bootcamp attendee tracker. Attended: Yes. Recording sent: Yes.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-29",
+            "notes": "No new payment action recorded for this follow-up project."
+          }
         }
       ]
     },
@@ -645,6 +688,49 @@
             "dueDate": "",
             "lastFollowUp": "2026-07-08",
             "notes": ""
+          }
+        },
+        {
+          "id": "P-044",
+          "name": "Jarvis Onboarding Follow-Up",
+          "buildType": "Jarvis Onboarding Check-Up",
+          "status": "Testing",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-07-29",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "AI Agent installed",
+              "done": true
+            },
+            {
+              "label": "Jarvis CRM user confirmed",
+              "done": true
+            },
+            {
+              "label": "Jarvis connected",
+              "done": true
+            },
+            {
+              "label": "Jarvis onboarding call completed",
+              "done": false
+            },
+            {
+              "label": "Post-onboarding check-up completed",
+              "done": false
+            }
+          ],
+          "blocker": "Final onboarding check and follow-up remain.",
+          "nextAction": "Attend the Jarvis onboarding call at 3:00 PM CST on July 29, confirm CRM access and connection status, then complete the follow-up.",
+          "notes": "Added from the Bootcamp attendee tracker. Attended: Yes. Recording sent: Yes.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-29",
+            "notes": "No new payment action recorded for this follow-up project."
           }
         }
       ]
@@ -1160,6 +1246,49 @@
             "lastFollowUp": "2026-07-02",
             "notes": "Paid July 2"
           }
+        },
+        {
+          "id": "P-038",
+          "name": "Jarvis Onboarding Follow-Up",
+          "buildType": "Jarvis Onboarding Check-Up",
+          "status": "Planning",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-07-29",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "AI Agent installed",
+              "done": true
+            },
+            {
+              "label": "Jarvis CRM user confirmed",
+              "done": true
+            },
+            {
+              "label": "Jarvis connected",
+              "done": false
+            },
+            {
+              "label": "Jarvis onboarding call completed",
+              "done": false
+            },
+            {
+              "label": "Post-onboarding check-up completed",
+              "done": false
+            }
+          ],
+          "blocker": "Jarvis connection needs completion.",
+          "nextAction": "Attend the Jarvis onboarding call at 3:00 PM CST on July 29, confirm CRM access and connection status, then complete the follow-up.",
+          "notes": "Added from the Bootcamp attendee tracker. Attended: Yes. Recording sent: Yes.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-29",
+            "notes": "No new payment action recorded for this follow-up project."
+          }
         }
       ]
     },
@@ -1235,7 +1364,51 @@
       "id": "C-024",
       "name": "Jenn Waldman",
       "company": "",
-      "projects": []
+      "projects": [
+        {
+          "id": "P-040",
+          "name": "Jarvis Onboarding Follow-Up",
+          "buildType": "Jarvis Onboarding Check-Up",
+          "status": "Planning",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-07-29",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "AI Agent installed",
+              "done": false
+            },
+            {
+              "label": "Jarvis CRM user confirmed",
+              "done": true
+            },
+            {
+              "label": "Jarvis connected",
+              "done": false
+            },
+            {
+              "label": "Jarvis onboarding call completed",
+              "done": false
+            },
+            {
+              "label": "Post-onboarding check-up completed",
+              "done": false
+            }
+          ],
+          "blocker": "Jarvis connection needs completion.",
+          "nextAction": "Attend the Jarvis onboarding call at 3:00 PM CST on July 29, confirm CRM access and connection status, then complete the follow-up.",
+          "notes": "Added from the Bootcamp attendee tracker. Attended: Yes. Recording sent: Yes.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-29",
+            "notes": "No new payment action recorded for this follow-up project."
+          }
+        }
+      ]
     },
     {
       "id": "C-025",
@@ -1303,55 +1476,7 @@
       "id": "C-026",
       "name": "X Cerebro AI",
       "company": "Internal Event",
-      "projects": [
-        {
-          "id": "P-026",
-          "name": "The Bot Army Bootcamp",
-          "buildType": "Live AI Bot Bootcamp",
-          "status": "Ready",
-          "priority": "Urgent",
-          "owner": "Alexia / Q",
-          "start": "2026-07-15",
-          "targetEnd": "2026-07-15",
-          "tasks": [
-            {
-              "label": "Landing page live",
-              "done": true
-            },
-            {
-              "label": "Payment link live",
-              "done": true
-            },
-            {
-              "label": "Paid attendee count verified",
-              "done": true
-            },
-            {
-              "label": "Final start time and Zoom link confirmed",
-              "done": false
-            },
-            {
-              "label": "Attendee reminders sent",
-              "done": false
-            },
-            {
-              "label": "Bootcamp delivered",
-              "done": false
-            }
-          ],
-          "blocker": "Final start time, timezone, and Zoom link are not recorded in the Command Center.",
-          "nextAction": "Confirm the final schedule and Zoom link, send reminders to 11 paid attendees, and follow up with Will Moleon on the failed payment.",
-          "notes": "Verified attendee revenue: 11 paid attendees at $250 each ($2,750 collected). Paid attendees: Jenn Waldman, Samuel Elizondo, Alejandro Carbajal, Tony Gutierrez, Dennis Alvarado, Steve Rodriguez Jr, Max Adamson, James Raeford, Javier Navarro, Debra Batterson, and Arelys Santamaria. Ten paid through the AI Bot Building Bootcamp payment link; Arelys Santamaria paid $250 through the earlier webinar offer and confirmed she is joining the bootcamp. Will Moleon had 2 failed payment attempts and is not included in the paid attendee count.",
-          "payment": {
-            "total": 2750,
-            "paid": 2750,
-            "status": "Paid",
-            "dueDate": "",
-            "lastFollowUp": "2026-07-15",
-            "notes": "11 paid attendees at $250 each: 10 direct Bootcamp payment-link payments plus Arelys Santamaria’s earlier $250 webinar-offer payment. Will Moleon remains unpaid after 2 failed attempts."
-          }
-        }
-      ]
+      "projects": []
     },
     {
       "id": "C-027",
@@ -1527,6 +1652,49 @@
             "dueDate": "",
             "lastFollowUp": "2026-07-27",
             "notes": "$500 payment confirmed for AI Agent coaching."
+          }
+        },
+        {
+          "id": "P-036",
+          "name": "Jarvis Onboarding Follow-Up",
+          "buildType": "Jarvis Onboarding Check-Up",
+          "status": "Planning",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-07-29",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "AI Agent installed",
+              "done": true
+            },
+            {
+              "label": "Jarvis CRM user confirmed",
+              "done": false
+            },
+            {
+              "label": "Jarvis connected",
+              "done": false
+            },
+            {
+              "label": "Jarvis onboarding call completed",
+              "done": false
+            },
+            {
+              "label": "Post-onboarding check-up completed",
+              "done": false
+            }
+          ],
+          "blocker": "Jarvis CRM access needs confirmation; Jarvis connection needs completion.",
+          "nextAction": "Attend the Jarvis onboarding call at 3:00 PM CST on July 29, confirm CRM access and connection status, then complete the follow-up.",
+          "notes": "Added from the Bootcamp attendee tracker. Attended: Yes. Recording sent: Yes.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-29",
+            "notes": "No new payment action recorded for this follow-up project."
           }
         }
       ]
@@ -1709,6 +1877,406 @@
             "dueDate": "",
             "lastFollowUp": "2026-07-27",
             "notes": "Payment confirmation not provided; recorded as unpaid pending verification."
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-033",
+      "name": "Adam Pasternak",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-033",
+          "name": "Jarvis Onboarding Follow-Up",
+          "buildType": "Jarvis Onboarding Check-Up",
+          "status": "Planning",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-07-29",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "AI Agent installed",
+              "done": false
+            },
+            {
+              "label": "Jarvis CRM user confirmed",
+              "done": false
+            },
+            {
+              "label": "Jarvis connected",
+              "done": false
+            },
+            {
+              "label": "Jarvis onboarding call completed",
+              "done": false
+            },
+            {
+              "label": "Post-onboarding check-up completed",
+              "done": false
+            }
+          ],
+          "blocker": "Jarvis CRM access needs confirmation; Jarvis connection needs completion.",
+          "nextAction": "Attend the Jarvis onboarding call at 3:00 PM CST on July 29, confirm CRM access and connection status, then complete the follow-up.",
+          "notes": "Added from the Bootcamp attendee tracker. Attended: Yes. Recording sent: Yes.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-29",
+            "notes": "No new payment action recorded for this follow-up project."
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-034",
+      "name": "David Roberts",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-035",
+          "name": "Jarvis Onboarding Follow-Up",
+          "buildType": "Jarvis Onboarding Check-Up",
+          "status": "Planning",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-07-29",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "AI Agent installed",
+              "done": false
+            },
+            {
+              "label": "Jarvis CRM user confirmed",
+              "done": false
+            },
+            {
+              "label": "Jarvis connected",
+              "done": false
+            },
+            {
+              "label": "Jarvis onboarding call completed",
+              "done": false
+            },
+            {
+              "label": "Post-onboarding check-up completed",
+              "done": false
+            }
+          ],
+          "blocker": "Jarvis CRM access needs confirmation; Jarvis connection needs completion.",
+          "nextAction": "Attend the Jarvis onboarding call at 3:00 PM CST on July 29, confirm CRM access and connection status, then complete the follow-up.",
+          "notes": "Added from the Bootcamp attendee tracker. Attended: Yes. Recording sent: Yes.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-29",
+            "notes": "No new payment action recorded for this follow-up project."
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-035",
+      "name": "Dennis Alvarado",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-037",
+          "name": "Jarvis Onboarding Follow-Up",
+          "buildType": "Jarvis Onboarding Check-Up",
+          "status": "Planning",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-07-29",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "AI Agent installed",
+              "done": false
+            },
+            {
+              "label": "Jarvis CRM user confirmed",
+              "done": false
+            },
+            {
+              "label": "Jarvis connected",
+              "done": false
+            },
+            {
+              "label": "Jarvis onboarding call completed",
+              "done": false
+            },
+            {
+              "label": "Post-onboarding check-up completed",
+              "done": false
+            }
+          ],
+          "blocker": "Jarvis CRM access needs confirmation; Jarvis connection needs completion.",
+          "nextAction": "Attend the Jarvis onboarding call at 3:00 PM CST on July 29, confirm CRM access and connection status, then complete the follow-up.",
+          "notes": "Added from the Bootcamp attendee tracker. Attended: No. Recording sent: Yes.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-29",
+            "notes": "No new payment action recorded for this follow-up project."
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-036",
+      "name": "Javier Navarro",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-039",
+          "name": "Jarvis Onboarding Follow-Up",
+          "buildType": "Jarvis Onboarding Check-Up",
+          "status": "Planning",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-07-29",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "AI Agent installed",
+              "done": true
+            },
+            {
+              "label": "Jarvis CRM user confirmed",
+              "done": false
+            },
+            {
+              "label": "Jarvis connected",
+              "done": false
+            },
+            {
+              "label": "Jarvis onboarding call completed",
+              "done": false
+            },
+            {
+              "label": "Post-onboarding check-up completed",
+              "done": false
+            }
+          ],
+          "blocker": "Jarvis CRM access needs confirmation; Jarvis connection needs completion.",
+          "nextAction": "Attend the Jarvis onboarding call at 3:00 PM CST on July 29, confirm CRM access and connection status, then complete the follow-up.",
+          "notes": "Added from the Bootcamp attendee tracker. Attended: Yes. Recording sent: Yes.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-29",
+            "notes": "No new payment action recorded for this follow-up project."
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-037",
+      "name": "Max Adamson",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-041",
+          "name": "Jarvis Onboarding Follow-Up",
+          "buildType": "Jarvis Onboarding Check-Up",
+          "status": "Planning",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-07-29",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "AI Agent installed",
+              "done": true
+            },
+            {
+              "label": "Jarvis CRM user confirmed",
+              "done": false
+            },
+            {
+              "label": "Jarvis connected",
+              "done": false
+            },
+            {
+              "label": "Jarvis onboarding call completed",
+              "done": false
+            },
+            {
+              "label": "Post-onboarding check-up completed",
+              "done": false
+            }
+          ],
+          "blocker": "Jarvis CRM access needs confirmation; Jarvis connection needs completion.",
+          "nextAction": "Attend the Jarvis onboarding call at 3:00 PM CST on July 29, confirm CRM access and connection status, then complete the follow-up.",
+          "notes": "Added from the Bootcamp attendee tracker. Attended: Yes. Recording sent: Yes.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-29",
+            "notes": "No new payment action recorded for this follow-up project."
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-038",
+      "name": "Samuel Elizondo",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-042",
+          "name": "Jarvis Onboarding Follow-Up",
+          "buildType": "Jarvis Onboarding Check-Up",
+          "status": "Planning",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-07-29",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "AI Agent installed",
+              "done": false
+            },
+            {
+              "label": "Jarvis CRM user confirmed",
+              "done": true
+            },
+            {
+              "label": "Jarvis connected",
+              "done": false
+            },
+            {
+              "label": "Jarvis onboarding call completed",
+              "done": false
+            },
+            {
+              "label": "Post-onboarding check-up completed",
+              "done": false
+            }
+          ],
+          "blocker": "Jarvis connection needs completion.",
+          "nextAction": "Attend the Jarvis onboarding call at 3:00 PM CST on July 29, confirm CRM access and connection status, then complete the follow-up.",
+          "notes": "Added from the Bootcamp attendee tracker. Attended: Yes. Recording sent: Yes.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-29",
+            "notes": "No new payment action recorded for this follow-up project."
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-039",
+      "name": "Deborah Rodriguez",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-043",
+          "name": "Jarvis Onboarding Follow-Up",
+          "buildType": "Jarvis Onboarding Check-Up",
+          "status": "Planning",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-07-29",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "AI Agent installed",
+              "done": true
+            },
+            {
+              "label": "Jarvis CRM user confirmed",
+              "done": true
+            },
+            {
+              "label": "Jarvis connected",
+              "done": false
+            },
+            {
+              "label": "Jarvis onboarding call completed",
+              "done": false
+            },
+            {
+              "label": "Post-onboarding check-up completed",
+              "done": false
+            }
+          ],
+          "blocker": "Jarvis connection needs completion.",
+          "nextAction": "Attend the Jarvis onboarding call at 3:00 PM CST on July 29, confirm CRM access and connection status, then complete the follow-up.",
+          "notes": "Added from the Bootcamp attendee tracker. Attended: Yes. Recording sent: Yes.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-29",
+            "notes": "No new payment action recorded for this follow-up project."
+          }
+        }
+      ]
+    },
+    {
+      "id": "C-040",
+      "name": "Haus Argun",
+      "company": "",
+      "projects": [
+        {
+          "id": "P-045",
+          "name": "Jarvis Onboarding Follow-Up",
+          "buildType": "Jarvis Onboarding Check-Up",
+          "status": "Planning",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "start": "2026-07-29",
+          "targetEnd": "",
+          "tasks": [
+            {
+              "label": "AI Agent installed",
+              "done": false
+            },
+            {
+              "label": "Jarvis CRM user confirmed",
+              "done": false
+            },
+            {
+              "label": "Jarvis connected",
+              "done": false
+            },
+            {
+              "label": "Jarvis onboarding call completed",
+              "done": false
+            },
+            {
+              "label": "Post-onboarding check-up completed",
+              "done": false
+            }
+          ],
+          "blocker": "Jarvis CRM access needs confirmation; Jarvis connection needs completion.",
+          "nextAction": "Attend the Jarvis onboarding call at 3:00 PM CST on July 29, confirm CRM access and connection status, then complete the follow-up.",
+          "notes": "Added from the Bootcamp attendee tracker. Attended: No. Recording sent: No. Added to the AI Agent Bootcamp tracker on July 21, 2026.",
+          "payment": {
+            "total": 0,
+            "paid": 0,
+            "status": "Paid",
+            "dueDate": "",
+            "lastFollowUp": "2026-07-29",
+            "notes": "No new payment action recorded for this follow-up project."
           }
         }
       ]
