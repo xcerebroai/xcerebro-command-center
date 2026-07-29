@@ -2056,6 +2056,16 @@
       "status": "Pending",
       "notes": "Follow up if interested.",
       "id": "F-026"
+    },
+    {
+      "who": "Marcus Fard",
+      "service": "Jarvis",
+      "channel": "Call",
+      "due": "2026-07-30",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "July 30 4PM CST - Meeting with Marcus Fard for his launching of Jarvis",
+      "id": "F-027"
     }
   ],
   "bootcampAttendees": [
