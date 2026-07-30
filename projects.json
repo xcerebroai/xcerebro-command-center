@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-07-29"
+    "updated": "2026-07-30"
   },
   "statusOptions": [
     "Planning",
@@ -2418,10 +2418,10 @@
       "who": "Tamika Johnson",
       "what": "07/10/2026",
       "channel": "Skool",
-      "due": "",
+      "due": "2026-07-30",
       "owner": "Dyan",
       "status": "Pending",
-      "notes": "Follow up on Jarvis sign up 25% off",
+      "notes": "Follow up on Jarvis sign up 25% off / ffup 7/29",
       "id": "F-002",
       "service": "Jarvis"
     },
