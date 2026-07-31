@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-07-30"
+    "updated": "2026-07-31"
   },
   "statusOptions": [
     "Planning",
@@ -318,7 +318,7 @@
     {
       "id": "C-005",
       "name": "Raj",
-      "company": "Narrow Path Homes",
+      "company": "",
       "projects": [
         {
           "id": "P-005",
@@ -326,7 +326,7 @@
           "buildType": "JV Partner + Lead System",
           "status": "Live",
           "priority": "High",
-          "owner": "Raj",
+          "owner": "Alexia / Q",
           "start": "2026-06-26",
           "targetEnd": "2026-07-12",
           "tasks": [
@@ -361,15 +361,10 @@
             {
               "label": "JV / Payment confirmed",
               "done": true
-            },
-            {
-              "label": "Add credits to the Narrow Path Homes Jarvis account",
-              "done": false,
-              "assignedTo": "Raj"
             }
           ],
-          "blocker": "Narrow Path Homes must add credits to the Jarvis account before lead activity can continue.",
-          "nextAction": "Raj: add credits to the Narrow Path Homes Jarvis account and confirm when completed.",
+          "blocker": "Payment method issue on Jarvis account, needs to add credits.",
+          "nextAction": "Follow up with Raj to add credits to his Jarvis account; confirm once added.",
           "notes": "Leads + JV partnership project; likely needs Jarvis pipeline and lead management setup.",
           "creditsAdded": false,
           "payment": {
