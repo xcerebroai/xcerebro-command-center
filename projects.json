@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-07-30"
+    "updated": "2026-07-31"
   },
   "statusOptions": [
     "Planning",
@@ -2634,6 +2634,16 @@
       "status": "Pending",
       "notes": "July 30 4PM CST - Meeting with Marcus Fard for his launching of Jarvis- Paid already",
       "id": "F-027"
+    },
+    {
+      "who": "Joy Russo",
+      "service": "Jarvis",
+      "channel": "Skool",
+      "due": "2026-08-05",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Interested in Jarvis lifetime $500 - ffup (closing on Aug 5)",
+      "id": "F-028"
     }
   ],
   "bootcampAttendees": [
