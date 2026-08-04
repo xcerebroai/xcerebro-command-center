@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-08-03"
+    "updated": "2026-08-04"
   },
   "statusOptions": [
     "Planning",
@@ -2654,6 +2654,16 @@
       "status": "Pending",
       "notes": "AI VIP (birthday, get him to signed up) ffup done 8/3",
       "id": "F-029"
+    },
+    {
+      "who": "Bretton Morin",
+      "service": "Jarvis",
+      "channel": "Skool",
+      "due": "2026-08-04",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Interested in Jarvis. Sent ffup 8/3",
+      "id": "F-030"
     }
   ],
   "bootcampAttendees": [
