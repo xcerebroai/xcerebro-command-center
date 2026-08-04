@@ -2664,6 +2664,16 @@
       "status": "Pending",
       "notes": "Interested in Jarvis. Sent ffup 8/3",
       "id": "F-030"
+    },
+    {
+      "who": "Tuu Funaki",
+      "service": "Jarvis",
+      "channel": "Skool",
+      "due": "2026-08-04",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Follow up eferrals for Jarvis (2) - sent 8/3",
+      "id": "F-031"
     }
   ],
   "bootcampAttendees": [
