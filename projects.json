@@ -2684,6 +2684,16 @@
       "status": "Pending",
       "notes": "He’s the one interested in Scraper $200 (With Jarvis account) Set a meeting with Q",
       "id": "F-032"
+    },
+    {
+      "who": "Luis Gaxiola",
+      "service": "Jarvis",
+      "channel": "Skool",
+      "due": "2026-08-06",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Luis Gaxiola - Scraper $300 / ffup invoice sent 8/5",
+      "id": "F-033"
     }
   ],
   "bootcampAttendees": [
