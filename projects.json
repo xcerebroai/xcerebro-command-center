@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-08-04"
+    "updated": "2026-08-05"
   },
   "statusOptions": [
     "Planning",
@@ -2674,6 +2674,16 @@
       "status": "Pending",
       "notes": "Follow up eferrals for Jarvis (2) - sent 8/3",
       "id": "F-031"
+    },
+    {
+      "who": "Ray Mendez",
+      "service": "Jarvis",
+      "channel": "Facebook",
+      "due": "2026-08-05",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "He’s the one interested in Scraper $200 (With Jarvis account) Set a meeting with Q",
+      "id": "F-032"
     }
   ],
   "bootcampAttendees": [
