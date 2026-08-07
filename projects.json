@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-08-05"
+    "updated": "2026-08-07"
   },
   "statusOptions": [
     "Planning",
@@ -2694,6 +2694,16 @@
       "status": "Pending",
       "notes": "Luis Gaxiola - Scraper $300 / ffup invoice sent 8/5",
       "id": "F-033"
+    },
+    {
+      "who": "Marc Cesar",
+      "service": "Jarvis",
+      "channel": "Facebook",
+      "due": "2026-08-07",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Ffup if interested in Jarvis / Recently joined Skool",
+      "id": "F-034"
     }
   ],
   "bootcampAttendees": [
