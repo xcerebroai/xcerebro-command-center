@@ -480,10 +480,12 @@
       <p>To save changes straight to GitHub, paste a personal access key below. It's stored <b>only in this browser</b>, never on the website.</p>
       <ol>
         <li>Open <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener">github.com/settings/tokens</a> → <b>Generate new token</b> (Fine-grained).</li>
+        <li><b>Expiration</b> → pick <b>the longest option</b> (or a custom far-off date) so it doesn't lapse and stop saving.</li>
         <li><b>Repository access</b> → Only select repositories → <code>xcerebro-command-center</code>.</li>
         <li><b>Permissions</b> → Repository → <b>Contents</b> → <b>Read and write</b>.</li>
         <li>Generate, copy the <code>github_pat_…</code>, paste it here.</li>
       </ol>
+      <p style="color:var(--amber)">⚠ If saving suddenly stops working, the token has likely <b>expired</b> — just generate a new one and paste it here.</p>
       <div class="efield" style="margin-top:0"><label>Access key</label>
         <input class="ein" id="keyInput" type="password" placeholder="github_pat_…" autocomplete="off"></div>
       <div class="esave">
