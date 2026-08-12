@@ -1403,7 +1403,7 @@
           "buildType": "Scraper",
           "status": "Ready",
           "priority": "Normal",
-          "owner": "Alexia / Q",
+          "owner": "Q",
           "start": "2026-07-09",
           "targetEnd": "",
           "tasks": [
