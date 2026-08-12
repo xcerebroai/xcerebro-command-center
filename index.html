@@ -353,6 +353,7 @@
     <button class="tab on" data-tab="overview">◎ Overview</button>
     <button class="tab" data-tab="progress">📈 Daily Progress</button>
     <button class="tab" data-tab="command">◉ Command Center</button>
+    <button class="tab" data-tab="finished">✅ Finished <span class="tabbadge" id="finBadge" style="display:none"></span></button>
     <button class="tab" data-tab="payments">💲 Payments <span class="tabbadge" id="payBadge" style="display:none"></span></button>
     <button class="tab" data-tab="followups">📞 Follow-ups <span class="tabbadge" id="fuBadge" style="display:none"></span></button>
     <button class="tab" data-tab="calls">📅 Booked Calls <span class="tabbadge" id="callBadge" style="display:none"></span></button>
@@ -419,6 +420,15 @@
     </aside>
   </main>
   </div><!-- /view-command -->
+
+  <div id="view-finished" style="display:none">
+    <section class="kpis" id="finkpis"></section>
+    <section class="panel" style="margin-top:16px">
+      <h2><span class="tick">✅</span> Successfully Finished <span class="count" id="finCount"></span></h2>
+      <div class="filters"><input class="search" id="finsearch" placeholder="Search finished client…" aria-label="Search finished"></div>
+      <div class="clients" id="finBoard"></div>
+    </section>
+  </div><!-- /view-finished -->
 
   <div id="view-payments" style="display:none">
     <section class="kpis" id="paykpis"></section>
@@ -530,6 +540,8 @@ const RAWURL="https://raw.githubusercontent.com/"+REPO+"/"+BRANCH+"/"+FILEPATH;
 
 const clients=()=>DB.clients||[];
 const projPct=p=>{const t=p.tasks||[];return t.length?t.filter(x=>x.done).length/t.length:0;};
+const projDone=p=>Array.isArray(p.tasks)&&p.tasks.length>0&&p.tasks.every(x=>x.done);
+const clientDone=c=>(c.projects||[]).length>0&&(c.projects||[]).every(projDone); // every project 100%
 const clientTasks=c=>{let d=0,t=0;(c.projects||[]).forEach(p=>{(p.tasks||[]).forEach(x=>{t++;if(x.done)d++;});});return{d,t};};
 const clientPct=c=>{const {d,t}=clientTasks(c);return t?d/t:0;};
 const allProjects=()=>{const a=[];clients().forEach(c=>(c.projects||[]).forEach(p=>a.push({c,p})));return a;};
@@ -562,10 +574,11 @@ function render(){
 
   const t=filterText.toLowerCase();
   const shown=CLS.filter(c=>{if(!t)return true;const hay=(c.name+" "+(c.company||"")+" "+(c.projects||[]).map(p=>p.name+" "+p.buildType+" "+p.owner).join(" ")).toLowerCase();return hay.includes(t);});
-  $("#lbCount").textContent=`${shown.length} / ${CLS.length}`;
-  $("#board").innerHTML=shown.map(c=>{
+  const activeClients=shown.filter(c=>!clientDone(c));
+  $("#lbCount").textContent=`${activeClients.length} / ${CLS.length}`;
+  $("#board").innerHTML=activeClients.map(c=>{
     const cp=clientPct(c), open=openClients[c.id];
-    const projs=(c.projects||[]).map(p=>{
+    const projs=(c.projects||[]).filter(p=>!projDone(p)).map(p=>{
       const o=projPct(p);
       const mini=(p.tasks||[]).map(x=>`<span class="ci ${x.done?'done':''}">${x.done?'✓':'○'} ${esc(x.label)}</span>`).join("");
       return `<div class="proj" data-cid="${c.id}" data-pid="${p.id}">
@@ -608,7 +621,8 @@ function render(){
   $("#copyRaw").onclick=()=>{navigator.clipboard.writeText(RAWURL);toast("Link copied ✓","ok");};
   $("#copyPrompt").onclick=()=>{navigator.clipboard.writeText(AGENT_PROMPT());toast("Agent instructions copied ✓","ok");};
 
-  bindBoard();updatePayBadge();updateFuBadge();updateCallBadge();updateBootcampBadge();
+  bindBoard();updatePayBadge();updateFuBadge();updateCallBadge();updateBootcampBadge();updateFinBadge();
+  if(document.getElementById("finBoard"))renderFinished();
   if(document.getElementById("ovStats"))renderOverview();
   if(document.getElementById("dailyProgress"))renderDailyProgress();
   if(document.getElementById("paytable"))renderPayments();
@@ -698,18 +712,54 @@ function readPayment(base){const g=id=>document.getElementById(id);
     dueDate:g('pay_due').value,lastFollowUp:g('pay_follow').value,notes:g('pay_notes').value.trim()};}
 
 let activeTab="overview";
-const VIEWS={overview:"view-overview",progress:"view-progress",command:"view-command",payments:"view-payments",followups:"view-followups",calls:"view-calls",bootcamp:"view-bootcamp"};
+const VIEWS={overview:"view-overview",progress:"view-progress",command:"view-command",finished:"view-finished",payments:"view-payments",followups:"view-followups",calls:"view-calls",bootcamp:"view-bootcamp"};
 function switchTab(t){activeTab=t;
   document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("on",b.dataset.tab===t));
   Object.keys(VIEWS).forEach(k=>{const el=document.getElementById(VIEWS[k]);if(el)el.style.display=k===t?"":"none";});
   if(t==="overview")renderOverview();
   if(t==="progress")renderDailyProgress();
+  if(t==="finished")renderFinished();
   if(t==="payments")renderPayments();
   if(t==="followups")renderFollowups();
   if(t==="calls")renderCalls();
   if(t==="bootcamp")renderBootcamp();}
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));
 document.getElementById("paysearch").oninput=()=>renderPayments();
+document.getElementById("finsearch").oninput=()=>renderFinished();
+
+/* ---------- finished (100% complete) clients ---------- */
+function finishedList(){const t=(document.getElementById("finsearch").value||"").toLowerCase();
+  return clients().map(c=>({c,done:(c.projects||[]).filter(projDone)})).filter(o=>o.done.length>0)
+    .filter(o=>!t||(o.c.name+" "+(o.c.company||"")+" "+o.done.map(p=>p.name).join(" ")).toLowerCase().includes(t));}
+function finishedCount(){return clients().reduce((n,c)=>n+(c.projects||[]).filter(projDone).length,0);}
+function updateFinBadge(){const n=finishedCount(),b=document.getElementById("finBadge");if(!b)return;if(n){b.style.display="";b.textContent=n;}else b.style.display="none";}
+function renderFinished(){
+  const list=finishedList();
+  const totalDone=finishedCount(), clientsDone=clients().filter(clientDone).length;
+  const kp=[["Finished Builds",totalDone,"Hit 100%",""],["Clients Complete",clientsDone,"All projects done",""],["On the Board",clients().filter(c=>!clientDone(c)).length,"Still active",""]];
+  const k=document.getElementById("finkpis");k.style.gridTemplateColumns="repeat(3,1fr)";
+  k.innerHTML=kp.map(x=>`<div class="kpi"><div class="k-label">${x[0]}</div><div class="k-num">${x[1]}</div><div class="k-sub">${x[2]}</div></div>`).join("");
+  document.getElementById("finCount").textContent=totalDone+" finished";
+  document.getElementById("finBoard").innerHTML=list.map(o=>{const c=o.c;
+    const projs=o.done.map(p=>`<div class="proj" data-cid="${c.id}" data-pid="${p.id}">
+      <div class="prow">
+        <div style="min-width:0;display:flex;align-items:center;gap:9px">${faceFor(p.owner)}<div style="min-width:0"><div class="pj-nm">${esc(p.name)}</div><div class="pj-bt">${esc(p.buildType||"")}</div></div></div>
+        <div class="pr-st"><span class="tag" style="background:#083b2c;color:#3de8a0;width:auto;padding:5px 8px">✓ Complete</span></div>
+        <div class="ov"><div class="mini"><i style="width:100%"></i></div><span class="pv" style="color:var(--green)">100%</span></div>
+        <div class="days" style="color:var(--green)">✓<small>DONE</small></div>
+      </div></div>`).join("");
+    return `<div class="client open" data-client="${c.id}">
+      <div class="chead" style="cursor:default">
+        <span class="chev" style="color:var(--green)">✓</span>
+        <div class="cname"><div class="nm">${esc(c.name)}</div>${c.company?`<div class="co">${esc(c.company)}</div>`:""}</div>
+        <div class="cbarwrap"><div class="mini"><i style="width:100%"></i></div><span class="pv" style="color:var(--green)">100%</span></div>
+        <div class="cprojcount">${o.done.length} done</div>
+      </div>
+      <div class="projwrap" style="display:flex">${projs}</div>
+    </div>`;
+  }).join("")||`<div style="padding:26px;text-align:center;color:var(--mute)">Nothing finished yet — clients move here automatically when every task hits 100%. 🎉</div>`;
+  document.querySelectorAll('#finBoard .proj[data-pid]').forEach(el=>el.onclick=()=>openProject(el.dataset.cid,el.dataset.pid));
+}
 
 /* ---------- overview / analytics front page ---------- */
 function sparkline(vals,color){
