@@ -2786,6 +2786,16 @@
       "status": "Pending",
       "notes": "She and her friend is interested in Jarvis. (Tax preparing business) Set a meeting with Q. Sent ffup 8/11",
       "id": "F-036"
+    },
+    {
+      "who": "Curtis Potter",
+      "service": "Jarvis",
+      "channel": "Facebook",
+      "due": "2026-08-12",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Jarvis/Scraper - ffup if interested",
+      "id": "F-037"
     }
   ],
   "bootcampAttendees": [
