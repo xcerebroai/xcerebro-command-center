@@ -1463,11 +1463,11 @@
           "id": "P-027",
           "name": "Jarvis AI Agent Installation",
           "buildType": "AI Agent Installation + Jarvis",
-          "status": "Testing",
-          "priority": "High",
+          "status": "Blocked",
+          "priority": "Urgent",
           "owner": "Alexia / Q",
           "start": "2026-07-17",
-          "targetEnd": "",
+          "targetEnd": "2026-08-12",
           "tasks": [
             {
               "label": "Dashboard set up",
@@ -1487,7 +1487,7 @@
             },
             {
               "label": "Custom workflow mapped",
-              "done": false
+              "done": true
             },
             {
               "label": "A2P registration",
@@ -1499,6 +1499,10 @@
             },
             {
               "label": "JV / Payment confirmed",
+              "done": false
+            },
+            {
+              "label": "Jarvis Account A2P Suspended. Needs a new account",
               "done": false
             }
           ],
