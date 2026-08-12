@@ -1449,7 +1449,7 @@
           "notes": "Booked July 17 for AI agent installation and Jarvis setup. Follow-up record references a $527 payment.",
           "payment": {
             "total": 527,
-            "paid": 0,
+            "paid": 527,
             "status": "Paid",
             "dueDate": "",
             "lastFollowUp": "2026-07-29",
