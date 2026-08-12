@@ -258,6 +258,14 @@
   .leg{display:flex;flex-direction:column;gap:9px}
   .leg .li{display:flex;align-items:center;gap:9px;font:600 11.5px 'JetBrains Mono';color:var(--mute)}
   .leg .sw{width:11px;height:11px;border-radius:3px;flex-shrink:0}
+  /* team roster */
+  .team{display:flex;flex-wrap:wrap;gap:14px;padding:18px}
+  .tmember{display:flex;align-items:center;gap:13px;border:1px solid var(--line);border-radius:12px;padding:12px 16px;background:rgba(10,22,38,.5);flex:1;min-width:230px}
+  .tavatar{width:48px;height:48px;border-radius:50%;flex-shrink:0;object-fit:cover;border:2px solid var(--line);display:grid;place-items:center;font-family:'Orbitron';font-weight:800;font-size:15px}
+  .tinfo{min-width:0}
+  .tname{font-weight:700;font-size:15px;color:#fff}
+  .trole{font:600 11px 'JetBrains Mono';color:var(--mute);margin-top:2px;letter-spacing:.02em}
+  .tdot{width:10px;height:10px;border-radius:50%;margin-left:auto;flex-shrink:0}
   /* gradient heading (vanilla-CSS equivalent of the shadcn GradientHeading) */
   .hero{padding:4px 2px 2px;margin-top:2px}
   .ghead{font-family:'Orbitron';font-weight:900;letter-spacing:.03em;line-height:1.02;margin:0;
@@ -356,6 +364,7 @@
       <section class="panel"><h2><span class="tick">⚡</span> Next Moves</h2><div class="moves" id="ovMoves"></div></section>
       <section class="panel"><h2><span class="tick">💲</span> Payments Health</h2><div id="ovPay" style="padding:16px 18px"></div></section>
     </div>
+    <section class="panel" style="margin-top:16px"><h2><span class="tick">👥</span> Team</h2><div class="team" id="ovTeam"></div></section>
   </div><!-- /view-overview -->
 
   <div id="view-progress" style="display:none">
@@ -744,6 +753,22 @@ function renderOverview(){
   document.getElementById("ovMoves").innerHTML=moves.map((x,i)=>{const d=daysLeft(x.p);const col=d<0?"var(--red)":d<=3?"var(--amber)":"var(--mute)";
     return `<div class="move" data-cid="${x.c.id}" data-pid="${x.p.id}"><div class="rank">${String(i+1).padStart(2,"0")}</div><div><div class="m-cl">${esc(x.c.name)}</div><div class="m-ac">${esc(x.p.nextAction||"")}</div></div><div class="m-days" style="color:${col}">${d}d</div></div>`;}).join("")||'<div style="padding:16px;color:var(--mute)">All clear.</div>';
   document.querySelectorAll('#ovMoves .move[data-pid]').forEach(el=>el.onclick=()=>{switchTab('command');openProject(el.dataset.cid,el.dataset.pid);});
+  renderTeam();
+}
+
+/* team roster — swap photo:"" for a data: URI or committed image path to show a real picture */
+const TEAM=[
+  {name:"Q", role:"Co-Founder", color:"#20D9FF", photo:""},
+  {name:"Lexy", role:"Co-Founder · Operations", color:"#B57BFF", photo:""},
+  {name:"Dyan", role:"Appointment Scheduler", color:"#3DE8A0", photo:""}
+];
+function renderTeam(){const el=document.getElementById("ovTeam");if(!el)return;
+  el.innerHTML=TEAM.map(m=>{const ini=(m.name||"?").replace(/[^A-Za-z]/g,"").slice(0,2).toUpperCase()||"?";
+    const av=m.photo
+      ? `<img class="tavatar" src="${m.photo}" alt="${esc(m.name)}">`
+      : `<span class="tavatar" style="background:linear-gradient(135deg,${m.color}33,${m.color}0f);color:${m.color};border-color:${m.color}66">${esc(ini)}</span>`;
+    return `<div class="tmember">${av}<div class="tinfo"><div class="tname">${esc(m.name)}</div><div class="trole">${esc(m.role)}</div></div><span class="tdot" style="background:${m.color};box-shadow:0 0 10px ${m.color}"></span></div>`;
+  }).join("");
 }
 
 /* ---------- daily operational progress ---------- */
