@@ -327,10 +327,7 @@
 
   <div class="banner" id="banner"></div>
   <div class="editbar" id="editbar">
-    <span class="etxt">✎ Editor on — click a project to edit its checklist, or use ➕ Add Client.</span>
-    <span class="esep">·</span>
-    <span class="etxt">Access key: <b id="keyState" class="keyno">not set</b></span>
-    <button class="elink" id="keyBtn">set / change key</button>
+    <span class="etxt">✎ Editor on — make your changes, then <b>Save</b> copies them &amp; opens GitHub to paste + commit. No token needed.</span>
   </div>
 
   <div class="alertbar" id="callAlerts"></div>
@@ -1176,23 +1173,27 @@ function refreshKeyState(){const has=!!GH.token(),s=$("#keyState");if(s){s.textC
 function openKeyModal(){$("#keyInput").value=GH.token();$("#keyModal").classList.add("on");setTimeout(()=>$("#keyInput").focus(),40);}
 function closeKeyModal(){$("#keyModal").classList.remove("on");}
 
-async function commitChange(mutator,message,btn,okMsg){
-  if(!GH.token()){toast("Set your access key first","err");openKeyModal();return false;}
-  const label=btn?btn.textContent:"";if(btn){btn.disabled=true;btn.textContent="Saving…";}
+function downloadJSON(json){try{const b=new Blob([json],{type:"application/json"});const u=URL.createObjectURL(b);
+  const a=document.createElement("a");a.href=u;a.download="projects.json";document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(u),3000);}catch(e){}}
+function commitChange(mutator,message,btn,okMsg){
+  let data;
   try{
-    const {sha,data}=await GH.fetchLatest();
+    data=JSON.parse(JSON.stringify(DB||{}));
     if(!data.clients)data.clients=[];
     mutator(data);
     data.meta=data.meta||{};data.meta.updated=todayStr();
-    await GH.commit(data,message,sha);
-    holdUntil=Date.now()+90000;DB=data;render();closeDrawer();
-    toast(okMsg||"Saved ✓ — live in ~1 min","ok");
-    return true;
-  }catch(e){
-    if(String(e.message).indexOf("AUTH")>=0){toast("Access key invalid or missing write access","err");openKeyModal();}
-    else toast("Save failed: "+e.message,"err");
-    return false;
-  }finally{if(btn){btn.disabled=false;btn.textContent=label;}}
+  }catch(e){toast(String(e&&e.message||e),"err");return false;}
+  DB=data;render();closeDrawer();
+  const json=JSON.stringify(data,null,2);
+  // no token: open GitHub's editor (you're a logged-in collaborator) and copy the new data to paste
+  try{window.open("https://github.com/"+REPO+"/edit/"+BRANCH+"/"+FILEPATH,"_blank");}catch(e){}
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(json)
+      .then(()=>toast("Copied ✓ — in the GitHub tab: select all (Ctrl+A), paste (Ctrl+V), then Commit changes","ok"))
+      .catch(()=>{downloadJSON(json);toast("Downloaded projects.json — drag it onto GitHub to publish","ok");});
+  }else{downloadJSON(json);toast("Downloaded projects.json — drag it onto GitHub to publish","ok");}
+  return true;
 }
 
 function setEditor(on){editorMode=on;$("#editToggle").setAttribute("aria-pressed",on?"true":"false");
@@ -1201,7 +1202,6 @@ function setEditor(on){editorMode=on;$("#editToggle").setAttribute("aria-pressed
   refreshKeyState();if(!on)closeDrawer();render();}
 $("#editToggle").onclick=()=>setEditor(!editorMode);
 $("#addClient").onclick=()=>{if(!editorMode)setEditor(true);openAddClient();};
-$("#keyBtn").onclick=openKeyModal;
 $("#keySave").onclick=()=>{const v=$("#keyInput").value.trim();if(!v){toast("Paste a key first","err");return;}GH.save(v);refreshKeyState();closeKeyModal();toast("Key saved ✓","ok");};
 $("#keyClear").onclick=()=>{GH.clear();refreshKeyState();$("#keyInput").value="";toast("Key removed");};
 $("#keyCancel").onclick=closeKeyModal;
