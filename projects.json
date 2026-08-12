@@ -929,7 +929,7 @@
         {
           "name": "AI Agents Installation",
           "buildType": "AI Agent Project",
-          "status": "Payment Follow-Up",
+          "status": "Planning",
           "priority": "High",
           "owner": "Alexia / Q",
           "targetEnd": "",
@@ -972,8 +972,8 @@
           ],
           "payment": {
             "total": 1000,
-            "paid": 250,
-            "status": "Partial",
+            "paid": 1000,
+            "status": "Paid",
             "dueDate": "",
             "lastFollowUp": "2026-08-07",
             "notes": ""
