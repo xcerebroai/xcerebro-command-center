@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-08-07"
+    "updated": "2026-08-12"
   },
   "statusOptions": [
     "Planning",
@@ -2481,7 +2481,7 @@
       "channel": "Skool",
       "due": "2026-07-24",
       "owner": "Dyan",
-      "status": "Pending",
+      "status": "Done",
       "notes": "1-on-1 Call with Q 1PM CST July 24 (done calendar invite)",
       "id": "F-011"
     },
