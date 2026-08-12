@@ -1046,68 +1046,6 @@
       ]
     },
     {
-      "id": "C-019",
-      "name": "Mario Garcia",
-      "company": "",
-      "projects": [
-        {
-          "id": "P-019",
-          "name": "Jarvis Build - Mario Garcia",
-          "buildType": "Jarvis",
-          "status": "Ready",
-          "priority": "Normal",
-          "owner": "Alexia / Q",
-          "start": "2026-07-02",
-          "targetEnd": "",
-          "tasks": [
-            {
-              "label": "Dashboard set up",
-              "done": false
-            },
-            {
-              "label": "Campaign built",
-              "done": false
-            },
-            {
-              "label": "Automations wired",
-              "done": false
-            },
-            {
-              "label": "AI Agent configured",
-              "done": false
-            },
-            {
-              "label": "Custom workflow mapped",
-              "done": false
-            },
-            {
-              "label": "A2P registration",
-              "done": false
-            },
-            {
-              "label": "Jarvis build",
-              "done": false
-            },
-            {
-              "label": "JV / Payment confirmed",
-              "done": false
-            }
-          ],
-          "blocker": "",
-          "nextAction": "",
-          "notes": "Appointment scheduled July 2. Meeting done.",
-          "payment": {
-            "total": 0,
-            "paid": 0,
-            "status": "Paid",
-            "dueDate": "",
-            "lastFollowUp": "2026-07-02",
-            "notes": "Paid July 2"
-          }
-        }
-      ]
-    },
-    {
       "id": "C-020",
       "name": "Marcus Fard",
       "company": "",
