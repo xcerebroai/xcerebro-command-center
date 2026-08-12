@@ -266,6 +266,12 @@
   .tname{font-weight:700;font-size:15px;color:#fff}
   .trole{font:600 11px 'JetBrains Mono';color:var(--mute);margin-top:2px;letter-spacing:.02em}
   .tdot{width:10px;height:10px;border-radius:50%;margin-left:auto;flex-shrink:0}
+  /* owner faces on projects + delete client */
+  .ownerfaces{display:inline-flex;flex-shrink:0}
+  .oface{width:27px;height:27px;border-radius:50%;object-fit:cover;border:2px solid var(--hull);display:grid;place-items:center;font:700 9px 'Orbitron';flex-shrink:0}
+  .oface+.oface{margin-left:-9px}
+  .delclient{background:none;border:1px solid transparent;color:var(--mute2);cursor:pointer;font-size:13px;padding:1px 5px;border-radius:6px;margin-left:8px;line-height:1}
+  .delclient:hover{color:var(--red);border-color:rgba(255,93,93,.35);background:rgba(255,93,93,.08)}
   /* gradient heading (vanilla-CSS equivalent of the shadcn GradientHeading) */
   .hero{padding:4px 2px 2px;margin-top:2px}
   .ghead{font-family:'Orbitron';font-weight:900;letter-spacing:.03em;line-height:1.02;margin:0;
@@ -564,7 +570,7 @@ function render(){
       const mini=(p.tasks||[]).map(x=>`<span class="ci ${x.done?'done':''}">${x.done?'✓':'○'} ${esc(x.label)}</span>`).join("");
       return `<div class="proj" data-cid="${c.id}" data-pid="${p.id}">
         <div class="prow">
-          <div style="min-width:0"><div class="pj-nm">${esc(p.name)}</div><div class="pj-bt">${esc(p.buildType||"")}</div></div>
+          <div style="min-width:0;display:flex;align-items:center;gap:9px">${faceFor(p.owner)}<div style="min-width:0"><div class="pj-nm">${esc(p.name)}</div><div class="pj-bt">${esc(p.buildType||"")}</div></div></div>
           <div class="pr-st">${tag(p.status,STATUS_CLR)}</div>
           <div class="ov"><div class="mini"><i style="width:${o*100}%"></i></div><span class="pv">${pct(o)}</span></div>
           ${dayCell(p)}
@@ -578,7 +584,7 @@ function render(){
         <span class="chev">▶</span>
         <div class="cname"><div class="nm">${esc(c.name)}</div>${c.company?`<div class="co">${esc(c.company)}</div>`:""}</div>
         <div class="cbarwrap"><div class="mini"><i style="width:${cp*100}%"></i></div><span class="pv">${pct(cp)}</span></div>
-        <div class="cprojcount">${(c.projects||[]).length} proj</div>
+        <div class="cprojcount">${(c.projects||[]).length} proj${editorMode?`<button class="delclient" data-delclient="${c.id}" title="Delete this client and all its projects">🗑</button>`:""}</div>
       </div>
       <div class="projwrap">${projs}${addBtn}</div>
     </div>`;
@@ -622,6 +628,10 @@ function bindBoard(){
   document.querySelectorAll("[data-toggle]").forEach(h=>h.onclick=()=>{const id=h.dataset.toggle;openClients[id]=!openClients[id];render();});
   document.querySelectorAll(".proj[data-pid]").forEach(el=>el.onclick=()=>openProject(el.dataset.cid,el.dataset.pid));
   document.querySelectorAll("[data-addproj]").forEach(b=>b.onclick=e=>{e.stopPropagation();openAddProject(b.dataset.addproj);});
+  document.querySelectorAll("[data-delclient]").forEach(b=>b.onclick=e=>{e.stopPropagation();
+    const cid=b.dataset.delclient, c=clients().find(x=>x.id===cid); if(!c)return;
+    if(!confirm(`Delete client "${c.name}" and all their projects? This cannot be undone.`))return;
+    commitChange(data=>{data.clients=(data.clients||[]).filter(x=>x.id!==cid);},"Delete client "+c.name,b);});
   document.querySelectorAll(".move[data-pid]").forEach(el=>el.onclick=()=>openProject(el.dataset.cid,el.dataset.pid));
 }
 
@@ -758,10 +768,21 @@ function renderOverview(){
 
 /* team roster — swap photo:"" for a data: URI or committed image path to show a real picture */
 const TEAM=[
-  {name:"Q", role:"Co-Founder", color:"#20D9FF", photo:"assets/q.jpg"},
-  {name:"Lexy", role:"Co-Founder · Operations", color:"#B57BFF", photo:"assets/lexy.jpg"},
+  {name:"Q", role:"Owner", color:"#20D9FF", photo:"assets/q.jpg"},
+  {name:"Lexy", role:"Operations", color:"#B57BFF", photo:"assets/lexy.jpg"},
   {name:"Dyan", role:"Appointment Scheduler", color:"#3DE8A0", photo:""}
 ];
+function faceFor(ownerStr){
+  const parts=String(ownerStr||"").split(/[\/,&]|\band\b/i).map(s=>s.trim()).filter(Boolean);
+  const picked=[];
+  parts.forEach(n=>{const nn=n.toLowerCase();
+    const m=TEAM.find(t=>{const tn=t.name.toLowerCase();return tn===nn||nn.includes(tn)||(tn==="lexy"&&/alexia|lexy/i.test(n));});
+    if(m&&!picked.some(x=>x.name===m.name))picked.push(m);});
+  if(!picked.length)return "";
+  return `<span class="ownerfaces">`+picked.map(m=>m.photo
+    ?`<img class="oface" src="${esc(m.photo)}" alt="${esc(m.name)}" title="${esc(m.name)}">`
+    :`<span class="oface" style="color:${m.color};border-color:${m.color}66;background:${m.color}22" title="${esc(m.name)}">${esc((m.name||"?").slice(0,2).toUpperCase())}</span>`).join("")+`</span>`;
+}
 function renderTeam(){const el=document.getElementById("ovTeam");if(!el)return;
   el.innerHTML=TEAM.map(m=>{const ini=(m.name||"?").replace(/[^A-Za-z]/g,"").slice(0,2).toUpperCase()||"?";
     const av=m.photo
