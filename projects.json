@@ -1529,7 +1529,7 @@
           "id": "P-028",
           "name": "Jarvis Lifetime Account and AI Agent",
           "buildType": "Jarvis Lifetime + AI Agent",
-          "status": "Payment Follow-Up",
+          "status": "Build Mode",
           "priority": "High",
           "owner": "Alexia / Q",
           "start": "2026-07-27",
@@ -1549,7 +1549,7 @@
             },
             {
               "label": "AI Agent configured",
-              "done": false
+              "done": true
             },
             {
               "label": "Custom workflow mapped",
