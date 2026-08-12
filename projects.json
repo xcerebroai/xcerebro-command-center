@@ -1716,23 +1716,23 @@
           "tasks": [
             {
               "label": "Dashboard set up",
-              "done": false
+              "done": true
             },
             {
               "label": "Campaign built",
-              "done": false
+              "done": true
             },
             {
               "label": "Automations wired",
-              "done": false
+              "done": true
             },
             {
               "label": "AI Agent configured",
-              "done": false
+              "done": true
             },
             {
               "label": "Custom workflow mapped",
-              "done": false
+              "done": true
             },
             {
               "label": "A2P registration",
@@ -1740,7 +1740,7 @@
             },
             {
               "label": "Jarvis build",
-              "done": false
+              "done": true
             },
             {
               "label": "JV / Payment confirmed",
