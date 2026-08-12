@@ -2229,7 +2229,7 @@
             },
             {
               "label": "AI Agent configured",
-              "done": false
+              "done": true
             },
             {
               "label": "Custom workflow mapped",
@@ -2241,7 +2241,7 @@
             },
             {
               "label": "Jarvis build",
-              "done": false
+              "done": true
             },
             {
               "label": "JV / Payment confirmed",
