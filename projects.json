@@ -1400,7 +1400,7 @@
         {
           "id": "P-025",
           "name": "Scraper + AI Agent Build - Ray Cervantes",
-          "buildType": "Scraper + AI Agent",
+          "buildType": "Scraper",
           "status": "Ready",
           "priority": "Normal",
           "owner": "Alexia / Q",
