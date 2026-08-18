@@ -2694,6 +2694,16 @@
       "status": "Pending",
       "notes": "Tony Howard - Jarvis $97 ffup sign up semt 8/17",
       "id": "F-040"
+    },
+    {
+      "who": "Ryan Nickel",
+      "service": "AI Agent",
+      "channel": "Facebook",
+      "due": "2026-08-18",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Call with Q at 2:30pm CST 8/18",
+      "id": "F-041"
     }
   ],
   "bootcampAttendees": [
