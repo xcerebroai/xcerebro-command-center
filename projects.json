@@ -2684,6 +2684,16 @@
       "status": "Pending",
       "notes": "Troy Prater -  AI agent $1500 ffup on Aug 21 (will ask wife) done call with Q 8/18",
       "id": "F-039"
+    },
+    {
+      "who": "Tony Howard",
+      "service": "Jarvis",
+      "channel": "Facebook",
+      "due": "2026-08-21",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Tony Howard - Jarvis $97 ffup sign up semt 8/17",
+      "id": "F-040"
     }
   ],
   "bootcampAttendees": [
