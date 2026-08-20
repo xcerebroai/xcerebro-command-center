@@ -2734,6 +2734,16 @@
       "status": "Pending",
       "notes": "Michael Deavours - AI agent set a meeting sent 8/20",
       "id": "F-044"
+    },
+    {
+      "who": "Jordan Sizelove",
+      "service": "AI Agent",
+      "channel": "Facebook",
+      "due": "2026-08-21",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "AI Agent (money) ask availability - $1,500 with JARVIS CRM and unlock elite courses",
+      "id": "F-045"
     }
   ],
   "bootcampAttendees": [
