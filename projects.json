@@ -2724,6 +2724,16 @@
       "status": "Pending",
       "notes": "Reuben Wabomnor / AI Agent - 2PM AI Agent ($500-$700)  - Q not available",
       "id": "F-043"
+    },
+    {
+      "who": "Michael Deavours",
+      "service": "AI Agent",
+      "channel": "Instagram",
+      "due": "2026-08-21",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Michael Deavours - AI agent set a meeting sent 8/20",
+      "id": "F-044"
     }
   ],
   "bootcampAttendees": [
