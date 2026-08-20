@@ -2714,6 +2714,16 @@
       "status": "Pending",
       "notes": "AI Agent- 1PM CST  8/20- no response",
       "id": "F-042"
+    },
+    {
+      "who": "Reuben Wabomnor",
+      "service": "AI Agent",
+      "channel": "Facebook",
+      "due": "2026-08-21",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Reuben Wabomnor / AI Agent - 2PM AI Agent ($500-$700)  - Q not available",
+      "id": "F-043"
     }
   ],
   "bootcampAttendees": [
