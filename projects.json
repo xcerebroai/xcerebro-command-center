@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-08-20"
+    "updated": "2026-08-21"
   },
   "statusOptions": [
     "Planning",
@@ -2744,6 +2744,16 @@
       "status": "Pending",
       "notes": "AI Agent (money) ask availability - $1,500 with JARVIS CRM and unlock elite courses",
       "id": "F-045"
+    },
+    {
+      "who": "Michael Deavours",
+      "service": "AI Agent",
+      "channel": "Instagram",
+      "due": "2026-08-21",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Michael Deavours - AI Agent  available today 8/20 (aware of $500-$3k) -ask Q's availability",
+      "id": "F-046"
     }
   ],
   "bootcampAttendees": [
