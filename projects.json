@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-08-26"
+    "updated": "2026-08-27"
   },
   "statusOptions": [
     "Planning",
@@ -2764,6 +2764,16 @@
       "status": "Pending",
       "notes": "Phil Monto - AI Agent . A net price calculator for 32 schools - waiting for Q's availability sent 8/25",
       "id": "F-048"
+    },
+    {
+      "who": "John Adams",
+      "service": "AI Agent",
+      "channel": "Facebook",
+      "due": "2026-09-01",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "John Adams - Quote - FB waiting for Q sent 8/27 $5k - ffup- next week",
+      "id": "F-049"
     }
   ],
   "bootcampAttendees": [
