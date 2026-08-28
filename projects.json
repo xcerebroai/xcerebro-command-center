@@ -2784,6 +2784,16 @@
       "status": "Pending",
       "notes": "Simon Walsh -12PM CST fired his whole team and replacing them with AI Agents- done meeting with Q, sent invoice $3k 8/28 -need to ffup if paid",
       "id": "F-050"
+    },
+    {
+      "who": "Winston Wright",
+      "service": "AI Skool",
+      "channel": "Facebook",
+      "due": "2026-10-12",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Winston Wright - AI Agents ffup 2 weeks from now",
+      "id": "F-051"
     }
   ],
   "bootcampAttendees": [
