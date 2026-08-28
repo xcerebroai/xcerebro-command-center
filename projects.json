@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-08-27"
+    "updated": "2026-08-28"
   },
   "statusOptions": [
     "Planning",
@@ -2774,6 +2774,16 @@
       "status": "Pending",
       "notes": "John Adams - Quote - FB waiting for Q sent 8/27 $5k - ffup- next week",
       "id": "F-049"
+    },
+    {
+      "who": "Simon Walsh",
+      "service": "AI Skool",
+      "channel": "Facebook",
+      "due": "2026-08-31",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Simon Walsh -12PM CST fired his whole team and replacing them with AI Agents- done meeting with Q, sent invoice $3k 8/28 -need to ffup if paid",
+      "id": "F-050"
     }
   ],
   "bootcampAttendees": [
