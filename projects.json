@@ -2794,6 +2794,16 @@
       "status": "Pending",
       "notes": "Winston Wright - AI Agents ffup 2 weeks from now",
       "id": "F-051"
+    },
+    {
+      "who": "Trey Perez",
+      "service": "Jarvis",
+      "channel": "Other",
+      "due": "2026-09-08",
+      "owner": "Dyan",
+      "status": "Done",
+      "notes": "Trey Perez with Tejano Cash Buyers (Jarvis user) is closed on a scraper for Houston texas for $500 9/8",
+      "id": "F-052"
     }
   ],
   "bootcampAttendees": [
