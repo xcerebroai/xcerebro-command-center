@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-09-10"
+    "updated": "2026-09-11"
   },
   "statusOptions": [
     "Planning",
@@ -2814,6 +2814,16 @@
       "status": "Pending",
       "notes": "AI Agent - 2016luis1992@gmail.com - done meeting with Q (undecided) ffup on 9/11",
       "id": "F-053"
+    },
+    {
+      "who": "Michael Corpus",
+      "service": "AI Agent",
+      "channel": "Facebook",
+      "due": "2026-09-11",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Michael Corpus - AI Agent - ffup on FB (Wife sell her bosses on the idea.)",
+      "id": "F-054"
     }
   ],
   "bootcampAttendees": [
