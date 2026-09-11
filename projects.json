@@ -2824,6 +2824,16 @@
       "status": "Pending",
       "notes": "Michael Corpus - AI Agent - ffup on FB (Wife sell her bosses on the idea.)",
       "id": "F-054"
+    },
+    {
+      "who": "Apolo Mendoza",
+      "service": "Jarvis",
+      "channel": "Facebook",
+      "due": "2026-09-11",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Apolo Mendoza - Jarvis - ffup on FB",
+      "id": "F-055"
     }
   ],
   "bootcampAttendees": [
