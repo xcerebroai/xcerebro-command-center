@@ -2834,6 +2834,16 @@
       "status": "Pending",
       "notes": "Apolo Mendoza - Jarvis - ffup on FB",
       "id": "F-055"
+    },
+    {
+      "who": "Johnny Moore",
+      "service": "AI Agent",
+      "channel": "Facebook",
+      "due": "2026-09-11",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Johnny Moore - ffup AI agent (fb) sent ffup 9/10",
+      "id": "F-056"
     }
   ],
   "bootcampAttendees": [
