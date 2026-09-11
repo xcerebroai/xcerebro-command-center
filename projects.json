@@ -2844,6 +2844,16 @@
       "status": "Pending",
       "notes": "Johnny Moore - ffup AI agent (fb) sent ffup 9/10",
       "id": "F-056"
+    },
+    {
+      "who": "Phil Najera",
+      "service": "Jarvis",
+      "channel": "Call",
+      "due": "2026-09-10",
+      "owner": "Dyan",
+      "status": "Done",
+      "notes": "Elite member Jarvis & Deal Machine",
+      "id": "F-057"
     }
   ],
   "bootcampAttendees": [
