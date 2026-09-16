@@ -2864,6 +2864,16 @@
       "status": "Pending",
       "notes": "Erica Browder - FB cancel GHL & move over to Jarvis - sent 9/16",
       "id": "F-058"
+    },
+    {
+      "who": "Anthony Maricic",
+      "service": "AI Agent",
+      "channel": "Instagram",
+      "due": "2026-09-16",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Anthony Maricic - IG - AI agents and Jarvis - ffup his availability",
+      "id": "F-059"
     }
   ],
   "bootcampAttendees": [
