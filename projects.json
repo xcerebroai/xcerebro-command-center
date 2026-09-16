@@ -2874,6 +2874,16 @@
       "status": "Pending",
       "notes": "Anthony Maricic - IG - AI agents and Jarvis - ffup his availability sent 9/16",
       "id": "F-059"
+    },
+    {
+      "who": "Johnny Tep",
+      "service": "AI Agent",
+      "channel": "Facebook",
+      "due": "2026-09-17",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Johnny Tep - FB - FULL CRM - ffup 9/16",
+      "id": "F-060"
     }
   ],
   "bootcampAttendees": [
