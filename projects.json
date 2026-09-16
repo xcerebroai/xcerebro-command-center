@@ -2854,6 +2854,16 @@
       "status": "Done",
       "notes": "Elite member Jarvis & Deal Machine",
       "id": "F-057"
+    },
+    {
+      "who": "Erica Browder",
+      "service": "Jarvis",
+      "channel": "Facebook",
+      "due": "2026-09-17",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Erica Browder - FB cancel GHL & move over to Jarvis - sent 9/16",
+      "id": "F-058"
     }
   ],
   "bootcampAttendees": [
