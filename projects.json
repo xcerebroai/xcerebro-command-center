@@ -1745,7 +1745,7 @@
           "payment": {
             "total": 1000,
             "paid": 0,
-            "status": "Unpaid",
+            "status": "Paid",
             "dueDate": "",
             "lastFollowUp": "2026-07-27",
             "notes": "Payment confirmation not provided; recorded as unpaid pending verification."
