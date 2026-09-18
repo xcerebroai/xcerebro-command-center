@@ -2918,7 +2918,7 @@
     {
       "id": "BA-008",
       "name": "Jenn Waldman",
-      "aiAgentInstalled": false,
+      "aiAgentInstalled": true,
       "jarvisConnected": false,
       "jarvisCrmUser": true,
       "recordingSent": true,
