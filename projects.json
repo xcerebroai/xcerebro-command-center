@@ -387,7 +387,7 @@
           "id": "P-006",
           "name": "JV Partnership",
           "buildType": "JV Partner Setup",
-          "status": "Planning",
+          "status": "Live",
           "priority": "Urgent",
           "owner": "Alexia / Q",
           "start": "2026-06-26",
@@ -395,35 +395,27 @@
           "tasks": [
             {
               "label": "Dashboard set up",
-              "done": false
+              "done": true
             },
             {
               "label": "Campaign built",
-              "done": false
+              "done": true
             },
             {
               "label": "Automations wired",
-              "done": false
-            },
-            {
-              "label": "AI Agent configured",
-              "done": false
+              "done": true
             },
             {
               "label": "Custom workflow mapped",
-              "done": false
+              "done": true
             },
             {
               "label": "A2P registration",
               "done": true
             },
             {
-              "label": "Jarvis build",
-              "done": false
-            },
-            {
               "label": "JV / Payment confirmed",
-              "done": false
+              "done": true
             }
           ],
           "blocker": "Payment follow-up needed before build-out can move forward.",
