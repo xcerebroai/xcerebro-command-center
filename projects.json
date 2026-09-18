@@ -2020,7 +2020,7 @@
           "id": "P-042",
           "name": "Jarvis Onboarding Follow-Up",
           "buildType": "Jarvis Onboarding Check-Up",
-          "status": "Planning",
+          "status": "Ready",
           "priority": "High",
           "owner": "Alexia / Q",
           "start": "2026-07-29",
@@ -2028,7 +2028,7 @@
           "tasks": [
             {
               "label": "AI Agent installed",
-              "done": false
+              "done": true
             },
             {
               "label": "Jarvis CRM user confirmed",
