@@ -2848,7 +2848,7 @@
     {
       "id": "BA-001",
       "name": "Adam Pasternak",
-      "aiAgentInstalled": false,
+      "aiAgentInstalled": true,
       "jarvisConnected": false,
       "jarvisCrmUser": false,
       "recordingSent": true,
