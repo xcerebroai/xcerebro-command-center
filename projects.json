@@ -963,7 +963,7 @@
         {
           "name": "Jarvis Lifetime Software",
           "buildType": "Jarvis Lifetime",
-          "status": "Payment Follow-Up",
+          "status": "Ready",
           "priority": "High",
           "owner": "Alexia / Q",
           "targetEnd": "",
@@ -1006,8 +1006,8 @@
           ],
           "payment": {
             "total": 500,
-            "paid": 250,
-            "status": "Partial",
+            "paid": 500,
+            "status": "Paid",
             "dueDate": "",
             "lastFollowUp": "2026-08-12",
             "notes": ""
