@@ -627,19 +627,15 @@
             },
             {
               "label": "Campaign built",
-              "done": false
+              "done": true
             },
             {
               "label": "Automations wired",
-              "done": false
+              "done": true
             },
             {
               "label": "AI Agent configured",
               "done": true
-            },
-            {
-              "label": "Custom workflow mapped",
-              "done": false
             },
             {
               "label": "A2P registration",
