@@ -597,8 +597,8 @@
           "notes": "AI agent already connected in Telegram. Appointment tracker: scheduled July 2, meeting done.",
           "payment": {
             "total": 3000,
-            "paid": 500,
-            "status": "Partial",
+            "paid": 3000,
+            "status": "Paid",
             "dueDate": "",
             "lastFollowUp": "2026-07-08",
             "notes": ""
