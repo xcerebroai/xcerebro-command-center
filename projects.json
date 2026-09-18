@@ -208,7 +208,7 @@
           "id": "P-034",
           "name": "Jarvis Onboarding Follow-Up",
           "buildType": "Jarvis Onboarding Check-Up",
-          "status": "Testing",
+          "status": "Live",
           "priority": "High",
           "owner": "Alexia / Q",
           "start": "2026-07-29",
@@ -228,11 +228,11 @@
             },
             {
               "label": "Jarvis onboarding call completed",
-              "done": false
+              "done": true
             },
             {
               "label": "Post-onboarding check-up completed",
-              "done": false
+              "done": true
             }
           ],
           "blocker": "Final onboarding check and follow-up remain.",
