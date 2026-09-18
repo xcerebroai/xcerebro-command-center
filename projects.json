@@ -1966,7 +1966,7 @@
           "id": "P-041",
           "name": "Jarvis Onboarding Follow-Up",
           "buildType": "Jarvis Onboarding Check-Up",
-          "status": "Planning",
+          "status": "Live",
           "priority": "High",
           "owner": "Alexia / Q",
           "start": "2026-07-29",
@@ -1978,11 +1978,11 @@
             },
             {
               "label": "Jarvis CRM user confirmed",
-              "done": false
+              "done": true
             },
             {
               "label": "Jarvis connected",
-              "done": false
+              "done": true
             },
             {
               "label": "Jarvis onboarding call completed",
@@ -1991,6 +1991,10 @@
             {
               "label": "Post-onboarding check-up completed",
               "done": false
+            },
+            {
+              "label": "Needs to follow up in Support for his Manual Charges",
+              "done": true
             }
           ],
           "blocker": "Jarvis CRM access needs confirmation; Jarvis connection needs completion.",
