@@ -2850,7 +2850,7 @@
       "name": "Adam Pasternak",
       "aiAgentInstalled": true,
       "jarvisConnected": false,
-      "jarvisCrmUser": false,
+      "jarvisCrmUser": true,
       "recordingSent": true,
       "attended": true,
       "notes": ""
