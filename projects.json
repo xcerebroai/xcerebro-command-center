@@ -565,7 +565,7 @@
           "id": "P-009",
           "name": "AI Agents Installation",
           "buildType": "AI Agent Installation",
-          "status": "Ready",
+          "status": "Live",
           "priority": "Normal",
           "owner": "Alexia / Q",
           "start": "2026-07-07",
@@ -580,32 +580,16 @@
               "done": true
             },
             {
-              "label": "Campaign built",
-              "done": false
-            },
-            {
-              "label": "Automations wired",
-              "done": false
-            },
-            {
               "label": "AI Agent configured",
               "done": true
             },
             {
-              "label": "Custom workflow mapped",
-              "done": false
-            },
-            {
               "label": "A2P registration",
-              "done": false
+              "done": true
             },
             {
               "label": "Jarvis build",
               "done": true
-            },
-            {
-              "label": "JV / Payment confirmed",
-              "done": false
             }
           ],
           "blocker": "Needs a website built before A2P registration can be submitted.",
