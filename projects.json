@@ -258,7 +258,7 @@
           "id": "P-004",
           "name": "AI Agents",
           "buildType": "AI Agent Project",
-          "status": "Testing",
+          "status": "Live",
           "priority": "High",
           "owner": "Alexia / Q",
           "start": "2026-06-26",
