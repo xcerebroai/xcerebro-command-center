@@ -1425,7 +1425,7 @@
           "id": "P-028",
           "name": "Jarvis Lifetime Account and AI Agent",
           "buildType": "Jarvis Lifetime + AI Agent",
-          "status": "Build Mode",
+          "status": "Live",
           "priority": "High",
           "owner": "Alexia / Q",
           "start": "2026-07-27",
@@ -1433,15 +1433,15 @@
           "tasks": [
             {
               "label": "Dashboard set up",
-              "done": false
+              "done": true
             },
             {
               "label": "Campaign built",
-              "done": false
+              "done": true
             },
             {
               "label": "Automations wired",
-              "done": false
+              "done": true
             },
             {
               "label": "AI Agent configured",
@@ -1449,19 +1449,15 @@
             },
             {
               "label": "Custom workflow mapped",
-              "done": false
+              "done": true
             },
             {
               "label": "A2P registration",
-              "done": false
+              "done": true
             },
             {
               "label": "Jarvis build",
-              "done": false
-            },
-            {
-              "label": "JV / Payment confirmed",
-              "done": false
+              "done": true
             }
           ],
           "blocker": "$2,000 balance remains unpaid on the $3,000 project.",
@@ -1469,8 +1465,8 @@
           "notes": "Jarvis Lifetime account and AI Agent project. $1,000 paid; $2,000 remains.",
           "payment": {
             "total": 3000,
-            "paid": 1000,
-            "status": "Partial",
+            "paid": 3000,
+            "status": "Paid",
             "dueDate": "",
             "lastFollowUp": "2026-07-30",
             "notes": "$1,000 paid; $2,000 outstanding."
