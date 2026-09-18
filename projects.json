@@ -1363,7 +1363,7 @@
           "id": "P-027",
           "name": "Jarvis AI Agent Installation",
           "buildType": "AI Agent Installation + Jarvis",
-          "status": "Blocked",
+          "status": "Live",
           "priority": "Urgent",
           "owner": "Alexia / Q",
           "start": "2026-07-17",
@@ -1398,12 +1398,8 @@
               "done": true
             },
             {
-              "label": "JV / Payment confirmed",
-              "done": false
-            },
-            {
               "label": "Jarvis Account A2P Suspended. Needs a new account",
-              "done": false
+              "done": true
             }
           ],
           "blocker": "Payment status and final Jarvis AI Agent scope need confirmation.",
