@@ -1045,10 +1045,6 @@
               "done": true
             },
             {
-              "label": "AI Agent configured",
-              "done": false
-            },
-            {
               "label": "Custom workflow mapped",
               "done": true
             },
