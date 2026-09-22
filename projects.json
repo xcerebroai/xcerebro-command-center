@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-09-18"
+    "updated": "2026-09-22"
   },
   "statusOptions": [
     "Planning",
@@ -2838,6 +2838,16 @@
       "status": "Pending",
       "notes": "Johnny Tep - FB - FULL CRM - ffup 9/17",
       "id": "F-060"
+    },
+    {
+      "who": "Edson Allen",
+      "service": "Other",
+      "channel": "Facebook",
+      "due": "2026-09-22",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "intersted in Q's service-sent 9/21",
+      "id": "F-061"
     }
   ],
   "bootcampAttendees": [
