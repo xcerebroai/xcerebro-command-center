@@ -2848,6 +2848,16 @@
       "status": "Pending",
       "notes": "intersted in Q's service-sent 9/21",
       "id": "F-061"
+    },
+    {
+      "who": "Keith Mathis",
+      "service": "AI Agent",
+      "channel": "Facebook",
+      "due": "2026-09-22",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "interested in AI agents - wnats to automate realestate business - 4:30pm cst - waiting for Q's availability- sent 9/21",
+      "id": "F-062"
     }
   ],
   "bootcampAttendees": [
