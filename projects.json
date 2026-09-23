@@ -2868,6 +2868,16 @@
       "status": "Pending",
       "notes": "Jarvis CRM & AI agent $2,500 - waiting for Q sent 9/23",
       "id": "F-063"
+    },
+    {
+      "who": "Daniel Rincon",
+      "service": "AI Agent",
+      "channel": "Facebook",
+      "due": "2026-09-24",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Daniel Rincon - AI Agent",
+      "id": "F-064"
     }
   ],
   "bootcampAttendees": [
