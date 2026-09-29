@@ -2878,6 +2878,16 @@
       "status": "Pending",
       "notes": "Daniel Rincon - AI Agent",
       "id": "F-064"
+    },
+    {
+      "who": "Erik Torrente",
+      "service": "AI Agent",
+      "channel": "Facebook",
+      "due": "2026-10-01",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Erik Torrente - FB ffup AI Agent interest/macbook pro - no storage > cloud",
+      "id": "F-065"
     }
   ],
   "bootcampAttendees": [
