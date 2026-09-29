@@ -2276,6 +2276,68 @@
           "start": "2026-09-29"
         }
       ]
+    },
+    {
+      "id": "C-043",
+      "name": "Tuu Funaki",
+      "company": "",
+      "projects": [
+        {
+          "name": "Jarvis Lifetime Software",
+          "buildType": "Jarvis Lifetime Account",
+          "status": "Planning",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "targetEnd": "",
+          "blocker": "",
+          "nextAction": "",
+          "notes": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": false
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": false
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "payment": {
+            "total": 500,
+            "paid": 0,
+            "status": "Unpaid",
+            "dueDate": "",
+            "lastFollowUp": "",
+            "notes": ""
+          },
+          "id": "P-048",
+          "start": "2026-09-29"
+        }
+      ]
     }
   ],
   "paymentStatusOptions": [
