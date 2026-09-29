@@ -2214,6 +2214,68 @@
           "start": "2026-08-12"
         }
       ]
+    },
+    {
+      "id": "C-042",
+      "name": "Phil Najera",
+      "company": "",
+      "projects": [
+        {
+          "name": "Coaching - Real Estate",
+          "buildType": "REI And AI",
+          "status": "Planning",
+          "priority": "High",
+          "owner": "Alexia / Q",
+          "targetEnd": "",
+          "blocker": "",
+          "nextAction": "",
+          "notes": "",
+          "tasks": [
+            {
+              "label": "Dashboard set up",
+              "done": true
+            },
+            {
+              "label": "Campaign built",
+              "done": false
+            },
+            {
+              "label": "Automations wired",
+              "done": false
+            },
+            {
+              "label": "AI Agent configured",
+              "done": true
+            },
+            {
+              "label": "Custom workflow mapped",
+              "done": false
+            },
+            {
+              "label": "A2P registration",
+              "done": false
+            },
+            {
+              "label": "Jarvis build",
+              "done": false
+            },
+            {
+              "label": "JV / Payment confirmed",
+              "done": false
+            }
+          ],
+          "payment": {
+            "total": 3000,
+            "paid": 1000,
+            "status": "Unpaid",
+            "dueDate": "",
+            "lastFollowUp": "",
+            "notes": ""
+          },
+          "id": "P-047",
+          "start": "2026-09-29"
+        }
+      ]
     }
   ],
   "paymentStatusOptions": [
