@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-09-24"
+    "updated": "2026-09-29"
   },
   "statusOptions": [
     "Planning",
@@ -2491,7 +2491,7 @@
     },
     {
       "who": "Cameron Villareal",
-      "service": "",
+      "service": "AI Agent",
       "channel": "Call",
       "due": "2026-08-14",
       "owner": "Dyan",
