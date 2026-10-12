@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-10-06"
+    "updated": "2026-10-12"
   },
   "statusOptions": [
     "Planning",
@@ -3032,6 +3032,16 @@
       "status": "Pending",
       "notes": "Akeem Ramsey is interested in AI agents. He’s curious about how you’ve been using AI to help with wholesaling. He said to text him at this number 223‑269‑3774. sent 10/5",
       "id": "F-067"
+    },
+    {
+      "who": "Michael Barcena",
+      "service": "AI Agent",
+      "channel": "Instagram",
+      "due": "2026-10-12",
+      "owner": "Dyan",
+      "status": "Done",
+      "notes": "Michael Barcena - Booked by Q (ai agents) done zoom calll 10/12",
+      "id": "F-068"
     }
   ],
   "bootcampAttendees": [
