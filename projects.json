@@ -3042,6 +3042,16 @@
       "status": "Done",
       "notes": "Michael Barcena - Booked by Q (ai agents) done zoom calll 10/12",
       "id": "F-068"
+    },
+    {
+      "who": "Chad Crocker",
+      "service": "AI Agent",
+      "channel": "Facebook",
+      "due": "2026-10-13",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Chad Crocker has a friend who owns a Stem Cell Clinic and wants to run ads and build a funnel with Chad. He is asking if you can teach him how to do that, for a fee.- reschedule- sent ffup 10/12",
+      "id": "F-069"
     }
   ],
   "bootcampAttendees": [
