@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-10-12"
+    "updated": "2026-10-13"
   },
   "statusOptions": [
     "Planning",
@@ -3052,6 +3052,16 @@
       "status": "Pending",
       "notes": "Chad Crocker has a friend who owns a Stem Cell Clinic and wants to run ads and build a funnel with Chad. He is asking if you can teach him how to do that, for a fee.- reschedule- sent ffup 10/12",
       "id": "F-069"
+    },
+    {
+      "who": "Angel Mendoza",
+      "service": "AI Agent",
+      "channel": "Facebook",
+      "due": "2026-10-13",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Angel Mendoza - AI agent (Spanish) - sent 10/12",
+      "id": "F-070"
     }
   ],
   "bootcampAttendees": [
