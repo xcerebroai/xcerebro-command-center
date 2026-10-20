@@ -3,7 +3,7 @@
     "title": "X CEREBRO",
     "subtitle": "AI Agents + Jarvis Command Center",
     "owner": "Alexia / Q",
-    "updated": "2026-10-14"
+    "updated": "2026-10-20"
   },
   "statusOptions": [
     "Planning",
@@ -3082,6 +3082,16 @@
       "status": "Pending",
       "notes": "Stephen Cruz (10AM PST) - IG Jarvis / waiting for Q's availability Thursday AM sent 10/13 -Zboyscruz@gmail.com",
       "id": "F-072"
+    },
+    {
+      "who": "Michael Chuks",
+      "service": "Jarvis",
+      "channel": "Facebook",
+      "due": "2026-10-21",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Michael Chuks - Jarvis - ffup payment link sent 10/20",
+      "id": "F-073"
     }
   ],
   "bootcampAttendees": [
