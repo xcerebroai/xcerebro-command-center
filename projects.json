@@ -3102,6 +3102,16 @@
       "status": "Pending",
       "notes": "Awuor Scholar - Jarvis - ffup payment link sent 10/20",
       "id": "F-074"
+    },
+    {
+      "who": "Ayokunle Adi",
+      "service": "Jarvis",
+      "channel": "Facebook",
+      "due": "2026-10-21",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Ayokunle Adi - Jarvis  payment link sent 10/20",
+      "id": "F-075"
     }
   ],
   "bootcampAttendees": [
