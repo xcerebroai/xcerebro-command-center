@@ -3092,6 +3092,16 @@
       "status": "Pending",
       "notes": "Michael Chuks - Jarvis - ffup payment link sent 10/20",
       "id": "F-073"
+    },
+    {
+      "who": "Awuor Scholar",
+      "service": "Jarvis",
+      "channel": "Facebook",
+      "due": "2026-10-21",
+      "owner": "Dyan",
+      "status": "Pending",
+      "notes": "Awuor Scholar - Jarvis - ffup payment link sent 10/20",
+      "id": "F-074"
     }
   ],
   "bootcampAttendees": [
